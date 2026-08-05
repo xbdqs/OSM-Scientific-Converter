@@ -1,0 +1,42 @@
+{
+  "allowed_v041_differences": [
+    "export field subset enforcement",
+    "deterministic stratified quality sampling",
+    "category-applicable expected field metadata",
+    "advanced JSON GUI validation",
+    "persistent paginated selections",
+    "v0.4.1 user/release materials"
+  ],
+  "checks": {
+    "all_profile_classification_semantics_unchanged": true,
+    "all_v041_profile_hashes_changed": true,
+    "classifier_source_unchanged": true,
+    "phase2_evidence_unchanged": true,
+    "rule_engine_source_unchanged": true,
+    "scanner_source_unchanged": true,
+    "v040_release_record_unchanged": true
+  },
+  "decision": "v0.4.1 is derived only from frozen v0.4.0; Phase 1 v0.2.3 and Phase 2 v0.3.1 remain external frozen predecessors.",
+  "profiles": {
+    "aeroway": {
+      "classification_semantics_equal_after_removing_expected_field_metadata": true,
+      "hash_changed": true,
+      "v040_sha256": "9a98e416ced363fd27d4ccdaa65cc33580f712e4d6c47859215ee97475e5517b",
+      "v041_sha256": "ff2f74757d78bed9e776512d4d0ba6112a1b2f959f774ebea31dda12c2bc23b4"
+    },
+    "pipeline": {
+      "classification_semantics_equal_after_removing_expected_field_metadata": true,
+      "hash_changed": true,
+      "v040_sha256": "7bcb7aada62730cace2c1e289410277bff88c6e6a2d936c56cc3cc1d0c0ef9b6",
+      "v041_sha256": "7ad325f8ea9bce00c727703aa872219d14aad233371412d2352db0e76edcfa2e"
+    },
+    "power": {
+      "classification_semantics_equal_after_removing_expected_field_metadata": true,
+      "hash_changed": true,
+      "v040_sha256": "543ad34387684e1e0f3b52056133748fff5660674d9e5826ded57bb55183bf24",
+      "v041_sha256": "393249f2c3fb8e3263b10d5e5902852b7a881089d33189843441dad35da2fd1f"
+    }
+  },
+  "schema_version": "1.0",
+  "status": "success"
+}

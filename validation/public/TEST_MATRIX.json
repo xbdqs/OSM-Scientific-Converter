@@ -1,0 +1,54 @@
+{
+  "generated_at_utc": "2026-08-04T18:12:51.7815045Z",
+  "policy": {
+    "installed_runs_removed_pythonpath": true,
+    "qt_platform": "offscreen",
+    "source_runs_used_explicit_src_pythonpath": true,
+    "warnings_as_errors": true
+  },
+  "runs": {
+    "installed_wheel_python_3_12_13": {
+      "duration_seconds": 14.73,
+      "import_mode": "installed final wheel; PYTHONPATH removed",
+      "passed": 90,
+      "python_version": "3.12.13",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "installed_wheel_python_3_13_14": {
+      "duration_seconds": 14.09,
+      "import_mode": "installed final wheel; PYTHONPATH removed",
+      "passed": 90,
+      "python_version": "3.13.14",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "source_python_3_12_13": {
+      "duration_seconds": 13.37,
+      "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+      "passed": 90,
+      "python_version": "3.12.13",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "source_python_3_13_14": {
+      "duration_seconds": 12.88,
+      "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+      "passed": 90,
+      "python_version": "3.13.14",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    }
+  },
+  "schema_version": "1.0",
+  "software_version": "0.4.1",
+  "status": "success",
+  "wheel": {
+    "file": "osm_scientific_converter-0.4.1-py3-none-any.whl",
+    "sha256": "b882fb9988a7e9adec3c561f7e28563d16f54a11b28dfe806eacfc4597f63ec3"
+  }
+}

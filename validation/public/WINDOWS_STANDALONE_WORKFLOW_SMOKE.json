@@ -1,0 +1,64 @@
+{
+  "clean_environment": true,
+  "environment": {
+    "checked_at_utc": "2026-08-04T18:15:38.772566Z",
+    "gdal": {
+      "data_path": "<LOCAL_PATH_REDACTED>",
+      "drivers": {
+        "GPKG": true,
+        "OSM": true
+      },
+      "ogr2ogr": "<LOCAL_PATH_REDACTED>",
+      "ogrinfo": "<LOCAL_PATH_REDACTED>",
+      "python_bindings": true,
+      "version": "GDAL 3.13.2 \"Iowa City\", released 2026/07/20"
+    },
+    "os": {
+      "machine": "AMD64",
+      "release": "10",
+      "system": "Windows",
+      "version": "10.0.19045"
+    },
+    "problems": [],
+    "python": {
+      "executable": "<LOCAL_PATH_REDACTED>",
+      "version": "3.12.13"
+    },
+    "reproducibility_warnings": [],
+    "sqlite": {
+      "version": "3.50.0"
+    },
+    "temporary_directory": "<LOCAL_PATH_REDACTED>"
+  },
+  "five_step_pages": 5,
+  "frozen": true,
+  "qt_version": "6.8.3",
+  "software_version": "0.4.1",
+  "status": "success",
+  "workflow": {
+    "export_exists": true,
+    "features_written": 2,
+    "field_selection_applied": true,
+    "input_sha256": "e896535d009134dbaf4b6bff68c695af05d8db92cf359101cc9e66af73bcce18",
+    "matched_objects": 2,
+    "quality_sampling": "deterministic category × geometry_group stratification; SHA-256 order within each stratum",
+    "quality_strata": [
+      {
+        "category": "line",
+        "geometry_group": "line",
+        "population": 1,
+        "sampled": 1
+      },
+      {
+        "category": "substation",
+        "geometry_group": "point",
+        "population": 1,
+        "sampled": 1
+      }
+    ],
+    "scan_status": "success",
+    "selected_profile_attributes": [
+      "voltage"
+    ]
+  }
+}
