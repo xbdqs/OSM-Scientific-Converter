@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "id": "aeroway",
+  "label_zh": "航空基础设施",
+  "label_en": "Aeroway infrastructure",
+  "attributes": [
+    "icao", "iata", "faa", "ref", "surface", "width", "length", "lit",
+    "operator", "military", "access"
+  ],
+  "rules": [
+    {"id": "aeroway_aerodrome", "category": "aerodrome", "geometry": ["point", "polygon"], "expected_fields": {"required": ["aeroway"], "recommended": ["icao", "name"], "optional": ["iata", "faa", "operator", "military", "access"]}, "expression": {"key": "aeroway", "op": "equals", "value": "aerodrome"}},
+    {"id": "aeroway_airstrip", "category": "airstrip", "expected_fields": {"required": ["aeroway"], "recommended": ["surface"], "optional": ["length", "width", "operator", "access"]}, "expression": {"key": "aeroway", "op": "equals", "value": "airstrip"}},
+    {"id": "aeroway_runway", "category": "runway", "geometry": ["line", "polygon"], "expected_fields": {"required": ["aeroway"], "recommended": ["ref", "surface"], "optional": ["length", "width", "lit"]}, "expression": {"key": "aeroway", "op": "equals", "value": "runway"}},
+    {"id": "aeroway_taxiway", "category": "taxiway", "geometry": ["line", "polygon"], "expected_fields": {"required": ["aeroway"], "recommended": ["surface"], "optional": ["ref", "width", "lit"]}, "expression": {"key": "aeroway", "op": "equals", "value": "taxiway"}},
+    {"id": "aeroway_taxilane", "category": "taxilane", "geometry": ["line", "polygon"], "expected_fields": {"required": ["aeroway"], "recommended": ["surface"], "optional": ["ref", "width", "lit"]}, "expression": {"key": "aeroway", "op": "equals", "value": "taxilane"}},
+    {"id": "aeroway_apron", "category": "apron", "geometry": ["polygon"], "expected_fields": {"required": ["aeroway"], "recommended": ["surface"], "optional": ["ref", "operator", "access"]}, "expression": {"key": "aeroway", "op": "equals", "value": "apron"}},
+    {"id": "aeroway_terminal", "category": "terminal", "geometry": ["point", "polygon"], "expected_fields": {"required": ["aeroway"], "recommended": ["operator"], "optional": ["ref", "access"]}, "expression": {"key": "aeroway", "op": "equals", "value": "terminal"}},
+    {"id": "aeroway_hangar", "category": "hangar", "geometry": ["point", "polygon"], "expected_fields": {"required": ["aeroway"], "recommended": [], "optional": ["operator", "access"]}, "expression": {"key": "aeroway", "op": "equals", "value": "hangar"}},
+    {"id": "aeroway_helipad", "category": "helipad", "geometry": ["point", "polygon"], "expected_fields": {"required": ["aeroway"], "recommended": ["surface"], "optional": ["ref", "lit", "access"]}, "expression": {"key": "aeroway", "op": "equals", "value": "helipad"}},
+    {"id": "aeroway_gate", "category": "gate", "geometry": ["point"], "expected_fields": {"required": ["aeroway"], "recommended": ["ref"], "optional": ["operator", "access"]}, "expression": {"key": "aeroway", "op": "equals", "value": "gate"}},
+    {"id": "aeroway_parking_position", "category": "parking_position", "geometry": ["point"], "expected_fields": {"required": ["aeroway"], "recommended": ["ref"], "optional": ["operator", "access"]}, "expression": {"key": "aeroway", "op": "equals", "value": "parking_position"}},
+    {"id": "aeroway_navigation_aid", "category": "navigation_aid", "expected_fields": {"required": [], "recommended": ["ref"], "optional": ["operator"]}, "expression": {"any": [{"key": "navigationaid", "op": "exists"}, {"key": "aeroway", "op": "equals", "value": "navigationaid"}]}},
+    {
+      "id": "aeroway_lifecycle",
+      "category": "lifecycle",
+      "expected_fields": {"required": [], "recommended": ["operator"], "optional": ["ref", "surface", "access"]},
+      "lifecycle": ["proposed", "planned", "construction", "disused", "abandoned", "demolished", "removed", "razed"],
+      "expression": {
+        "any": [
+          {"key": "aeroway", "op": "exists"},
+          {"key": "proposed:aeroway", "op": "exists"},
+          {"key": "planned:aeroway", "op": "exists"},
+          {"key": "construction:aeroway", "op": "exists"},
+          {"key": "disused:aeroway", "op": "exists"},
+          {"key": "abandoned:aeroway", "op": "exists"}
+        ]
+      }
+    }
+  ]
+}

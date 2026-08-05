@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="osm-scientific-converter-unicode-test">
+  <bounds minlat="50.0000" minlon="-114.0000" maxlat="50.0100" maxlon="-113.9900"/>
+  <node id="1001" lat="50.0010" lon="-113.9990" version="1">
+    <tag k="power" v="transformer"/>
+    <tag k="name" v="中文变压器"/>
+  </node>
+  <node id="1002" lat="50.0020" lon="-113.9980" version="1"/>
+  <node id="1003" lat="50.0030" lon="-113.9960" version="1"/>
+  <way id="1100" version="1">
+    <nd ref="1002"/>
+    <nd ref="1003"/>
+    <tag k="power" v="line"/>
+    <tag k="voltage" v="220000"/>
+    <tag k="name" v="한국어 송전선"/>
+  </way>
+</osm>

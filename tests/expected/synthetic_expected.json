@@ -1,0 +1,11 @@
+{
+  "required_layers": ["points", "lines", "multilinestrings", "multipolygons", "other_relations"],
+  "layer_feature_counts": {"points": 1, "lines": 4, "multilinestrings": 1, "multipolygons": 2, "other_relations": 1},
+  "osm_object_types": {"node": 1, "way": 5, "relation": 3},
+  "total_features": 9,
+  "total_tag_assignments": 23,
+  "unique_keys": 17,
+  "unique_key_values": 23,
+  "required_keys": ["aeroway", "construction:power", "landuse", "man_made", "power", "research:unknown_key", "route", "substance", "voltage"],
+  "required_lifecycle_states": ["construction", "proposed"]
+}

@@ -1,0 +1,14 @@
+name: osm-scientific-converter-phase3
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.12,<3.14
+  - gdal>=3.13.2,<3.14
+  - pytest>=8
+  - psutil>=5.9
+  - pip
+  - pip:
+      - PySide6==6.8.3
+      - pytest-qt>=4.4,<5
+      - pyinstaller>=6.10,<7
+      - .

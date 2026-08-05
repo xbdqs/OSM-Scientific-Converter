@@ -1,0 +1,40 @@
+{
+  "name": "OSM_Scientific_Converter_Phase3",
+  "version": "0.4.1",
+  "phase": 3,
+  "entry_points": [
+    "osm-sci scan INPUT --project PROJECT --keep-raw-master",
+    "osm-sci profile list",
+    "osm-sci profile inspect PROFILE",
+    "osm-sci classify PROJECT --profile PROFILE",
+    "osm-sci classify PROJECT --rules CUSTOM.json",
+    "osm-sci export PROJECT --selection SELECTION.json --output OUTPUT",
+    "osm-sci extract INPUT --profile PROFILE --project PROJECT --output OUTPUT",
+    "osm-sci-gui"
+  ],
+  "includes": [
+    "frozen-compatible Phase 1 scanner core",
+    "versioned power, pipeline, and aeroway profiles",
+    "custom nested rule engine with numeric and lifecycle handling",
+    "streamed traceable classification SQLite database",
+    "GPKG, GeoJSON, and Shapefile exporters with loss audit",
+    "Phase 2-compatible minimized feedback bundle",
+    "Phase 2 regression tests plus Phase 3 GUI tests",
+    "read-only paginated inventory browser and bounded map preview",
+    "background tasks, project persistence, and pre-export quality checks",
+    "Windows Phase 3 environment and standalone packaging tooling",
+    "README, changelog, citation, license, and validation records"
+  ],
+  "excludes": [
+    "web map tiles and automatic geometry repair",
+    "user OSM/PBF data",
+    "real-data raw masters and thematic geometry outputs",
+    "Phase 1 v0.2.3 frozen release artifacts"
+  ],
+  "version_separation": {
+    "phase1": "0.2.3 frozen; not modified or bundled",
+    "phase2": "0.3.1 frozen; rules and classification schema unchanged",
+    "phase3": "0.4.1 hardening release derived from frozen v0.4.0; no GUI architecture redesign"
+  },
+  "review_status": "Phase 3 v0.4.1 locally validated release candidate; public release and manuscript submission remain blocked by the explicitly listed external metadata and scientific-validation prerequisites."
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="osm-scientific-converter-v0.4.1-synthetic-example">
+  <bounds minlat="50.000" minlon="-114.000" maxlat="50.020" maxlon="-113.980"/>
+  <node id="1" lat="50.001" lon="-113.999"><tag k="power" v="substation"/><tag k="name" v="示例变电站"/><tag k="voltage" v="240000"/></node>
+  <node id="2" lat="50.002" lon="-113.998"/>
+  <node id="3" lat="50.004" lon="-113.994"/>
+  <node id="4" lat="50.006" lon="-113.990"/>
+  <node id="5" lat="50.008" lon="-113.988"/>
+  <node id="6" lat="50.010" lon="-113.986"/>
+  <way id="100"><nd ref="2"/><nd ref="3"/><tag k="power" v="line"/><tag k="voltage" v="240000"/><tag k="operator" v="Synthetic Grid"/></way>
+  <way id="101"><nd ref="3"/><nd ref="4"/><tag k="man_made" v="pipeline"/><tag k="substance" v="gas"/><tag k="operator" v="Synthetic Pipeline"/></way>
+  <way id="102"><nd ref="5"/><nd ref="6"/><tag k="aeroway" v="runway"/><tag k="ref" v="09/27"/><tag k="surface" v="asphalt"/></way>
+</osm>

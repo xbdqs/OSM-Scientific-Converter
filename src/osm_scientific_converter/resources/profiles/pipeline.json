@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "id": "pipeline",
+  "label_zh": "管道基础设施",
+  "label_en": "Pipeline infrastructure",
+  "attributes": [
+    "substance", "usage", "diameter", "pressure", "capacity", "operator",
+    "owner", "location", "flow_direction"
+  ],
+  "expected_fields_by_category": {
+    "pipeline": {"required": ["man_made"], "recommended": ["substance", "usage"], "optional": ["diameter", "pressure", "capacity", "operator", "owner", "location", "flow_direction"]},
+    "gas": {"required": [], "recommended": ["substance"], "optional": ["usage", "diameter", "pressure", "capacity", "operator", "owner", "location", "flow_direction", "product"]},
+    "oil": {"required": [], "recommended": ["substance"], "optional": ["usage", "diameter", "pressure", "capacity", "operator", "owner", "location", "flow_direction", "product"]},
+    "water": {"required": ["substance"], "recommended": ["usage"], "optional": ["diameter", "pressure", "capacity", "operator", "owner", "location", "flow_direction"]},
+    "sewage": {"required": ["substance"], "recommended": ["usage"], "optional": ["diameter", "pressure", "capacity", "operator", "owner", "location", "flow_direction"]},
+    "heat": {"required": ["substance"], "recommended": ["usage"], "optional": ["diameter", "pressure", "capacity", "operator", "owner", "location", "flow_direction"]},
+    "transmission": {"required": ["usage"], "recommended": ["substance", "operator"], "optional": ["diameter", "pressure", "capacity", "owner", "location", "flow_direction"]},
+    "distribution": {"required": ["usage"], "recommended": ["substance", "operator"], "optional": ["diameter", "pressure", "capacity", "owner", "location", "flow_direction"]},
+    "valve": {"required": [], "recommended": ["substance"], "optional": ["usage", "operator", "owner", "location"]},
+    "pumping": {"required": [], "recommended": ["substance", "operator"], "optional": ["usage", "pressure", "capacity", "owner", "location"]},
+    "pumping_candidate": {"required": [], "recommended": [], "optional": ["substance", "usage", "operator", "owner", "location"]},
+    "compressor": {"required": [], "recommended": ["substance", "operator"], "optional": ["usage", "pressure", "capacity", "owner", "location"]},
+    "compressor_candidate": {"required": [], "recommended": [], "optional": ["substance", "usage", "operator", "owner", "location"]},
+    "storage": {"required": [], "recommended": ["substance", "capacity"], "optional": ["usage", "pressure", "operator", "owner", "location"]},
+    "storage_candidate": {"required": [], "recommended": [], "optional": ["substance", "usage", "capacity", "operator", "owner", "location"]},
+    "lifecycle": {"required": [], "recommended": ["operator"], "optional": ["substance", "usage", "owner", "location"]}
+  },
+  "rules": [
+    {"id": "pipeline_main", "category": "pipeline", "geometry": ["line", "point", "polygon"], "expression": {"key": "man_made", "op": "equals", "value": "pipeline"}},
+    {"id": "pipeline_gas", "category": "gas", "expression": {"all": [{"any": [{"key": "man_made", "op": "equals", "value": "pipeline"}, {"key": "pipeline", "op": "exists"}, {"key": "route", "op": "equals", "value": "pipeline"}]}, {"any": [{"key": "substance", "op": "in", "value": ["gas", "natural_gas"]}, {"key": "product", "op": "in", "value": ["gas", "natural_gas"]}]}]}},
+    {"id": "pipeline_oil", "category": "oil", "expression": {"all": [{"any": [{"key": "man_made", "op": "equals", "value": "pipeline"}, {"key": "pipeline", "op": "exists"}, {"key": "route", "op": "equals", "value": "pipeline"}]}, {"any": [{"key": "substance", "op": "in", "value": ["oil", "crude_oil"]}, {"key": "product", "op": "in", "value": ["oil", "crude_oil"]}]}]}},
+    {"id": "pipeline_water", "category": "water", "expression": {"all": [{"any": [{"key": "man_made", "op": "equals", "value": "pipeline"}, {"key": "pipeline", "op": "exists"}, {"key": "route", "op": "equals", "value": "pipeline"}]}, {"key": "substance", "op": "in", "value": ["water", "drinking_water"]}]}},
+    {"id": "pipeline_sewage", "category": "sewage", "expression": {"all": [{"any": [{"key": "man_made", "op": "equals", "value": "pipeline"}, {"key": "pipeline", "op": "exists"}, {"key": "route", "op": "equals", "value": "pipeline"}]}, {"key": "substance", "op": "in", "value": ["sewage", "wastewater"]}]}},
+    {"id": "pipeline_heat", "category": "heat", "expression": {"all": [{"any": [{"key": "man_made", "op": "equals", "value": "pipeline"}, {"key": "pipeline", "op": "exists"}, {"key": "route", "op": "equals", "value": "pipeline"}]}, {"key": "substance", "op": "in", "value": ["heat", "steam", "hot_water"]}]}},
+    {"id": "pipeline_transmission", "category": "transmission", "expression": {"all": [{"any": [{"key": "man_made", "op": "equals", "value": "pipeline"}, {"key": "pipeline", "op": "exists"}, {"key": "route", "op": "equals", "value": "pipeline"}]}, {"key": "usage", "op": "equals", "value": "transmission"}]}},
+    {"id": "pipeline_distribution", "category": "distribution", "expression": {"all": [{"any": [{"key": "man_made", "op": "equals", "value": "pipeline"}, {"key": "pipeline", "op": "exists"}, {"key": "route", "op": "equals", "value": "pipeline"}]}, {"key": "usage", "op": "equals", "value": "distribution"}]}},
+    {"id": "pipeline_valve", "category": "valve", "geometry": ["point"], "expression": {"any": [{"key": "pipeline", "op": "equals", "value": "valve"}, {"key": "man_made", "op": "equals", "value": "valve"}]}},
+    {"id": "pipeline_pumping", "category": "pumping", "expression": {"any": [{"key": "pipeline", "op": "in", "value": ["pumping_station", "pump"]}, {"all": [{"key": "man_made", "op": "equals", "value": "pumping_station"}, {"any": [{"key": "substance", "op": "exists"}, {"key": "product", "op": "exists"}, {"key": "utility", "op": "exists"}, {"key": "usage", "op": "in", "value": ["transmission", "distribution"]}, {"key": "route", "op": "equals", "value": "pipeline"}]}]}]}},
+    {"id": "pipeline_pumping_candidate", "category": "pumping_candidate", "default_export": false, "expression": {"all": [{"key": "man_made", "op": "equals", "value": "pumping_station"}], "none": [{"key": "pipeline", "op": "exists"}, {"key": "substance", "op": "exists"}, {"key": "product", "op": "exists"}, {"key": "utility", "op": "exists"}, {"key": "usage", "op": "in", "value": ["transmission", "distribution"]}, {"key": "route", "op": "equals", "value": "pipeline"}]}},
+    {"id": "pipeline_compressor", "category": "compressor", "expression": {"any": [{"key": "pipeline", "op": "in", "value": ["compressor", "compressor_station"]}, {"all": [{"key": "man_made", "op": "equals", "value": "compressor_station"}, {"any": [{"key": "substance", "op": "exists"}, {"key": "product", "op": "exists"}, {"key": "utility", "op": "exists"}, {"key": "usage", "op": "in", "value": ["transmission", "distribution"]}, {"key": "route", "op": "equals", "value": "pipeline"}]}]}]}},
+    {"id": "pipeline_compressor_candidate", "category": "compressor_candidate", "default_export": false, "expression": {"all": [{"key": "man_made", "op": "equals", "value": "compressor_station"}], "none": [{"key": "pipeline", "op": "exists"}, {"key": "substance", "op": "exists"}, {"key": "product", "op": "exists"}, {"key": "utility", "op": "exists"}, {"key": "usage", "op": "in", "value": ["transmission", "distribution"]}, {"key": "route", "op": "equals", "value": "pipeline"}]}},
+    {"id": "pipeline_storage", "category": "storage", "expression": {"any": [{"key": "pipeline", "op": "equals", "value": "storage"}, {"all": [{"key": "man_made", "op": "in", "value": ["storage_tank", "gasometer"]}, {"any": [{"key": "substance", "op": "exists"}, {"key": "product", "op": "exists"}, {"key": "utility", "op": "exists"}, {"key": "usage", "op": "in", "value": ["transmission", "distribution"]}, {"key": "route", "op": "equals", "value": "pipeline"}]}]}]}},
+    {"id": "pipeline_storage_candidate", "category": "storage_candidate", "default_export": false, "expression": {"all": [{"key": "man_made", "op": "in", "value": ["storage_tank", "gasometer"]}], "none": [{"key": "pipeline", "op": "exists"}, {"key": "substance", "op": "exists"}, {"key": "product", "op": "exists"}, {"key": "utility", "op": "exists"}, {"key": "usage", "op": "in", "value": ["transmission", "distribution"]}, {"key": "route", "op": "equals", "value": "pipeline"}]}},
+    {
+      "id": "pipeline_lifecycle",
+      "category": "lifecycle",
+      "lifecycle": ["proposed", "planned", "construction", "disused", "abandoned", "demolished", "removed", "razed"],
+      "expression": {
+        "any": [
+          {"key": "man_made", "op": "equals", "value": "pipeline"},
+          {"key": "proposed:man_made", "op": "equals", "value": "pipeline"},
+          {"key": "planned:man_made", "op": "equals", "value": "pipeline"},
+          {"key": "construction:man_made", "op": "equals", "value": "pipeline"},
+          {"key": "disused:man_made", "op": "equals", "value": "pipeline"},
+          {"key": "abandoned:man_made", "op": "equals", "value": "pipeline"}
+        ]
+      }
+    }
+  ]
+}

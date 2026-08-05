@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "osm-scientific-converter"
+version = "0.4.1"
+description = "Auditable OSM scientific converter with a PySide6 desktop workflow"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "OSM Scientific Converter contributors"}]
+dependencies = ["psutil>=5.9", "PySide6==6.8.3"]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "pytest-qt>=4.4,<5"]
+package = ["pyinstaller>=6.10,<7"]
+
+[project.scripts]
+osm-sci = "osm_scientific_converter.cli.main:main"
+osm-sci-gui = "osm_scientific_converter.gui.app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+osm_scientific_converter = ["resources/*.ini", "resources/profiles/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

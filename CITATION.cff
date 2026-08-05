@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the release described by this file."
+title: "OSM Scientific Converter: Auditable Scanner, Rule Classifier, and Thematic Exporter"
+type: software
+version: 0.4.1
+date-released: 2026-08-04
+license: MIT
+authors:
+  - name: "OSM Scientific Converter contributors"
+    # Replace with verified author name(s) and ORCID(s) before public release.

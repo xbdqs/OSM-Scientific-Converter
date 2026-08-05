@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "id": "power",
+  "label_zh": "电力基础设施",
+  "label_en": "Power infrastructure",
+  "attributes": [
+    "voltage", "circuits", "cables", "wires", "frequency", "operator",
+    "owner", "network", "location", "plant:source", "generator:source",
+    "generator:output:electricity"
+  ],
+  "rules": [
+    {"id": "power_line", "category": "line", "geometry": ["line"], "expected_fields": {"required": ["power"], "recommended": ["voltage", "circuits", "frequency"], "optional": ["operator", "owner", "network", "wires"]}, "expression": {"key": "power", "op": "equals", "value": "line"}},
+    {"id": "power_minor_line", "category": "minor_line", "geometry": ["line"], "expected_fields": {"required": ["power"], "recommended": ["voltage", "circuits"], "optional": ["frequency", "operator", "owner", "network", "wires"]}, "expression": {"key": "power", "op": "equals", "value": "minor_line"}},
+    {"id": "power_cable", "category": "cable", "geometry": ["line"], "expected_fields": {"required": ["power"], "recommended": ["voltage", "cables"], "optional": ["circuits", "frequency", "operator", "owner", "network", "location"]}, "expression": {"key": "power", "op": "equals", "value": "cable"}},
+    {"id": "power_tower", "category": "tower", "geometry": ["point"], "expected_fields": {"required": ["power"], "recommended": ["voltage"], "optional": ["operator", "owner", "network"]}, "expression": {"key": "power", "op": "equals", "value": "tower"}},
+    {"id": "power_pole", "category": "pole", "geometry": ["point"], "expected_fields": {"required": ["power"], "recommended": ["voltage"], "optional": ["operator", "owner", "network"]}, "expression": {"key": "power", "op": "equals", "value": "pole"}},
+    {"id": "power_portal", "category": "portal", "geometry": ["point"], "expected_fields": {"required": ["power"], "recommended": ["voltage"], "optional": ["operator", "owner", "network"]}, "expression": {"key": "power", "op": "equals", "value": "portal"}},
+    {"id": "power_substation", "category": "substation", "geometry": ["point", "polygon"], "expected_fields": {"required": ["power"], "recommended": ["voltage", "operator"], "optional": ["owner", "network", "location"]}, "expression": {"key": "power", "op": "equals", "value": "substation"}},
+    {"id": "power_plant", "category": "plant", "geometry": ["point", "polygon"], "expected_fields": {"required": ["power"], "recommended": ["plant:source", "operator"], "optional": ["owner", "network", "location"]}, "expression": {"key": "power", "op": "equals", "value": "plant"}},
+    {"id": "power_generator", "category": "generator", "geometry": ["point", "polygon"], "expected_fields": {"required": ["power"], "recommended": ["generator:source", "generator:output:electricity"], "optional": ["operator", "owner", "network", "location"]}, "expression": {"key": "power", "op": "equals", "value": "generator"}},
+    {"id": "power_transformer", "category": "transformer", "geometry": ["point", "polygon"], "expected_fields": {"required": ["power"], "recommended": ["voltage"], "optional": ["operator", "owner", "network", "location"]}, "expression": {"key": "power", "op": "equals", "value": "transformer"}},
+    {"id": "power_converter", "category": "converter", "geometry": ["point", "polygon"], "expected_fields": {"required": ["power"], "recommended": ["voltage"], "optional": ["operator", "owner", "network", "location"]}, "expression": {"key": "power", "op": "equals", "value": "converter"}},
+    {"id": "power_switchgear", "category": "switchgear", "geometry": ["point", "polygon"], "expected_fields": {"required": ["power"], "recommended": ["voltage"], "optional": ["operator", "owner", "network", "location"]}, "expression": {"key": "power", "op": "equals", "value": "switchgear"}},
+    {
+      "id": "power_lifecycle",
+      "category": "lifecycle",
+      "expected_fields": {"required": [], "recommended": ["operator"], "optional": ["owner", "network", "voltage"]},
+      "lifecycle": ["proposed", "planned", "construction", "disused", "abandoned", "demolished", "removed", "razed"],
+      "expression": {
+        "any": [
+          {"key": "power", "op": "exists"},
+          {"key": "proposed:power", "op": "exists"},
+          {"key": "planned:power", "op": "exists"},
+          {"key": "construction:power", "op": "exists"},
+          {"key": "disused:power", "op": "exists"},
+          {"key": "abandoned:power", "op": "exists"},
+          {"key": "demolished:power", "op": "exists"},
+          {"key": "removed:power", "op": "exists"},
+          {"key": "razed:power", "op": "exists"}
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "profile": "pipeline",
+  "profile_sha256": "7bcb7aada62730cace2c1e289410277bff88c6e6a2d936c56cc3cc1d0c0ef9b6",
+  "method": "Fixed after direct inspection of New York raw_master.gpkg tags. Expected rules distinguish definite infrastructure from candidates and are checked against source layer/FID.",
+  "positive": [
+    {"osm_id": "way/1052519287", "source_layer": "lines", "source_fid": 1373999, "expected_tags": {"man_made": "pipeline", "substance": "gas", "usage": "transmission"}, "expected_rules": ["pipeline_main", "pipeline_gas", "pipeline_transmission"]},
+    {"osm_id": "way/75065743", "source_layer": "lines", "source_fid": 345673, "expected_tags": {"man_made": "pipeline", "disused:man_made": "pipeline"}, "expected_rules": ["pipeline_main", "pipeline_lifecycle", "pipeline_water"]},
+    {"osm_id": "relation/15045842", "source_layer": "multilinestrings", "source_fid": 8320, "expected_tags": {"man_made": "pipeline", "route": "pipeline"}, "expected_rules": ["pipeline_main"]},
+    {"osm_id": "way/20041312", "source_layer": "lines", "source_fid": 87388, "expected_tags": {"man_made": "pipeline", "substance": "oil"}, "expected_rules": ["pipeline_main", "pipeline_oil"]},
+    {"osm_id": "node/10148386264", "source_layer": "points", "source_fid": 3558002, "expected_tags": {"man_made": "pumping_station", "substance": "wastewater"}, "expected_rules": ["pipeline_pumping"]},
+    {"osm_id": "way/1192793837", "source_layer": "lines", "source_fid": 1588229, "expected_tags": {"man_made": "pipeline", "substance": "wastewater"}, "expected_rules": ["pipeline_main", "pipeline_sewage"]},
+    {"osm_id": "node/10658394170", "source_layer": "points", "source_fid": 3598329, "expected_tags": {"pipeline": "valve"}, "expected_rules": ["pipeline_valve"]},
+    {"osm_id": "node/12462974522", "source_layer": "points", "source_fid": 3975144, "expected_tags": {"pipeline": "substation", "substance": "water"}, "expected_rules": ["pipeline_water"]},
+    {"osm_id": "node/13550905761", "source_layer": "points", "source_fid": 4116475, "expected_tags": {"pipeline": "substation", "substance": "gas"}, "expected_rules": ["pipeline_gas"]},
+    {"osm_id": "way/1005705844", "source_layer": "lines", "source_fid": 1289821, "expected_tags": {"man_made": "pipeline"}, "expected_rules": ["pipeline_main"]}
+  ],
+  "negative": [
+    {"osm_id": "node/12996423016", "source_layer": "points", "source_fid": 4042113, "expected_tags": {"man_made": "petroleum_well", "substance": "oil"}, "forbidden_rules": ["pipeline_oil"], "expected_rules": []},
+    {"osm_id": "node/10280881887", "source_layer": "points", "source_fid": 3577924, "expected_tags": {"man_made": "pumping_station"}, "forbidden_rules": ["pipeline_pumping"], "expected_rules": ["pipeline_pumping_candidate"]},
+    {"osm_id": "node/10313722534", "source_layer": "points", "source_fid": 3581831, "expected_tags": {"man_made": "pumping_station"}, "forbidden_rules": ["pipeline_pumping"], "expected_rules": ["pipeline_pumping_candidate"]},
+    {"osm_id": "node/11422241330", "source_layer": "points", "source_fid": 3735705, "expected_tags": {"man_made": "pumping_station"}, "forbidden_rules": ["pipeline_pumping"], "expected_rules": ["pipeline_pumping_candidate"]},
+    {"osm_id": "node/5499342835", "source_layer": "points", "source_fid": 439886, "expected_tags": {"man_made": "pumping_station"}, "forbidden_rules": ["pipeline_pumping"], "expected_rules": ["pipeline_pumping_candidate"]},
+    {"osm_id": "node/8408480208", "source_layer": "points", "source_fid": 907609, "expected_tags": {"man_made": "pumping_station"}, "forbidden_rules": ["pipeline_pumping"], "expected_rules": ["pipeline_pumping_candidate"]},
+    {"osm_id": "node/10047721745", "source_layer": "points", "source_fid": 3543418, "expected_tags": {"man_made": "storage_tank", "content": "water"}, "forbidden_rules": ["pipeline_storage"], "expected_rules": ["pipeline_storage_candidate"]},
+    {"osm_id": "node/10075921315", "source_layer": "points", "source_fid": 3546975, "expected_tags": {"man_made": "storage_tank", "content": "water"}, "forbidden_rules": ["pipeline_storage"], "expected_rules": ["pipeline_storage_candidate"]},
+    {"osm_id": "node/10131081027", "source_layer": "points", "source_fid": 3555749, "expected_tags": {"man_made": "storage_tank"}, "forbidden_rules": ["pipeline_storage"], "expected_rules": ["pipeline_storage_candidate"]},
+    {"osm_id": "node/10131081028", "source_layer": "points", "source_fid": 3555750, "expected_tags": {"man_made": "storage_tank"}, "forbidden_rules": ["pipeline_storage"], "expected_rules": ["pipeline_storage_candidate"]},
+    {"osm_id": "node/10131081029", "source_layer": "points", "source_fid": 3555751, "expected_tags": {"man_made": "storage_tank"}, "forbidden_rules": ["pipeline_storage"], "expected_rules": ["pipeline_storage_candidate"]}
+  ]
+}

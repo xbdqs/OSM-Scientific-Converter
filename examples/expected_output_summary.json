@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "input": "sample_infrastructure.osm",
+  "synthetic": true,
+  "scan": {
+    "reconstructed_features": 4,
+    "geometry_groups": {"point": 1, "line": 3}
+  },
+  "default_profile_results": {
+    "power": {"matched_objects": 2, "categories": {"line": 1, "substation": 1}},
+    "pipeline": {"matched_objects": 1, "required_default_categories_include": ["pipeline", "gas"]},
+    "aeroway": {"matched_objects": 1, "categories": {"runway": 1}}
+  },
+  "note": "Counts refer to classified OSM objects. Rule-match counts may exceed object counts when one object matches multiple categories."
+}

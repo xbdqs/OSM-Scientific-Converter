@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="osm-scientific-converter-tests">
+  <bounds minlat="50.0000" minlon="-114.0000" maxlat="50.0200" maxlon="-113.9800"/>
+  <node id="1" lat="50.0010" lon="-113.9990" version="1"><tag k="name" v="科学站 α"/><tag k="amenity" v="bench"/><tag k="research:unknown_key" v="rare-value"/></node>
+  <node id="2" lat="50.0020" lon="-113.9980" version="1"/>
+  <node id="3" lat="50.0030" lon="-113.9960" version="1"/>
+  <node id="4" lat="50.0040" lon="-113.9940" version="1"/>
+  <node id="5" lat="50.0050" lon="-113.9920" version="1"/>
+  <node id="6" lat="50.0060" lon="-113.9990" version="1"/>
+  <node id="7" lat="50.0060" lon="-113.9970" version="1"/>
+  <node id="8" lat="50.0080" lon="-113.9970" version="1"/>
+  <node id="9" lat="50.0080" lon="-113.9990" version="1"/>
+  <node id="10" lat="50.0100" lon="-113.9990" version="1"/>
+  <node id="11" lat="50.0100" lon="-113.9930" version="1"/>
+  <node id="12" lat="50.0160" lon="-113.9930" version="1"/>
+  <node id="13" lat="50.0160" lon="-113.9990" version="1"/>
+  <node id="14" lat="50.0120" lon="-113.9970" version="1"/>
+  <node id="15" lat="50.0120" lon="-113.9950" version="1"/>
+  <node id="16" lat="50.0140" lon="-113.9950" version="1"/>
+  <node id="17" lat="50.0140" lon="-113.9970" version="1"/>
+  <node id="18" lat="50.0020" lon="-113.9900" version="1"/>
+  <node id="19" lat="50.0040" lon="-113.9880" version="1"/>
+  <node id="20" lat="50.0060" lon="-113.9860" version="1"/>
+  <node id="21" lat="50.0090" lon="-113.9900" version="1"/>
+  <node id="22" lat="50.0120" lon="-113.9860" version="1"/>
+  <node id="23" lat="50.0150" lon="-113.9820" version="1"/>
+  <way id="100" version="1"><nd ref="2"/><nd ref="3"/><nd ref="4"/><tag k="power" v="line"/><tag k="voltage" v="220000;500000"/><tag k="name" v="Transmission α"/></way>
+  <way id="101" version="1"><nd ref="6"/><nd ref="7"/><nd ref="8"/><nd ref="9"/><nd ref="6"/><tag k="building" v="service"/></way>
+  <way id="102" version="1"><nd ref="10"/><nd ref="11"/><nd ref="12"/><nd ref="13"/><nd ref="10"/></way>
+  <way id="103" version="1"><nd ref="14"/><nd ref="15"/><nd ref="16"/><nd ref="17"/><nd ref="14"/></way>
+  <way id="104" version="1"><nd ref="18"/><nd ref="19"/><nd ref="20"/><tag k="man_made" v="pipeline"/><tag k="substance" v="gas"/></way>
+  <way id="105" version="1"><nd ref="21"/><nd ref="22"/><nd ref="23"/><tag k="aeroway" v="runway"/><tag k="ref" v="09/27"/></way>
+  <way id="106" version="1"><nd ref="4"/><nd ref="5"/><tag k="power" v="construction"/><tag k="construction" v="line"/><tag k="construction:power" v="line"/></way>
+  <relation id="200" version="1"><member type="way" ref="102" role="outer"/><member type="way" ref="103" role="inner"/><tag k="type" v="multipolygon"/><tag k="landuse" v="industrial"/><tag k="name" v="Test multipolygon"/></relation>
+  <relation id="201" version="1"><member type="way" ref="100" role=""/><tag k="type" v="route"/><tag k="route" v="power"/><tag k="name" v="Grid route"/></relation>
+  <relation id="202" version="1"><member type="node" ref="1" role="station"/><tag k="type" v="site"/><tag k="site" v="research"/><tag k="proposed:amenity" v="laboratory"/></relation>
+</osm>
+
