@@ -1,12 +1,14 @@
 # Manuscript evidence and figures
 
-The public repository contains the five figures used in the SoftwareX manuscript under `paper/figures/`.
+The revised SoftwareX manuscript uses six figures stored under `paper/figures/`, together with source data and reproducible scripts.
 
-- Figure 1: architecture and evidence flow;
-- Figure 2: actual English Windows GUI screenshots from one Berlin project;
-- Figure 3: thematic-category examples;
-- Figure 4: export-loss and reproducibility audit;
-- Figure 5: complete-workflow time and peak resident memory.
+- **Figure 1:** software architecture and evidence flow.
+- **Figure 2:** actual English Windows GUI workflow captured from the packaged v0.4.1 application during the Berlin power case.
+- **Figure 3:** overview of the four validation regions (Berlin, South Korea, New York, and Quebec); representative points are shown on a Natural Earth public-domain basemap and do not denote exact Geofabrik extract boundaries.
+- **Figure 4:** thematic extraction examples for the selected infrastructure profiles.
+- **Figure 5:** Berlin export-audit and repeated-run reproducibility evidence.
+- **Figure 6:** complete-workflow processing time and peak resident memory across the four validation cases.
 
+The repository stores publication figures, plotting code, source CSV files, and the real GUI source panels required to reproduce the figure assembly. Regional `.osm.pbf` inputs and private project databases are intentionally not redistributed.
 
-The manuscript itself is maintained outside the repository until author, affiliation, repository, DOI, funding, and declaration fields are finalized. The figures and public evidence in this repository are the materials referred to by the manuscript.
+The validated software release remains **v0.4.1**. Peer-review changes in `main` update scientific documentation and publication figures only; they do not alter the released scientific core or binaries.

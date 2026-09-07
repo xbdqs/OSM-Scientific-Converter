@@ -1,0 +1,5 @@
+region,theme,input_size,longitude,latitude,label_x,label_y
+Berlin,power,94.2 MiB,13.4050,52.5200,15.5,56.0
+South Korea,aeroway,271.3 MiB,127.7669,35.9078,130.5,27.0
+New York,pipeline,471.4 MiB,-75.0000,43.0000,-98.0,29.0
+Quebec,power,1.08 GiB,-71.5000,52.0000,-93.0,56.0

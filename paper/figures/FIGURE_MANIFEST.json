@@ -1,0 +1,201 @@
+{
+  "manuscript": "SOFTX-D-26-01000",
+  "figure_count": 6,
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "67f2e4fb199739a576c35ed1d092cb3880204eb0872ea2c87f989fa92845c7b0",
+      "bytes": 1226
+    },
+    {
+      "path": "code/figure_1_architecture.py",
+      "sha256": "301e9108ba47aeaac4e32f749ae670f812a92952193c4debc66d8db9d3a615e8",
+      "bytes": 3244
+    },
+    {
+      "path": "code/figure_2_actual_english_gui.py",
+      "sha256": "a75008329857a72039f62fcff5fce92a2d4ed4d071928e7593982d947999b3db",
+      "bytes": 2922
+    },
+    {
+      "path": "code/figure_3_validation_regions.py",
+      "sha256": "f1ea0f66ffbe3683a19bbed55616293802122722497ac3a97bc57c4029020ff6",
+      "bytes": 1340
+    },
+    {
+      "path": "code/figure_4_thematic_examples.py",
+      "sha256": "3a3a435d50a89398e35199fbaf3a869e990ca5b340ec81843618130b6ec4a1b1",
+      "bytes": 1860
+    },
+    {
+      "path": "code/figure_5_export_reproducibility.py",
+      "sha256": "94a0ae3714479a6c25d59f18227cf714bfde40ae210fc9b048e7f09fd2683213",
+      "bytes": 2757
+    },
+    {
+      "path": "code/figure_6_performance.py",
+      "sha256": "f049658e2d277f10cd2bb6b2234cca50c49427b75f8ac25db191818740adf411",
+      "bytes": 1711
+    },
+    {
+      "path": "code/run_all_figures.py",
+      "sha256": "a7ecf35a1b7fbc6c675b49af71ab3ccc8f6e60235ccc7216becc0173a3cd317c",
+      "bytes": 473
+    },
+    {
+      "path": "data/Figure_3_validation_regions.csv",
+      "sha256": "77c28bf913a8e81a0e958cc3a133600f20de7cc34d248fa5ba5c025780d65fa3",
+      "bytes": 271
+    },
+    {
+      "path": "data/Figure_4_thematic_category_data.csv",
+      "sha256": "98e5541604f76e3eab8cf6f5c495f0d4fad57e15c98a5f78a15ff0a29327ac84",
+      "bytes": 596
+    },
+    {
+      "path": "data/Figure_5_export_audit_data.csv",
+      "sha256": "ecc8b8e6a3e652305f569c87f82b351063a33d302085edcccc1f240ec44fa9cf",
+      "bytes": 158
+    },
+    {
+      "path": "data/Figure_6_performance_data.csv",
+      "sha256": "5a9a382cbceb7100e0a979b21e4ef3520d6cf7f275297cfa749bd3503dc7abe1",
+      "bytes": 358
+    },
+    {
+      "path": "data/naturalearth_lowres/naturalearth_lowres.cpg",
+      "sha256": "09fc313075748ce8ead962229ed89c919d5a9ff71974ee725a0b48bb87d975a2",
+      "bytes": 10
+    },
+    {
+      "path": "data/naturalearth_lowres/naturalearth_lowres.dbf",
+      "sha256": "d2ae1c99adcf8e4586a5b12c639672035fa2f3f469e7255947de00401c3ed7e1",
+      "bytes": 48869
+    },
+    {
+      "path": "data/naturalearth_lowres/naturalearth_lowres.prj",
+      "sha256": "98aaf3d1c0ecadf1a424a4536de261c3daf4e373697cb86c40c43b989daf52eb",
+      "bytes": 143
+    },
+    {
+      "path": "data/naturalearth_lowres/naturalearth_lowres.shp",
+      "sha256": "08e341606e8391e458c3f08deb312de664b56bfae376064c5aa0aee6681a5f55",
+      "bytes": 180924
+    },
+    {
+      "path": "data/naturalearth_lowres/naturalearth_lowres.shx",
+      "sha256": "8b0be2ad97dd484aee5c2ebc98697d5372e832b8ae58a35a661aeef6b985668d",
+      "bytes": 1516
+    },
+    {
+      "path": "output/Figure_1_architecture.pdf",
+      "sha256": "9fb37a54df3e76c6e27e31140903f98237f3282995cc07d4f73c1d3ca6d12a10",
+      "bytes": 30190
+    },
+    {
+      "path": "output/Figure_1_architecture.png",
+      "sha256": "fe1d9ee0a673e9208f0b2d55e9908dc0cc5f476c17961f922c696fed1b6a7f7d",
+      "bytes": 610386
+    },
+    {
+      "path": "output/Figure_2_actual_English_GUI_workflow.pdf",
+      "sha256": "16d430d9964f493864379127c2cbb0910543a6e74e08a51a1f564a23e50edf23",
+      "bytes": 530355
+    },
+    {
+      "path": "output/Figure_2_actual_English_GUI_workflow.png",
+      "sha256": "a78d45c65dd22ac853f084cd85554384d90717059cb35a66f3f39d2df7e86822",
+      "bytes": 994301
+    },
+    {
+      "path": "output/Figure_3_validation_regions.pdf",
+      "sha256": "d37b27cc55c850b2e0fc87b745ec4d560177371a00bc21398b82e9f4bb2c11f1",
+      "bytes": 113615
+    },
+    {
+      "path": "output/Figure_3_validation_regions.png",
+      "sha256": "c5be0e30633a05cc8d2db722d60bfdfe7fd98a576e32c4b0135b28f9c387d8ae",
+      "bytes": 1230086
+    },
+    {
+      "path": "output/Figure_4_thematic_examples.pdf",
+      "sha256": "4c110c25608cc4dca313156a15e31e7f4c72aea755e1bdc81c1f6992dd5840f4",
+      "bytes": 24650
+    },
+    {
+      "path": "output/Figure_4_thematic_examples.png",
+      "sha256": "1f6c9e5f417d1477d83ee4359b6bf1cfe96e4d1879138a2127fe09f058170f9b",
+      "bytes": 425878
+    },
+    {
+      "path": "output/Figure_5_export_reproducibility.pdf",
+      "sha256": "797ce5ac8f7225acd34b7b77d42a38777e210a0b13fc3f00c5d2d456130cbecd",
+      "bytes": 26866
+    },
+    {
+      "path": "output/Figure_5_export_reproducibility.png",
+      "sha256": "72c43879690d0fe7f57589ee5ff9d647ea19c5e5c5be261b9d7d22836c38e6b1",
+      "bytes": 496179
+    },
+    {
+      "path": "output/Figure_6_performance.pdf",
+      "sha256": "2b20a039c4745b7e84e8cb035d48dd59ed9537ddfb5e9b75bf30565d93f1a733",
+      "bytes": 25234
+    },
+    {
+      "path": "output/Figure_6_performance.png",
+      "sha256": "dce4014316f97807e7f2d114ff4dad3de5778d172d6e62d70b70b1959c24ab02",
+      "bytes": 363170
+    },
+    {
+      "path": "source/Figure_2_actual_GUI_panels/Figure_2a_step1_input_environment.png",
+      "sha256": "67a75e0c6256216894b8c7239416345af34134bfe67abf4d04e4f9476104ef06",
+      "bytes": 67141
+    },
+    {
+      "path": "source/Figure_2_actual_GUI_panels/Figure_2b_step2_data_overview.png",
+      "sha256": "5f0759c253c18079a2e092fcb843e3330311067c254e137f611c98bb1378e19f",
+      "bytes": 70325
+    },
+    {
+      "path": "source/Figure_2_actual_GUI_panels/Figure_2c_step3_feature_selection.png",
+      "sha256": "b9e67d06a3226bce8d63a4427fea9a62a0711a73bc4952a74690a74135559273",
+      "bytes": 94232
+    },
+    {
+      "path": "source/Figure_2_actual_GUI_panels/Figure_2d_step4_preview_quality.png",
+      "sha256": "91b0b00fa2d734b794763e69c9cdca1d63b4e3b9b93aa7382ebc27d79ff8059b",
+      "bytes": 149229
+    },
+    {
+      "path": "source/Figure_2_actual_GUI_panels/Figure_2e_step5_export.png",
+      "sha256": "6a0ba82840c8a844b90884bcdf038729e655b4e1b259861ebeb4e94c155375ec",
+      "bytes": 67752
+    },
+    {
+      "path": "source_panels/Figure_2a_step1_input_environment.png",
+      "sha256": "67a75e0c6256216894b8c7239416345af34134bfe67abf4d04e4f9476104ef06",
+      "bytes": 67141
+    },
+    {
+      "path": "source_panels/Figure_2b_step2_data_overview.png",
+      "sha256": "5f0759c253c18079a2e092fcb843e3330311067c254e137f611c98bb1378e19f",
+      "bytes": 70325
+    },
+    {
+      "path": "source_panels/Figure_2c_step3_feature_selection.png",
+      "sha256": "b9e67d06a3226bce8d63a4427fea9a62a0711a73bc4952a74690a74135559273",
+      "bytes": 94232
+    },
+    {
+      "path": "source_panels/Figure_2d_step4_preview_quality.png",
+      "sha256": "91b0b00fa2d734b794763e69c9cdca1d63b4e3b9b93aa7382ebc27d79ff8059b",
+      "bytes": 149229
+    },
+    {
+      "path": "source_panels/Figure_2e_step5_export.png",
+      "sha256": "6a0ba82840c8a844b90884bcdf038729e655b4e1b259861ebeb4e94c155375ec",
+      "bytes": 67752
+    }
+  ]
+}
