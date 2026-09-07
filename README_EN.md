@@ -1,30 +1,67 @@
 # OSM Scientific Converter v0.4.1
 
-OSM Scientific Converter is an auditable OpenStreetMap scanning, rule-classification, and thematic-export application for scientific data preparation. It discovers tags from the supplied snapshot, reconstructs five OSM-aware layers, applies versioned and explainable JSON profiles, and exports GPKG, GeoJSON, or Shapefile.
+OSM Scientific Converter is an auditable desktop and command-line workflow for scientific preparation of thematic OpenStreetMap (OSM) datasets from a dated local `.osm` or `.osm.pbf` snapshot. It inventories the tag vocabulary actually present in the supplied snapshot, reconstructs the five logical layers exposed by the GDAL OSM driver, applies versioned JSON profiles, preserves object/rule provenance, performs deterministic process checks, and exports GeoPackage, GeoJSON, or Shapefile with explicit export-audit evidence.
 
-v0.4.1 is a hardening release derived from frozen v0.4.0. The classifier, rule evaluator, scanner, classification expressions, and classification database schema are unchanged. The three v0.4.1 profile files intentionally have new SHA-256 values because they add category-applicable expected-field metadata; do not mix their hashes with v0.4.0 evidence.
+The validated software release remains **v0.4.1**. This peer-review update changes documentation and publication figures only; it does not change the released scanner, classifier, rule evaluator, built-in profiles, exporter, database schema, tests, or binaries.
 
-## Scientific boundaries
+## Scientific scope
 
-- Inputs are local `.osm` or `.osm.pbf` snapshots; the software does not download or refresh OSM data.
-- Results describe the supplied snapshot and rules, not guaranteed real-world infrastructure completeness.
-- Native output is EPSG:4326; no silent reprojection is performed.
-- Automatic geometry repair is disabled and not implemented.
-- Map preview is bounded to 2,000 objects. Quality geometry checks use a deterministic stratified sample rather than claiming a full census.
-- Shapefile has measurable field-name, text-width, and Unicode compatibility risks; inspect the generated loss report.
+The software addresses **reproducible thematic data preparation**, not OSM filtering as a novel operation and not external ground-truth validation. For a fixed local snapshot, it preserves three linked forms of provenance:
+
+- **Data provenance:** input SHA-256, OSM object/source representation, and environment.
+- **Semantic provenance:** observed tag inventory, resolved profile/rules, lifecycle handling, candidate/confirmed distinctions, and profile SHA-256.
+- **Computational/export provenance:** software release, project configuration, deterministic checks, output schema, mappings, and observed format losses.
+
+Results describe the supplied snapshot and selected rules. They do not guarantee physical infrastructure completeness, positional accuracy, or universal thematic correctness of OSM.
 
 ## Five-step desktop workflow
 
-1. Select an input and a new project directory; verify SHA-256 and the GDAL, memory, and disk environment.
-2. Browse the disk-backed inventory, Top-N tags, lifecycle states, and scan warnings.
-3. Select a built-in power, pipeline, or aeroway profile; create a simple rule from paginated key/value selections; or edit and validate an advanced nested JSON profile.
-4. Review the bounded map and the deterministic category × geometry quality sample.
-5. Select categories, a real profile-attribute subset, and an output format. Ten minimum provenance fields are always retained.
+1. Select the input and project directory; record input SHA-256 and the GDAL/memory/disk environment.
+2. Browse the disk-backed layer, tag, lifecycle, and warning inventory with lazy key/value queries.
+3. Apply a built-in `power`, `pipeline`, or `aeroway` profile, select from observed keys/values, or validate a custom JSON profile.
+4. Review a bounded map preview and deterministic category × geometry process checks.
+5. Select categories/attributes and export to GeoPackage, GeoJSON, or Shapefile with mandatory provenance and format-loss reporting.
 
-Run `osm-sci --help` for the CLI or `osm-sci-gui` for the desktop application. The Windows ZIP contains a standalone EXE and a synthetic example.
+Run `osm-sci --help` for the CLI or `osm-sci-gui` for the desktop application. The Windows release contains the packaged English GUI used for the manuscript workflow screenshots.
 
-## Reproducibility
+## Related tools and positioning
 
-`project.osmproject.json` atomically records the input/profile hashes, rules, selections, export and quality settings, and run results. Core evidence includes classification summaries, `classification.sqlite`, export audits, field mappings, Shapefile loss reports, and minimized diagnostic bundles. Reproducibility comparisons must use the same input, v0.4.1 release, profile SHA-256, and selection/configuration.
+OSM filtering and conversion are mature capabilities. GDAL provides the low-level OSM reconstruction engine used here; osm2pgsql is well suited to persistent PostgreSQL/PostGIS and large/planet-scale database workflows; Osmosis and osmconvert provide command-line file processing; QuickOSM supports QGIS/Overpass workflows; OSMnx standardizes programmatic OSM acquisition/analysis; OSM2CDR provides online conversion; and ohsome supports temporal OSM queries and statistics.
 
-The code is MIT licensed. OSM data is normally subject to the Open Database License; see `OSM_ATTRIBUTION_AND_ODBL.md`. Third-party runtime notices are in `THIRD_PARTY_NOTICES.md`.
+The narrower contribution of OSM Scientific Converter is to combine **snapshot-specific vocabulary discovery, explicit/versioned semantic rules, object-level provenance, deterministic extraction-process checks, GUI/CLI parity, and format-loss evidence** in one local project. See `docs/SCIENTIFIC_SCOPE_AND_RELATED_TOOLS.md`.
+
+## Profile authoring
+
+Built-in profiles are examples of explicit semantic definitions, not universal ontologies. A defensible profile is developed by scanning the target snapshot, inspecting observed key/value and geometry/lifecycle distributions, consulting OSM/domain knowledge, encoding inclusive/exclusive/candidate logic, reviewing category totals and deterministic samples, and freezing the resolved JSON with a SHA-256. Taginfo and ohsome can provide external context but do not replace the local inventory. See `docs/PROFILE_AUTHORING.md`.
+
+## Empirical scalability boundary
+
+Validated v0.4.1 workflows cover Berlin (94.2 MiB), South Korea (271.3 MiB), New York (471.4 MiB), and Quebec (1.08 GiB), with up to 12.38 million reconstructed features and complete-workflow peak RSS of 481.1-633.1 MiB on the tested workstation. These measurements support the stated regional and tested national workflows; they are **not** a planet-scale benchmark. See `docs/SCALABILITY_AND_LIMITS.md`.
+
+## Output formats
+
+- **GeoPackage:** implemented and default; standards-based evidence-bearing analytical output.
+- **GeoJSON:** implemented; transparent text interchange.
+- **Shapefile:** implemented for legacy interoperability; field mappings and observed losses are reported.
+- **GeoParquet:** discussed as a future analytical extension and **not implemented in v0.4.1**.
+
+See `docs/FORMAT_SUPPORT.md`.
+
+## Reproducibility and project evidence
+
+`project.osmproject.json` records input/profile hashes, resolved rules, selections, quality/export settings, and run results. Project evidence includes the disk-backed inventory, classification summaries/database, export audits, field mappings, loss reports, and minimized diagnostics. Reproducibility comparisons require the same input bytes, v0.4.1 release, profile SHA-256, and selection/configuration.
+
+The code is MIT licensed. OSM data are subject to the applicable OpenStreetMap/Open Database License terms; see `OSM_ATTRIBUTION_AND_ODBL.md`. Third-party runtime and publication-figure notices are in `THIRD_PARTY_NOTICES.md`.
+
+## Publication figures and evidence
+
+The revised SoftwareX manuscript uses **six figures**, all mirrored under `paper/figures/` with source data and reproducible Python code:
+
+1. software architecture and evidence flow;
+2. the actual five-step English GUI captured from the packaged v0.4.1 Windows application during the Berlin power workflow;
+3. representative locations of the four validation extracts (Natural Earth public-domain basemap; markers are not exact Geofabrik boundaries);
+4. major thematic categories for Berlin power, South Korea aeroway, and New York pipeline;
+5. observed Berlin export audit plus repeated-run reproducibility checks; and
+6. measured workflow time and peak resident memory.
+
+Public validation summaries are stored in `validation/public/`. Regional PBF inputs and private project databases are intentionally excluded.

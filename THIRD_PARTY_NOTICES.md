@@ -11,3 +11,7 @@ OSM Scientific Converter source code is released under the MIT License. The stan
 - setuptools, pytest, and pytest-qt are build/test dependencies and are not required as user-facing runtime APIs.
 
 This notice is a practical inventory, not a replacement for the complete license texts and metadata shipped inside bundled packages. The release validation records exact detected runtime versions. No third-party component is relicensed by this project.
+
+## Publication-figure basemap
+
+The validation-region overview figure uses the Natural Earth `naturalearth_lowres` country boundaries as a geographic background. Natural Earth raster and vector map data are in the public domain. The figure uses representative point locations for the named validation extracts and does not portray the precise Geofabrik extract boundaries.
