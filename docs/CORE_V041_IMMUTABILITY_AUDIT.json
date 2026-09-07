@@ -1,0 +1,263 @@
+{
+  "release": "v0.4.1",
+  "core_files_count": 64,
+  "statement": "Reviewer-driven update package contains no replacements for src/tests/config; these hashes document the existing validated core baseline.",
+  "files": [
+    {
+      "path": "src/osm_scientific_converter/__init__.py",
+      "sha256": "74d49b4001a2e1c875c218526e615437b98037d92776e85a8952aa15782669fd"
+    },
+    {
+      "path": "src/osm_scientific_converter/__main__.py",
+      "sha256": "6d3fa9e12541eecd281d2f140a985b29ad05175638cdc504fcf7b1aee3f23070"
+    },
+    {
+      "path": "src/osm_scientific_converter/cli/__init__.py",
+      "sha256": "a2ffeffd4abcae6b0ee3bc1d488a4d1f5273522004d312f151a98a163d61d9ce"
+    },
+    {
+      "path": "src/osm_scientific_converter/cli/main.py",
+      "sha256": "1aa35d1e682f480b8d5b86db7750a2b0f474f4f532380d0c100986a68498b1c7"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/__init__.py",
+      "sha256": "51d86d22601f371157645cb4c56cc3033ea1a493e2aadca6c752257fdca6580d"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/classifier.py",
+      "sha256": "797364e2e86c66de7385418c42ab91398f140321faf9d55cb0788f353f33aee8"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/environment.py",
+      "sha256": "1e0bd50051e3fc4f05460e96ff3e449aa32d31881425ef14ea6e337e1142a8e2"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/exporter.py",
+      "sha256": "97224c29e6d51f76bea3af25f575320436647e8602298e8771aec36ca29b0efd"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/feedback.py",
+      "sha256": "1c15760085669d5c99000075167ca254332449dad73dd192d77d566fe593d80b"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/hashing.py",
+      "sha256": "1fa475f15da05a332f9a2d44f4237b9ef03ece64f8d2e8bb37975c9e261a2837"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/input_inspector.py",
+      "sha256": "ff6dfa1ff8f38fa526d37180a24c5167291ead286fc188daa86de3b177b1f710"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/inventory_store.py",
+      "sha256": "83152bb2122ad430826b8dcb2b3bf9148c45b449fc5c7075fa3fae6c9f04ce55"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/lifecycle.py",
+      "sha256": "a055afd065356d95c75ec88e789489971c6f3b94640f311e71800ea105157552"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/models.py",
+      "sha256": "76126d666c53b810959fffde338332c58a91bd77522d0a3b3c2fe747e29eafc3"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/path_privacy.py",
+      "sha256": "f0c43d85e1e911bf2dd9fae5422b1cdff33bc796053e7585e8cd57b31d6c515e"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/phase2_feedback.py",
+      "sha256": "0e1a445fb20891107aa8820cf98916ae76de561120267837afb04540efb39205"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/profiles.py",
+      "sha256": "2464b388454e2a9099b05ae9c6e2a2b3be2005a07bf31602823eeafc25e6766d"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/raw_importer.py",
+      "sha256": "466facd0569c73c8ab43ace1647e9e7d4fcdf743762625ef036ddf2d16867e76"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/reports.py",
+      "sha256": "5b92d7f2c98db812fb021bac558f4b0b0ea29f8bcf651f24ee1392c3407e7572"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/resource_monitor.py",
+      "sha256": "c69d25345943c351f6289c025892cda1c0ffe91f4412e320db7bf1032b37c180"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/rules.py",
+      "sha256": "4a06dab799c53971b3b75b13e6181f67e9bb3c04ab4d62826d1ede3ba302bf48"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/scanner.py",
+      "sha256": "e590c0b57a604f7edc397cac2e459c12b6d197739da83c8c6077201d111546ca"
+    },
+    {
+      "path": "src/osm_scientific_converter/core/tag_scanner.py",
+      "sha256": "4537295c13b9c7c8257fa7ca7270c1ba7e20c8953fa82736c68b40f09d55c097"
+    },
+    {
+      "path": "src/osm_scientific_converter/gui/__init__.py",
+      "sha256": "47459f273b312ed5c22634b4844dc5a19c0ef5d34bf09d05282cf911ea29258a"
+    },
+    {
+      "path": "src/osm_scientific_converter/gui/__main__.py",
+      "sha256": "a67c172046323b0efcafe92cb83abc266d5dd4bc931d9312cde1b7bed50643db"
+    },
+    {
+      "path": "src/osm_scientific_converter/gui/app.py",
+      "sha256": "e355d757942286e06bdfed9a712616310a98ce47eb3097a7317475bf97a21a71"
+    },
+    {
+      "path": "src/osm_scientific_converter/gui/inventory.py",
+      "sha256": "72eecb4952b44bc28e90ed026397b5de6e632d168fd7abb3b109c468ce27e12e"
+    },
+    {
+      "path": "src/osm_scientific_converter/gui/main_window.py",
+      "sha256": "16017598cb7d55abd2af33c1cc0dd804d933fb0a3551f2196df5b52c68bd12ba"
+    },
+    {
+      "path": "src/osm_scientific_converter/gui/project_state.py",
+      "sha256": "00696e6720850a65c2becb2ba9c899d2537bea35909f35907b9ce0a8ef3fd4e8"
+    },
+    {
+      "path": "src/osm_scientific_converter/gui/quality.py",
+      "sha256": "a7b64636697b30e2631c49e62bef8da1f5d7a609e024aea7e6d4a113d4a95282"
+    },
+    {
+      "path": "src/osm_scientific_converter/gui/workers.py",
+      "sha256": "ce102cb7d4faf64a3f08a5c17c2b3a6c67c5db6a7877034fd219cd84dd4f9f9f"
+    },
+    {
+      "path": "src/osm_scientific_converter/resources/osmconf.ini",
+      "sha256": "cf96ceaea0e2f47a1a90ac19588f768624e065669e98ac7fa39c6ac1cdd04c92"
+    },
+    {
+      "path": "src/osm_scientific_converter/resources/profiles/aeroway.json",
+      "sha256": "ff2f74757d78bed9e776512d4d0ba6112a1b2f959f774ebea31dda12c2bc23b4"
+    },
+    {
+      "path": "src/osm_scientific_converter/resources/profiles/pipeline.json",
+      "sha256": "7ad325f8ea9bce00c727703aa872219d14aad233371412d2352db0e76edcfa2e"
+    },
+    {
+      "path": "src/osm_scientific_converter/resources/profiles/power.json",
+      "sha256": "393249f2c3fb8e3263b10d5e5902852b7a881089d33189843441dad35da2fd1f"
+    },
+    {
+      "path": "tests/expected/synthetic_expected.json",
+      "sha256": "152f9569d8b02c6c44a3e118a320cc6bce0f4853439409b0f761e753927e4a91"
+    },
+    {
+      "path": "tests/fixtures/aeroway_selection.json",
+      "sha256": "b44a6e94319d7f1b24cf09b971224016d8b7b7c9a446525f1781161d86a24135"
+    },
+    {
+      "path": "tests/fixtures/pipeline_manual_reference_set_v031.json",
+      "sha256": "fbf87c45e8358331f36ff898a7ca43b93803eab20ac37ec98fb5b22d8469d215"
+    },
+    {
+      "path": "tests/fixtures/pipeline_selection.json",
+      "sha256": "d4134e7e2ca8a2c1199f53f0e1c009215e029bc6091ce4b8a15a00082335ba33"
+    },
+    {
+      "path": "tests/fixtures/power_selection.json",
+      "sha256": "acd9927961f85d32d003b21a84d37ca8841d41bd559b33912f8f27d69a4eab2a"
+    },
+    {
+      "path": "tests/fixtures/synthetic.osm",
+      "sha256": "53ed4c76598f655f42e5155fd7c862c2dc1826b00f439c30b925dfca9afb1bdf"
+    },
+    {
+      "path": "tests/fixtures/unicode_power.osm",
+      "sha256": "6f0adaff2b14f3c07b2384b209dee799eaa46e9262210a1a314c7704c7faafdb"
+    },
+    {
+      "path": "tests/gui/test_gui_startup.py",
+      "sha256": "db2e61ca5236c5a6c16b532da3981bda18597ae182d533763aa057832cfc2922"
+    },
+    {
+      "path": "tests/gui/test_inventory_gui.py",
+      "sha256": "0ce855583a1f7e0bea17bd6565f615c1c5f489ea2c394ced3584424d7c399a18"
+    },
+    {
+      "path": "tests/gui/test_map_preview.py",
+      "sha256": "679fa6a39ffe4597bea75ef2c2af44ff3d28c2a43815cb9dbc9bc533c91361c5"
+    },
+    {
+      "path": "tests/gui/test_project_state.py",
+      "sha256": "5b655f2361df8aceb367ba969ef5bffa84b1957b77be4de457b53b63d2584186"
+    },
+    {
+      "path": "tests/gui/test_workers.py",
+      "sha256": "4e8857199719752f2157224dd7df162a0608da4a682576e68a5a8ea1d9336c8e"
+    },
+    {
+      "path": "tests/integration/test_phase2.py",
+      "sha256": "639f84f2d8446fd830ad3bd0e4ff8adf0c1809793b4a0da3d2148f5b45327caa"
+    },
+    {
+      "path": "tests/integration/test_scan.py",
+      "sha256": "d64815e054e4a80857096514c9ffceffc7b3e886248b9b1a800d86918ad2b969"
+    },
+    {
+      "path": "tests/unit/test_feedback_privacy.py",
+      "sha256": "e773ed1f91d41cf60a1182576c3072e22451a91542ea3141d463e9b951bc183e"
+    },
+    {
+      "path": "tests/unit/test_hashing.py",
+      "sha256": "b8c4f38721fd258893e5738f92e3f55355a0a2e5137799cb76276d36e8feee06"
+    },
+    {
+      "path": "tests/unit/test_input_inspector.py",
+      "sha256": "14cb47a6caeb03d53f6af463bbda926ea33a9cfd7cff07f6cc27abff65d12e66"
+    },
+    {
+      "path": "tests/unit/test_inventory_store.py",
+      "sha256": "485007885486813fc9fa0fa9e52d73cab791d013173f7cf4c5aeaeda01c88298"
+    },
+    {
+      "path": "tests/unit/test_lifecycle.py",
+      "sha256": "83b1158c6849b6a43d0c5d528816014905b07abfdbf6831616a136afd44dfc34"
+    },
+    {
+      "path": "tests/unit/test_models.py",
+      "sha256": "77cb3d91d0140c84e1d3ecf87fa3c65705cd01a159909f4ab43fa7429974840a"
+    },
+    {
+      "path": "tests/unit/test_osmconf.py",
+      "sha256": "f7949c716e7d5e540dc4b5c9de6c755f0c426ee84e4e99518ad44d404d63386b"
+    },
+    {
+      "path": "tests/unit/test_path_privacy.py",
+      "sha256": "7459bc6b498dacc99d8ad430fe46ffab633bbd49861e987a785b691492638dfb"
+    },
+    {
+      "path": "tests/unit/test_profiles.py",
+      "sha256": "c33f21450d05a6d2e69d5fa98770ae2e0d7d3d5e0b8199687c6958de98721d21"
+    },
+    {
+      "path": "tests/unit/test_raw_importer.py",
+      "sha256": "8ebc196dab7839a6c0f5e34db924cbd24744415f6ebdad93106c7984e579005b"
+    },
+    {
+      "path": "tests/unit/test_rules.py",
+      "sha256": "e90f46942641b128c2b3a02e981237e74a256a70fb7504a7deb670ee5ab53bec"
+    },
+    {
+      "path": "tests/unit/test_scanner_metrics.py",
+      "sha256": "1cf9d023d03d9e3bff6280121677e3f6db6df1a0471a3a8582cd33179f92c89a"
+    },
+    {
+      "path": "tests/unit/test_stream_reports.py",
+      "sha256": "9d72e60d38ce0e60055653baf912460ce18724664cb7093de12f18ac312102d6"
+    },
+    {
+      "path": "tests/unit/test_tag_scanner.py",
+      "sha256": "41ca9c9379a53e520a6569def1a8c17324a06ca237e2cb7b85f0c867a8f59684"
+    },
+    {
+      "path": "config/osmconf.ini",
+      "sha256": "cf96ceaea0e2f47a1a90ac19588f768624e065669e98ac7fa39c6ac1cdd04c92"
+    }
+  ]
+}
