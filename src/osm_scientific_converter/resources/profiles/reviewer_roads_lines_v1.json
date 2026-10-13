@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "id": "reviewer_roads_lines_v1",
+  "label_en": "Reviewer road extraction: exact OSM lines only",
+  "label_zh": "Reviewer road extraction: exact OSM lines only",
+  "attributes": ["highway", "name", "ref", "maxspeed", "oneway"],
+  "rules": [
+    {
+      "id": "road_motorways",
+      "category": "motorways_and_trunks",
+      "source_layer": ["lines"],
+      "expression": {"key": "highway", "op": "in", "value": ["motorway", "motorway_link", "trunk", "trunk_link"]}
+    },
+    {
+      "id": "road_arterials",
+      "category": "primary_secondary_tertiary",
+      "source_layer": ["lines"],
+      "expression": {"key": "highway", "op": "in", "value": ["primary", "primary_link", "secondary", "secondary_link", "tertiary", "tertiary_link"]}
+    },
+    {
+      "id": "road_local",
+      "category": "residential_and_service",
+      "source_layer": ["lines"],
+      "expression": {"key": "highway", "op": "in", "value": ["residential", "service"]}
+    },
+    {
+      "id": "road_pedestrian",
+      "category": "pedestrian",
+      "source_layer": ["lines"],
+      "expression": {"key": "highway", "op": "equals", "value": "pedestrian"}
+    }
+  ]
+}

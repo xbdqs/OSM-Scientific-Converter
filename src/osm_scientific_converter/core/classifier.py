@@ -170,7 +170,26 @@ def classify_project(
     resolved_profile: ResolvedProfile,
     *,
     progress: Callable[[str], None] | None = None,
+    source_layers: tuple[str, ...] | list[str] | None = None,
 ) -> ClassificationResult:
+    """Classify only explicitly permitted GDAL source layers when scoped.
+
+    This is an *exact source-layer* constraint: ``lines`` excludes the
+    distinct GDAL ``multilinestrings`` logical layer, even though both belong
+    to the broader ``line`` geometry group. It applies to ALL profile rules.
+    """
+    if source_layers is not None:
+        if not source_layers or isinstance(source_layers, str):
+            raise ValueError("source_layers must be a non-empty sequence of GDAL layer names")
+        invalid = set(source_layers).difference(LAYER_SPECS)
+        if invalid:
+            raise ValueError(f"Unknown GDAL source layer(s): {', '.join(sorted(invalid))}")
+        selected_layers = tuple(layer for layer in LAYER_SPECS if layer in set(source_layers))
+    else:
+        selected_layers = tuple(LAYER_SPECS)
+    scope_fingerprint = hashlib.sha256(
+        json.dumps({"source_layers": selected_layers}, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
     project = Path(project_dir).expanduser().resolve()
     manifest_path = project / "project_manifest.json"
     raw_master = project / "data" / "raw_master.gpkg"
@@ -221,6 +240,7 @@ def classify_project(
 
     try:
         announce(f"Resolving profile {resolved_profile.id} ({resolved_profile.sha256})")
+        announce(f"Classification source layers: {', '.join(selected_layers)}")
         output_profile = {
             **resolved_profile.data,
             "profile_sha256": resolved_profile.sha256,
@@ -244,10 +264,24 @@ def classify_project(
                 "phase1_project": ".",
                 "phase1_input_sha256": str(manifest.get("input", {}).get("sha256", "")),
                 "classified_at_utc": classified_at,
+                "classification_source_layers": json.dumps(selected_layers),
+                "classification_scope_sha256": scope_fingerprint,
             }
             target.executemany("INSERT INTO metadata(key, value) VALUES (?, ?)", metadata.items())
             tables = {row[0] for row in source.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+            # Count source candidates before classification. This is the denominator
+            # for true object progress, independent of how many objects match rules.
+            eligible_total = sum(
+                int(source.execute(f"SELECT COUNT(*) FROM {_quote(layer)}").fetchone()[0])
+                for layer in selected_layers if layer in tables
+            )
+            announce("@@PROGRESS " + json.dumps({
+                "operation": "classify", "processed": 0, "total": eligible_total,
+            }, sort_keys=True))
             for layer, (geometry_group, _) in LAYER_SPECS.items():
+                if layer not in selected_layers:
+                    announce(f"Skipping source layer {layer}: excluded by classification scope")
+                    continue
                 if layer not in tables:
                     announce(f"Skipping absent layer {layer}")
                     continue
@@ -331,10 +365,19 @@ def classify_project(
                             rule_counts[str(rule["id"])] += 1
                     if scanned % 5000 == 0:
                         target.commit()
+                    if scanned % 10000 == 0:
+                        announce("@@PROGRESS " + json.dumps({
+                            "operation": "classify", "processed": scanned,
+                            "total": eligible_total,
+                        }, sort_keys=True))
                 target.commit()
                 layer_totals[layer] = layer_scanned
                 layer_matches[layer] = layer_matched
                 announce(f"Classified {layer_scanned} objects from {layer}; matched {layer_matched}")
+                announce("@@PROGRESS " + json.dumps({
+                    "operation": "classify", "processed": scanned,
+                    "total": eligible_total,
+                }, sort_keys=True))
 
             integrity = target.execute("PRAGMA integrity_check").fetchone()[0]
             matched_hash = _matched_id_hash(target)
@@ -348,6 +391,13 @@ def classify_project(
                 "finished_at_utc": _utc_now(),
                 "phase1_project": ".",
                 "phase1_input_sha256": manifest.get("input", {}).get("sha256"),
+                "classification_scope": {
+                    "source_layers": list(selected_layers),
+                    "sha256": scope_fingerprint,
+                    "restricted": source_layers is not None,
+                    "eligible_source_objects": eligible_total,
+                    "semantics": "exact GDAL OSM source layers; 'lines' excludes 'multilinestrings'",
+                },
                 "profile": {
                     "id": resolved_profile.id,
                     "sha256": resolved_profile.sha256,

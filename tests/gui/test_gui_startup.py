@@ -6,6 +6,7 @@ from PySide6.QtCore import QMimeData, QPointF, Qt, QUrl
 from PySide6.QtGui import QDropEvent
 
 from osm_scientific_converter.gui.main_window import AdvancedProfileDialog, DropLineEdit, MainWindow
+from osm_scientific_converter import __version__
 
 
 def test_gui_starts_with_five_steps(qtbot):
@@ -14,7 +15,7 @@ def test_gui_starts_with_five_steps(qtbot):
     window.show()
     assert window.stack.count() == 5
     assert window.steps.count() == 5
-    assert "0.4.1" in window.windowTitle()
+    assert f"OSM Scientific Converter {__version__}" == window.windowTitle()
 
 
 def test_profile_tree_and_custom_rule_builder(qtbot):

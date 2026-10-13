@@ -14,6 +14,7 @@ from osm_scientific_converter.core.profiles import (
     resolve_profile,
 )
 from osm_scientific_converter.core.scanner import ScanExecutionError, ScanOptions, scan
+from osm_scientific_converter.core.targeted import targeted_highway_extract
 
 
 def _add_profile_source(parser: argparse.ArgumentParser) -> None:
@@ -53,6 +54,10 @@ def build_parser() -> argparse.ArgumentParser:
     classify_parser = commands.add_parser("classify", help="classify one retained Phase 1 project")
     classify_parser.add_argument("project", type=Path)
     _add_profile_source(classify_parser)
+    classify_parser.add_argument(
+        "--source-layer", action="append", choices=("points", "lines", "multilinestrings", "multipolygons", "other_relations"),
+        help="restrict classification to this exact GDAL source layer (repeatable); 'lines' excludes 'multilinestrings'",
+    )
 
     export_parser = commands.add_parser("export", help="export a classification selection")
     export_parser.add_argument("project", type=Path)
@@ -62,6 +67,10 @@ def build_parser() -> argparse.ArgumentParser:
     extract_parser = commands.add_parser("extract", help="run scan, classify, and export as explicit stages")
     extract_parser.add_argument("input", type=Path)
     _add_profile_source(extract_parser)
+    extract_parser.add_argument(
+        "--source-layer", action="append", choices=("points", "lines", "multilinestrings", "multipolygons", "other_relations"),
+        help="restrict classification to exact GDAL layers, repeatable",
+    )
     extract_parser.add_argument("--output", type=Path, required=True)
     extract_parser.add_argument("--project", type=Path, help="intermediate auditable project directory")
     extract_parser.add_argument("--format", choices=["GPKG", "GeoJSON", "Shapefile"])
@@ -69,6 +78,16 @@ def build_parser() -> argparse.ArgumentParser:
     extract_parser.add_argument("--temp-mb", type=int, default=100)
     extract_parser.add_argument("--overwrite", action="store_true")
     extract_parser.add_argument("--inventory-chunk-unique-limit", type=int, default=50000)
+    quick = commands.add_parser("quick-extract", help="EXPERIMENTAL highway/lines targeted extraction; no full inventory")
+    quick.add_argument("input", type=Path)
+    quick.add_argument("--rules", type=Path, required=True, help="reviewed highway equals/in profile JSON")
+    quick.add_argument("--output", type=Path, required=True, help="GeoPackage output")
+    quick.add_argument("--base-config", type=Path, help="explicit GDAL OSM osmconf.ini (defaults to bundled config)")
+    quick.add_argument("--overwrite", action="store_true")
+    quick.add_argument(
+        "--experimental-deferred-index", action="store_true",
+        help="EXPERIMENT ONLY: add GeoPackage RTree after category/provenance update; requires output index validation",
+    )
     return parser
 
 
@@ -92,7 +111,10 @@ def _run_scan(args: argparse.Namespace) -> int:
 
 def _run_classify(args: argparse.Namespace) -> int:
     resolved = resolve_profile(profile=args.profile, rules=args.rules)
-    result = classify_project(args.project, resolved, progress=lambda message: print(message, flush=True))
+    result = classify_project(
+        args.project, resolved, progress=lambda message: print(message, flush=True),
+        source_layers=args.source_layer,
+    )
     print(f"Classification completed: {result.database}")
     print(f"Matched objects: {result.matched_objects}; rule matches: {result.total_matches}")
     print(f"Upload this feedback bundle: {result.feedback_bundle}")
@@ -129,7 +151,10 @@ def _run_extract(args: argparse.Namespace) -> int:
     )
     print("[stage 2/3] classify", flush=True)
     resolved = resolve_profile(profile=args.profile, rules=args.rules)
-    classify_project(project, resolved, progress=lambda message: print(message, flush=True))
+    classify_project(
+        project, resolved, progress=lambda message: print(message, flush=True),
+        source_layers=args.source_layer,
+    )
     selection = {
         "schema_version": "1.0",
         "profile": resolved.id,
@@ -158,6 +183,31 @@ def _run_extract(args: argparse.Namespace) -> int:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
+        if args.command == "quick-extract":
+            from importlib.resources import files
+            config_path = args.base_config or Path(str(files("osm_scientific_converter").joinpath("resources/osmconf.ini")))
+            resolved = resolve_profile(rules=args.rules)
+            result = targeted_highway_extract(
+                args.input,
+                args.output,
+                resolved,
+                base_config=config_path,
+                overwrite=args.overwrite,
+                experimental_deferred_index=args.experimental_deferred_index,
+            )
+            # An explicitly requested experimental index must never silently
+            # fall back to the default GDAL index path. The core validates
+            # RTree tables and triggers before producing this success report.
+            if args.experimental_deferred_index and (
+                result.get("experimental_deferred_index") is not True
+                or result.get("spatial_index", {}).get("mode") != "deferred_then_created"
+            ):
+                raise RuntimeError(
+                    "Deferred-index mode was requested, but the execution "
+                    "report does not confirm deferred RTree creation."
+                )
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
         if args.command == "scan":
             return _run_scan(args)
         if args.command == "profile":

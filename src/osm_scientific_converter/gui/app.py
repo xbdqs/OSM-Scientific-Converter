@@ -241,6 +241,14 @@ def run_gui_acceptance(app: QApplication, window: MainWindow, arguments: list[st
 
 def main(argv: list[str] | None = None) -> int:
     arguments = list(argv if argv is not None else sys.argv)
+    if '--headless-cli' in arguments:
+        # Used by the frozen GUI's quick-road worker. It must not open a Qt
+        # window or accept arbitrary commands through an undocumented channel.
+        if arguments.index('--headless-cli') != 1 or len(arguments) < 3 or arguments[2] != 'quick-extract':
+            raise SystemExit('Frozen headless entry only accepts quick-extract')
+        configure_frozen_runtime()
+        from osm_scientific_converter.cli.main import main as cli_main
+        return cli_main(arguments[2:])
     app = create_application(arguments)
     window = MainWindow()
     if "--gui-acceptance-case" in arguments:
