@@ -1,22 +1,56 @@
-# OSM Scientific Converter v0.4.2 — release source candidate
+# OSM Scientific Converter v0.4.2
+
+OSM Scientific Converter v0.4.2 is a software release providing updated source code and a Windows x64 standalone application for reproducible thematic preparation of OpenStreetMap data.
 
 ## Changes relative to v0.4.1
 
-- Strict classification restriction by exact GDAL source-layer name (`--source-layer lines` excludes multilinestrings).
-- Experimental reviewed `highway`/`lines` quick workflow in CLI and GUI, without a full scan, limited preview and scope-labelled audit.
-- GUI output/quick result separation, geometry selection tolerances, feature tags and progress semantics.
-- GeoPackage enrichment uses GDAL/OGR to preserve spatial-trigger compatibility on Windows.
-- Explicitly optional deferred-RTree experiment remains off by default; three A/B comparisons did not establish a stable speed advantage.
-- Packaged GUI re-enters a constrained `--headless-cli quick-extract` subcommand so the frozen Windows EXE can run its quick-extraction subprocess.
+- Added strict classification restrictions using exact GDAL source-layer names.
+- Introduced an optional reviewed highway quick-extraction workflow in the GUI and CLI, without requiring the complete inventory scan.
+- Improved GUI feature selection, attribute inspection, result separation, and progress reporting.
+- Improved GeoPackage enrichment through GDAL/OGR for Windows spatial database compatibility.
+- Added support for headless quick-extraction subprocess execution from the packaged Windows application.
+- Retained deferred-RTree optimization as an optional experiment, disabled by default.
 
-## Testable evidence and limits
+## Validation evidence
 
-- Windows v0.4.2.dev1 source tree was user-tested: 127 automated tests following GUI changes, real four-object selection and interactive tags, and one fixed real PBF benchmark. These tests are **pre-release** and do not certify rebuilt 0.4.2 binaries.
-- Fixed 2026-09-01 Brazil Sudeste PBF (856,168,766 bytes, SHA-256 e850eeafc2ec1d94d5b6014b89b923f239a95415e663301cbe21907fa805dfc8) produced 2,067,117 matching `highway` lines in both direct-GDAL minimal mode and audited quick mode (canonical ID multi-set equality). Same-machine single measured wall times: 89.179 s and 126.289 s; **not equivalent output/provenance workloads**, no speed superiority claim.
-- The full workflow and optional quick workflow differ deliberately; quick mode lacks the complete tag-vocabulary scan and full project quality audit. Complete 2M+ feature geometry and all-attribute equality were not established.
+The v0.4.2 development source tree was previously evaluated with 127 passing automated tests, interactive GUI checks, and a fixed real-data benchmark.
 
-## Release gating
+The subsequent Windows build-host validation record reports 133 passing automated tests, together with successful frozen-GUI startup, standard scan/classification/export, and quick-extraction smoke tests.
 
-This archive provides versioned source and build inputs. A **standalone Windows x64 executable must be built and verified on Windows** (including frozen GUI + headless quick smoke) before labeling its binary a validated release. The archive itself does not imply any GitHub upload, Windows signing, DOI, publisher review or compatibility verification on other systems.
+The final public Windows x64 ZIP was repackaged and its SHA-256 checksum verified. Additional interactive testing of the packaged application was reported by the release maintainer.
 
-Before publishing, verify the `CITATION.cff` author identity, affiliations and date; do not invent author IDs. Confirm redistribution rights for OSM-derived examples, maps and dependencies.
+These checks document the tested configurations and do not establish universal operating-system compatibility.
+
+## Real-data benchmark
+
+A fixed Brazil Sudeste OSM PBF snapshot dated 2026-09-01 (856,168,766 bytes) was evaluated during development.
+
+The direct-GDAL minimal workflow and the reviewed quick-extraction workflow produced matching canonical OSM ID multisets comprising 2,067,117 highway line objects.
+
+Single measured wall times were 89.179 s and 126.289 s, respectively. Because the workflows have different output and provenance requirements, these measurements do not demonstrate a speed advantage.
+
+Complete geometry and attribute equality across all extracted objects was not established.
+
+## Scientific limitations
+
+The standard workflow and the optional quick-extraction workflow serve different purposes. Quick extraction does not perform the complete tag-vocabulary inventory or full project quality audit.
+
+The software supports reproducible preparation of thematic OSM datasets within explicitly defined data and rule scopes. Its outputs do not independently establish real-world infrastructure completeness or positional accuracy.
+
+Independent clean-Windows-host validation, digital code signing, formal security auditing, and compatibility verification on other operating systems have not been completed.
+
+## Distribution
+
+The v0.4.2 GitHub Release provides the Windows x64 standalone archive and its SHA-256 checksum file.
+
+Users should extract the entire archive and retain the `_internal` directory alongside the executable.
+
+Versioned source code is available from the corresponding Git tag.
+
+## Authors
+
+Qingsong Du, Guoyu Li, Fei Wang, Wei Ma, and Yanhu Mu.
+
+## License and attribution
+
+The source code is distributed under the repository's MIT license. OpenStreetMap data and relevant derived products remain subject to applicable OSM attribution and ODbL obligations. Third-party notices are provided separately.
