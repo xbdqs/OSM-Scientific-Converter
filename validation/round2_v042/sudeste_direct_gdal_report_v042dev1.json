@@ -1,0 +1,37 @@
+{
+  "mode": "direct_gdal_minimal_selection_baseline",
+  "equivalent_to_converter_full_workflow": false,
+  "limits": [
+    "No complete tag vocabulary inventory",
+    "No versioned profile/audit output",
+    "No per-rule provenance or validated category mapping",
+    "Does not prove feature equivalence without OSM ID/geometry comparison"
+  ],
+  "timestamp_utc": "2026-10-10T23:44:17.312417+00:00",
+  "input_file": "sudeste-260901.osm.pbf",
+  "input_sha256": "e850eeafc2ec1d94d5b6014b89b923f239a95415e663301cbe21907fa805dfc8",
+  "rules_sha256": "da49cec6259173afc6fb71c8a0e9e2d9351594eae7c788d235e97ba8218f7829",
+  "config_sha256": "cf96ceaea0e2f47a1a90ac19588f768624e065669e98ac7fa39c6ac1cdd04c92",
+  "filtered_highway_values": [
+    "motorway",
+    "motorway_link",
+    "pedestrian",
+    "primary",
+    "primary_link",
+    "residential",
+    "secondary",
+    "secondary_link",
+    "service",
+    "tertiary",
+    "tertiary_link",
+    "trunk",
+    "trunk_link"
+  ],
+  "source_layer": "lines",
+  "output_file": "gdal_baseline.gpkg",
+  "wall_seconds_including_gdal_startup_and_copy": 86.709,
+  "exit_code": 0,
+  "gdal_stdout_tail": "",
+  "gdal_stderr_tail": "",
+  "note": "Benchmark only; do not interpret as equally audited software workflow."
+}

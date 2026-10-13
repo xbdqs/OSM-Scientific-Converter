@@ -1,0 +1,52 @@
+{
+  "allowed_values": [
+    "motorway",
+    "motorway_link",
+    "pedestrian",
+    "primary",
+    "primary_link",
+    "residential",
+    "secondary",
+    "secondary_link",
+    "service",
+    "tertiary",
+    "tertiary_link",
+    "trunk",
+    "trunk_link"
+  ],
+  "category_counts": {
+    "motorways_and_trunks": 73732,
+    "pedestrian": 3922,
+    "primary_secondary_tertiary": 352653,
+    "residential_and_service": 1636810
+  },
+  "feature_count": 2067117,
+  "format": "GPKG",
+  "input_name": "sudeste-260901.osm.pbf",
+  "input_sha256": "e850eeafc2ec1d94d5b6014b89b923f239a95415e663301cbe21907fa805dfc8",
+  "matched_id_sha256": "985dc74b6d7bf88aee47204f9aa8c60265824c34c4c414547d19e94930cca7ad",
+  "output_name": "targeted_roads.gpkg",
+  "profile_id": "reviewer_roads_lines_v1",
+  "profile_sha256": "da49cec6259173afc6fb71c8a0e9e2d9351594eae7c788d235e97ba8218f7829",
+  "scope_limitations": [
+    "No full OSM tag-vocabulary inventory",
+    "No complete deterministic pre-export geometry/quality audit",
+    "No GUI integration in current experimental targeted mode",
+    "GDAL still reconstructs OSM geometry and may read non-matching data",
+    "Only reviewed highway equals/in rules on exact 'lines' layer",
+    "Only GPKG output supported"
+  ],
+  "software_version": "0.4.2.dev1",
+  "source_layer": "lines",
+  "started_at_utc": "2026-10-10T23:45:48.900687+00:00",
+  "status": "success",
+  "tag_key": "highway",
+  "timings_seconds": {
+    "category_and_provenance": 37.781,
+    "gdal_selective_import": 84.933,
+    "input_hash": 2.068,
+    "total_before_final_copy": 124.783,
+    "total_end_to_end": 124.783
+  },
+  "workflow": "experimental_targeted_highway_v1"
+}

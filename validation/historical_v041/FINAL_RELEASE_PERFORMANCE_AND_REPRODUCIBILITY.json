@@ -1,0 +1,1081 @@
+{
+  "cases": {
+    "berlin_power": {
+      "counts": {
+        "classification": {
+          "categories": {
+            "cable": 383,
+            "converter": 1,
+            "generator": 2443,
+            "lifecycle": 272,
+            "line": 183,
+            "minor_line": 76,
+            "plant": 39,
+            "pole": 274,
+            "portal": 44,
+            "substation": 1903,
+            "switchgear": 14,
+            "tower": 869,
+            "transformer": 232
+          },
+          "layers": {
+            "lines": {
+              "matched": 726,
+              "scanned": 624902
+            },
+            "multilinestrings": {
+              "matched": 0,
+              "scanned": 1557
+            },
+            "multipolygons": {
+              "matched": 3162,
+              "scanned": 699243
+            },
+            "other_relations": {
+              "matched": 0,
+              "scanned": 10154
+            },
+            "points": {
+              "matched": 2838,
+              "scanned": 1189826
+            }
+          },
+          "matched_objects": 6726,
+          "numeric_parse_failures": 0,
+          "rules": {
+            "power_cable": 383,
+            "power_converter": 1,
+            "power_generator": 2443,
+            "power_lifecycle": 272,
+            "power_line": 183,
+            "power_minor_line": 76,
+            "power_plant": 39,
+            "power_pole": 274,
+            "power_portal": 44,
+            "power_substation": 1903,
+            "power_switchgear": 14,
+            "power_tower": 869,
+            "power_transformer": 232
+          },
+          "scanned_objects": 2525682,
+          "tag_parse_anomalies": {},
+          "total_rule_matches": 6733
+        },
+        "export_features": 6726,
+        "output_bytes": 3829760,
+        "preview_loaded": 2000,
+        "quality_sample": 50,
+        "scan": {
+          "features": 2525682,
+          "lifecycle_inventory_rows": 2238,
+          "tag_assignments": 11709632,
+          "unique_key_values": 445244,
+          "unique_keys": 6226
+        }
+      },
+      "finished_at_utc": "2026-08-04T15:32:29.695192Z",
+      "input": {
+        "bytes": 98810528,
+        "file": "berlin-260802.osm.pbf",
+        "sha256": "c2f8ca67650fa1777cf07c3fdc5ea1cf6efb3d8cdade0d2dd118f71588ca89d4"
+      },
+      "performance": {
+        "classification": {
+          "overall_peak_rss_bytes": 75730944,
+          "wall_time_seconds": 107.039773,
+          "working_disk_peak_bytes": 7909674
+        },
+        "export": {
+          "overall_peak_rss_bytes": 114139136,
+          "wall_time_seconds": 9.872938,
+          "working_disk_peak_bytes": 0
+        },
+        "import": {
+          "peak_rss_bytes": 459083776,
+          "wall_time_seconds": 44.928588,
+          "working_disk_peak_bytes": 280716827
+        },
+        "inventory_after_import": {
+          "overall_peak_rss_bytes": 504483840,
+          "wall_time_seconds": 81.877316,
+          "working_disk_peak_bytes": 1185075050
+        },
+        "preview": {
+          "overall_peak_rss_bytes": 101036032,
+          "wall_time_seconds": 0.464812,
+          "working_disk_peak_bytes": 1140835301
+        },
+        "quality": {
+          "overall_peak_rss_bytes": 99643392,
+          "wall_time_seconds": 0.093851,
+          "working_disk_peak_bytes": 1140835301
+        }
+      },
+      "profile": {
+        "id": "power",
+        "sha256": "393249f2c3fb8e3263b10d5e5902852b7a881089d33189843441dad35da2fd1f"
+      },
+      "quality": {
+        "missing_thematic_fields": {
+          "optional_missing_is_error": false,
+          "recommended_missing": 34,
+          "required_missing": 0
+        },
+        "sampling": "deterministic category × geometry_group stratification; SHA-256 order within each stratum",
+        "status": "warning",
+        "strata": [
+          {
+            "category": "cable",
+            "geometry_group": "line",
+            "population": 383,
+            "sampled": 3
+          },
+          {
+            "category": "converter",
+            "geometry_group": "polygon",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "generator",
+            "geometry_group": "point",
+            "population": 292,
+            "sampled": 2
+          },
+          {
+            "category": "generator",
+            "geometry_group": "polygon",
+            "population": 2151,
+            "sampled": 11
+          },
+          {
+            "category": "lifecycle",
+            "geometry_group": "line",
+            "population": 86,
+            "sampled": 2
+          },
+          {
+            "category": "lifecycle",
+            "geometry_group": "point",
+            "population": 176,
+            "sampled": 2
+          },
+          {
+            "category": "lifecycle",
+            "geometry_group": "polygon",
+            "population": 10,
+            "sampled": 1
+          },
+          {
+            "category": "line",
+            "geometry_group": "line",
+            "population": 183,
+            "sampled": 2
+          },
+          {
+            "category": "minor_line",
+            "geometry_group": "line",
+            "population": 76,
+            "sampled": 1
+          },
+          {
+            "category": "plant",
+            "geometry_group": "point",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "plant",
+            "geometry_group": "polygon",
+            "population": 38,
+            "sampled": 1
+          },
+          {
+            "category": "pole",
+            "geometry_group": "point",
+            "population": 274,
+            "sampled": 2
+          },
+          {
+            "category": "portal",
+            "geometry_group": "point",
+            "population": 44,
+            "sampled": 1
+          },
+          {
+            "category": "substation",
+            "geometry_group": "point",
+            "population": 963,
+            "sampled": 5
+          },
+          {
+            "category": "substation",
+            "geometry_group": "polygon",
+            "population": 940,
+            "sampled": 5
+          },
+          {
+            "category": "switchgear",
+            "geometry_group": "point",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "switchgear",
+            "geometry_group": "polygon",
+            "population": 13,
+            "sampled": 1
+          },
+          {
+            "category": "tower",
+            "geometry_group": "point",
+            "population": 869,
+            "sampled": 5
+          },
+          {
+            "category": "transformer",
+            "geometry_group": "point",
+            "population": 220,
+            "sampled": 2
+          },
+          {
+            "category": "transformer",
+            "geometry_group": "polygon",
+            "population": 12,
+            "sampled": 1
+          }
+        ]
+      },
+      "reproducibility": {
+        "byte_identical_output_required": false,
+        "classification_counts_equal": true,
+        "classification_osm_id_set_equal": true,
+        "classification_sqlite_integrity": "ok",
+        "export_feature_count_equal": true,
+        "export_layer_counts_equal": true,
+        "input_sha256_equal": true,
+        "output_gpkg_integrity": "ok",
+        "profile_sha256_equal": true,
+        "selection_sha256": "61b08d010fc619155669e5a886b8ee6bfea0739e36a6f55b0ce40d276e9f9dcf"
+      },
+      "started_at_utc": "2026-08-04T15:26:36.315325Z",
+      "status": "success"
+    },
+    "new_york_pipeline": {
+      "counts": {
+        "classification": {
+          "categories": {
+            "gas": 201,
+            "lifecycle": 1,
+            "oil": 11,
+            "pipeline": 835,
+            "pumping": 32,
+            "pumping_candidate": 67,
+            "sewage": 10,
+            "storage_candidate": 1913,
+            "transmission": 145,
+            "valve": 122,
+            "water": 293
+          },
+          "layers": {
+            "lines": {
+              "matched": 902,
+              "scanned": 2135792
+            },
+            "multilinestrings": {
+              "matched": 1,
+              "scanned": 11824
+            },
+            "multipolygons": {
+              "matched": 1783,
+              "scanned": 5081872
+            },
+            "other_relations": {
+              "matched": 0,
+              "scanned": 33794
+            },
+            "points": {
+              "matched": 392,
+              "scanned": 4171195
+            }
+          },
+          "matched_objects": 3078,
+          "numeric_parse_failures": 0,
+          "rules": {
+            "pipeline_gas": 201,
+            "pipeline_lifecycle": 1,
+            "pipeline_main": 835,
+            "pipeline_oil": 11,
+            "pipeline_pumping": 32,
+            "pipeline_pumping_candidate": 67,
+            "pipeline_sewage": 10,
+            "pipeline_storage_candidate": 1913,
+            "pipeline_transmission": 145,
+            "pipeline_valve": 122,
+            "pipeline_water": 293
+          },
+          "scanned_objects": 11434477,
+          "tag_parse_anomalies": {
+            "empty_all_tags": 3
+          },
+          "total_rule_matches": 3630
+        },
+        "export_features": 1098,
+        "output_bytes": 1114112,
+        "preview_loaded": 2000,
+        "quality_sample": 50,
+        "scan": {
+          "features": 11434477,
+          "lifecycle_inventory_rows": 1520,
+          "tag_assignments": 54512183,
+          "unique_key_values": 6576398,
+          "unique_keys": 5226
+        }
+      },
+      "finished_at_utc": "2026-08-04T17:12:54.659614Z",
+      "input": {
+        "bytes": 494249681,
+        "file": "new-york-260802.osm.pbf",
+        "sha256": "b22532c963678c2806a3168aff1c8ff31979a3c9502cb0ecca9edccf23b0ebd0"
+      },
+      "performance": {
+        "classification": {
+          "overall_peak_rss_bytes": 110370816,
+          "wall_time_seconds": 2175.549523,
+          "working_disk_peak_bytes": 6618549
+        },
+        "export": {
+          "overall_peak_rss_bytes": 88645632,
+          "wall_time_seconds": 2.079302,
+          "working_disk_peak_bytes": 0
+        },
+        "import": {
+          "peak_rss_bytes": 548777984,
+          "wall_time_seconds": 189.195279,
+          "working_disk_peak_bytes": 1637889980
+        },
+        "inventory_after_import": {
+          "overall_peak_rss_bytes": 663859200,
+          "wall_time_seconds": 716.244826,
+          "working_disk_peak_bytes": 7740477870
+        },
+        "preview": {
+          "overall_peak_rss_bytes": 80846848,
+          "wall_time_seconds": 0.405559,
+          "working_disk_peak_bytes": 7743958556
+        },
+        "quality": {
+          "overall_peak_rss_bytes": 83283968,
+          "wall_time_seconds": 0.06251,
+          "working_disk_peak_bytes": 7743958556
+        }
+      },
+      "profile": {
+        "id": "pipeline",
+        "sha256": "7ad325f8ea9bce00c727703aa872219d14aad233371412d2352db0e76edcfa2e"
+      },
+      "quality": {
+        "missing_thematic_fields": {
+          "optional_missing_is_error": false,
+          "recommended_missing": 25,
+          "required_missing": 0
+        },
+        "sampling": "deterministic category × geometry_group stratification; SHA-256 order within each stratum",
+        "status": "warning",
+        "strata": [
+          {
+            "category": "gas",
+            "geometry_group": "line",
+            "population": 182,
+            "sampled": 3
+          },
+          {
+            "category": "gas",
+            "geometry_group": "point",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "gas",
+            "geometry_group": "polygon",
+            "population": 18,
+            "sampled": 1
+          },
+          {
+            "category": "lifecycle",
+            "geometry_group": "line",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "oil",
+            "geometry_group": "line",
+            "population": 11,
+            "sampled": 1
+          },
+          {
+            "category": "pipeline",
+            "geometry_group": "line",
+            "population": 832,
+            "sampled": 8
+          },
+          {
+            "category": "pipeline",
+            "geometry_group": "polygon",
+            "population": 3,
+            "sampled": 1
+          },
+          {
+            "category": "pumping",
+            "geometry_group": "line",
+            "population": 5,
+            "sampled": 1
+          },
+          {
+            "category": "pumping",
+            "geometry_group": "point",
+            "population": 10,
+            "sampled": 1
+          },
+          {
+            "category": "pumping",
+            "geometry_group": "polygon",
+            "population": 17,
+            "sampled": 1
+          },
+          {
+            "category": "pumping_candidate",
+            "geometry_group": "line",
+            "population": 40,
+            "sampled": 1
+          },
+          {
+            "category": "pumping_candidate",
+            "geometry_group": "point",
+            "population": 9,
+            "sampled": 1
+          },
+          {
+            "category": "pumping_candidate",
+            "geometry_group": "polygon",
+            "population": 18,
+            "sampled": 1
+          },
+          {
+            "category": "sewage",
+            "geometry_group": "line",
+            "population": 10,
+            "sampled": 1
+          },
+          {
+            "category": "storage_candidate",
+            "geometry_group": "point",
+            "population": 239,
+            "sampled": 3
+          },
+          {
+            "category": "storage_candidate",
+            "geometry_group": "polygon",
+            "population": 1674,
+            "sampled": 15
+          },
+          {
+            "category": "transmission",
+            "geometry_group": "line",
+            "population": 145,
+            "sampled": 2
+          },
+          {
+            "category": "valve",
+            "geometry_group": "point",
+            "population": 122,
+            "sampled": 2
+          },
+          {
+            "category": "water",
+            "geometry_group": "line",
+            "population": 229,
+            "sampled": 3
+          },
+          {
+            "category": "water",
+            "geometry_group": "point",
+            "population": 11,
+            "sampled": 1
+          },
+          {
+            "category": "water",
+            "geometry_group": "polygon",
+            "population": 53,
+            "sampled": 1
+          }
+        ]
+      },
+      "reproducibility": {
+        "byte_identical_output_required": false,
+        "classification_counts_equal": true,
+        "classification_osm_id_set_equal": true,
+        "classification_sqlite_integrity": "ok",
+        "export_feature_count_equal": true,
+        "export_layer_counts_equal": true,
+        "input_sha256_equal": true,
+        "output_gpkg_integrity": "ok",
+        "profile_sha256_equal": true,
+        "selection_sha256": "7a871c6eb0467cc81d22632ca967f732fe8457991a9e95e29f50fb999b595b17"
+      },
+      "started_at_utc": "2026-08-04T15:44:25.495982Z",
+      "status": "success"
+    },
+    "quebec_power": {
+      "counts": {
+        "classification": {
+          "categories": {
+            "cable": 53,
+            "converter": 1,
+            "generator": 2335,
+            "lifecycle": 101,
+            "line": 4364,
+            "minor_line": 25903,
+            "plant": 129,
+            "pole": 361960,
+            "portal": 1369,
+            "substation": 897,
+            "switchgear": 10,
+            "tower": 77639,
+            "transformer": 417
+          },
+          "layers": {
+            "lines": {
+              "matched": 30370,
+              "scanned": 4034307
+            },
+            "multilinestrings": {
+              "matched": 0,
+              "scanned": 3214
+            },
+            "multipolygons": {
+              "matched": 1161,
+              "scanned": 5205873
+            },
+            "other_relations": {
+              "matched": 0,
+              "scanned": 20611
+            },
+            "points": {
+              "matched": 443635,
+              "scanned": 3118806
+            }
+          },
+          "matched_objects": 475166,
+          "numeric_parse_failures": 0,
+          "rules": {
+            "power_cable": 53,
+            "power_converter": 1,
+            "power_generator": 2335,
+            "power_lifecycle": 101,
+            "power_line": 4364,
+            "power_minor_line": 25903,
+            "power_plant": 129,
+            "power_pole": 361960,
+            "power_portal": 1369,
+            "power_substation": 897,
+            "power_switchgear": 10,
+            "power_tower": 77639,
+            "power_transformer": 417
+          },
+          "scanned_objects": 12382811,
+          "tag_parse_anomalies": {},
+          "total_rule_matches": 475178
+        },
+        "export_features": 475166,
+        "output_bytes": 140361728,
+        "preview_loaded": 2000,
+        "quality_sample": 50,
+        "scan": {
+          "features": 12382811,
+          "lifecycle_inventory_rows": 777,
+          "tag_assignments": 31053216,
+          "unique_key_values": 595209,
+          "unique_keys": 3694
+        }
+      },
+      "finished_at_utc": "2026-08-04T18:05:26.511001Z",
+      "input": {
+        "bytes": 1158137113,
+        "file": "quebec-260802.osm.pbf",
+        "sha256": "ffbdc82400413d87c0f40830aac95cf6f7fabcb1a27b9e648520423376c826ca"
+      },
+      "performance": {
+        "classification": {
+          "overall_peak_rss_bytes": 143323136,
+          "wall_time_seconds": 514.643167,
+          "working_disk_peak_bytes": 206128672
+        },
+        "export": {
+          "overall_peak_rss_bytes": 127549440,
+          "wall_time_seconds": 747.194635,
+          "working_disk_peak_bytes": 0
+        },
+        "import": {
+          "peak_rss_bytes": 573755392,
+          "wall_time_seconds": 261.806009,
+          "working_disk_peak_bytes": 2748188483
+        },
+        "inventory_after_import": {
+          "overall_peak_rss_bytes": 646324224,
+          "wall_time_seconds": 260.935174,
+          "working_disk_peak_bytes": 8742830756
+        },
+        "preview": {
+          "overall_peak_rss_bytes": 103763968,
+          "wall_time_seconds": 0.675054,
+          "working_disk_peak_bytes": 6493019673
+        },
+        "quality": {
+          "overall_peak_rss_bytes": 104726528,
+          "wall_time_seconds": 5.088943,
+          "working_disk_peak_bytes": 6493019673
+        }
+      },
+      "profile": {
+        "id": "power",
+        "sha256": "393249f2c3fb8e3263b10d5e5902852b7a881089d33189843441dad35da2fd1f"
+      },
+      "quality": {
+        "missing_thematic_fields": {
+          "optional_missing_is_error": false,
+          "recommended_missing": 44,
+          "required_missing": 0
+        },
+        "sampling": "deterministic category × geometry_group stratification; SHA-256 order within each stratum",
+        "status": "warning",
+        "strata": [
+          {
+            "category": "cable",
+            "geometry_group": "line",
+            "population": 53,
+            "sampled": 1
+          },
+          {
+            "category": "converter",
+            "geometry_group": "polygon",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "generator",
+            "geometry_group": "point",
+            "population": 2169,
+            "sampled": 1
+          },
+          {
+            "category": "generator",
+            "geometry_group": "polygon",
+            "population": 166,
+            "sampled": 1
+          },
+          {
+            "category": "lifecycle",
+            "geometry_group": "line",
+            "population": 57,
+            "sampled": 1
+          },
+          {
+            "category": "lifecycle",
+            "geometry_group": "point",
+            "population": 34,
+            "sampled": 1
+          },
+          {
+            "category": "lifecycle",
+            "geometry_group": "polygon",
+            "population": 10,
+            "sampled": 1
+          },
+          {
+            "category": "line",
+            "geometry_group": "line",
+            "population": 4364,
+            "sampled": 1
+          },
+          {
+            "category": "minor_line",
+            "geometry_group": "line",
+            "population": 25903,
+            "sampled": 3
+          },
+          {
+            "category": "plant",
+            "geometry_group": "polygon",
+            "population": 129,
+            "sampled": 1
+          },
+          {
+            "category": "pole",
+            "geometry_group": "point",
+            "population": 361960,
+            "sampled": 26
+          },
+          {
+            "category": "portal",
+            "geometry_group": "point",
+            "population": 1369,
+            "sampled": 1
+          },
+          {
+            "category": "substation",
+            "geometry_group": "point",
+            "population": 59,
+            "sampled": 1
+          },
+          {
+            "category": "substation",
+            "geometry_group": "polygon",
+            "population": 838,
+            "sampled": 1
+          },
+          {
+            "category": "switchgear",
+            "geometry_group": "polygon",
+            "population": 10,
+            "sampled": 1
+          },
+          {
+            "category": "tower",
+            "geometry_group": "point",
+            "population": 77639,
+            "sampled": 6
+          },
+          {
+            "category": "transformer",
+            "geometry_group": "point",
+            "population": 405,
+            "sampled": 1
+          },
+          {
+            "category": "transformer",
+            "geometry_group": "polygon",
+            "population": 12,
+            "sampled": 1
+          }
+        ]
+      },
+      "reproducibility": {
+        "byte_identical_output_required": false,
+        "classification_counts_equal": true,
+        "classification_osm_id_set_equal": true,
+        "classification_sqlite_integrity": "ok",
+        "export_feature_count_equal": true,
+        "export_layer_counts_equal": true,
+        "input_sha256_equal": true,
+        "output_gpkg_integrity": "ok",
+        "profile_sha256_equal": true,
+        "selection_sha256": "61b08d010fc619155669e5a886b8ee6bfea0739e36a6f55b0ce40d276e9f9dcf"
+      },
+      "started_at_utc": "2026-08-04T17:12:54.669614Z",
+      "status": "success"
+    },
+    "south_korea_aeroway": {
+      "counts": {
+        "classification": {
+          "categories": {
+            "aerodrome": 99,
+            "apron": 119,
+            "gate": 241,
+            "hangar": 357,
+            "helipad": 2025,
+            "lifecycle": 36,
+            "navigation_aid": 449,
+            "parking_position": 489,
+            "runway": 140,
+            "taxilane": 236,
+            "taxiway": 5081,
+            "terminal": 32
+          },
+          "layers": {
+            "lines": {
+              "matched": 5469,
+              "scanned": 1945896
+            },
+            "multilinestrings": {
+              "matched": 0,
+              "scanned": 5757
+            },
+            "multipolygons": {
+              "matched": 1988,
+              "scanned": 1780806
+            },
+            "other_relations": {
+              "matched": 0,
+              "scanned": 31408
+            },
+            "points": {
+              "matched": 1847,
+              "scanned": 823484
+            }
+          },
+          "matched_objects": 9304,
+          "numeric_parse_failures": 0,
+          "rules": {
+            "aeroway_aerodrome": 99,
+            "aeroway_apron": 119,
+            "aeroway_gate": 241,
+            "aeroway_hangar": 357,
+            "aeroway_helipad": 2025,
+            "aeroway_lifecycle": 36,
+            "aeroway_navigation_aid": 449,
+            "aeroway_parking_position": 489,
+            "aeroway_runway": 140,
+            "aeroway_taxilane": 236,
+            "aeroway_taxiway": 5081,
+            "aeroway_terminal": 32
+          },
+          "scanned_objects": 4587351,
+          "tag_parse_anomalies": {
+            "empty_all_tags": 6
+          },
+          "total_rule_matches": 9304
+        },
+        "export_features": 9304,
+        "output_bytes": 4239360,
+        "preview_loaded": 2000,
+        "quality_sample": 50,
+        "scan": {
+          "features": 4587351,
+          "lifecycle_inventory_rows": 357,
+          "tag_assignments": 15954474,
+          "unique_key_values": 1479872,
+          "unique_keys": 2966
+        }
+      },
+      "finished_at_utc": "2026-08-04T15:44:25.493151Z",
+      "input": {
+        "bytes": 284437905,
+        "file": "south-korea-260802.osm.pbf",
+        "sha256": "8322c9b719c824c59d5801da43dbe3c5d62ca186e6a78bc42e84f6d669b9d325"
+      },
+      "performance": {
+        "classification": {
+          "overall_peak_rss_bytes": 147525632,
+          "wall_time_seconds": 193.463289,
+          "working_disk_peak_bytes": 8449903
+        },
+        "export": {
+          "overall_peak_rss_bytes": 120369152,
+          "wall_time_seconds": 13.859985,
+          "working_disk_peak_bytes": 0
+        },
+        "import": {
+          "peak_rss_bytes": 492429312,
+          "wall_time_seconds": 92.222047,
+          "working_disk_peak_bytes": 939870122
+        },
+        "inventory_after_import": {
+          "overall_peak_rss_bytes": 633888768,
+          "wall_time_seconds": 210.284047,
+          "working_disk_peak_bytes": 3003359499
+        },
+        "preview": {
+          "overall_peak_rss_bytes": 113135616,
+          "wall_time_seconds": 0.277848,
+          "working_disk_peak_bytes": 2731768390
+        },
+        "quality": {
+          "overall_peak_rss_bytes": 113131520,
+          "wall_time_seconds": 0.090368,
+          "working_disk_peak_bytes": 2731768390
+        }
+      },
+      "profile": {
+        "id": "aeroway",
+        "sha256": "ff2f74757d78bed9e776512d4d0ba6112a1b2f959f774ebea31dda12c2bc23b4"
+      },
+      "quality": {
+        "missing_thematic_fields": {
+          "optional_missing_is_error": false,
+          "recommended_missing": 41,
+          "required_missing": 0
+        },
+        "sampling": "deterministic category × geometry_group stratification; SHA-256 order within each stratum",
+        "status": "warning",
+        "strata": [
+          {
+            "category": "aerodrome",
+            "geometry_group": "point",
+            "population": 24,
+            "sampled": 1
+          },
+          {
+            "category": "aerodrome",
+            "geometry_group": "polygon",
+            "population": 75,
+            "sampled": 1
+          },
+          {
+            "category": "apron",
+            "geometry_group": "polygon",
+            "population": 119,
+            "sampled": 1
+          },
+          {
+            "category": "gate",
+            "geometry_group": "point",
+            "population": 241,
+            "sampled": 2
+          },
+          {
+            "category": "hangar",
+            "geometry_group": "polygon",
+            "population": 357,
+            "sampled": 2
+          },
+          {
+            "category": "helipad",
+            "geometry_group": "point",
+            "population": 648,
+            "sampled": 3
+          },
+          {
+            "category": "helipad",
+            "geometry_group": "polygon",
+            "population": 1377,
+            "sampled": 6
+          },
+          {
+            "category": "lifecycle",
+            "geometry_group": "line",
+            "population": 34,
+            "sampled": 1
+          },
+          {
+            "category": "lifecycle",
+            "geometry_group": "polygon",
+            "population": 2,
+            "sampled": 1
+          },
+          {
+            "category": "navigation_aid",
+            "geometry_group": "point",
+            "population": 444,
+            "sampled": 3
+          },
+          {
+            "category": "navigation_aid",
+            "geometry_group": "polygon",
+            "population": 5,
+            "sampled": 1
+          },
+          {
+            "category": "parking_position",
+            "geometry_group": "point",
+            "population": 489,
+            "sampled": 3
+          },
+          {
+            "category": "runway",
+            "geometry_group": "line",
+            "population": 139,
+            "sampled": 1
+          },
+          {
+            "category": "runway",
+            "geometry_group": "polygon",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "taxilane",
+            "geometry_group": "line",
+            "population": 236,
+            "sampled": 2
+          },
+          {
+            "category": "taxiway",
+            "geometry_group": "line",
+            "population": 5060,
+            "sampled": 18
+          },
+          {
+            "category": "taxiway",
+            "geometry_group": "polygon",
+            "population": 21,
+            "sampled": 1
+          },
+          {
+            "category": "terminal",
+            "geometry_group": "point",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "terminal",
+            "geometry_group": "polygon",
+            "population": 31,
+            "sampled": 1
+          }
+        ]
+      },
+      "reproducibility": {
+        "byte_identical_output_required": false,
+        "classification_counts_equal": true,
+        "classification_osm_id_set_equal": true,
+        "classification_sqlite_integrity": "ok",
+        "export_feature_count_equal": true,
+        "export_layer_counts_equal": true,
+        "input_sha256_equal": true,
+        "output_gpkg_integrity": "ok",
+        "profile_sha256_equal": true,
+        "selection_sha256": "ec1e7910ea5099b9374cc767bffafea16943694346e15c4264e6c036aed48574"
+      },
+      "started_at_utc": "2026-08-04T15:32:29.698194Z",
+      "status": "success"
+    }
+  },
+  "checkpoint_finalization": {
+    "all_case_statuses_success": true,
+    "all_database_integrity_checks_passed": true,
+    "all_reproducibility_checks_passed": true,
+    "method": "strict recovery from four complete per-case checkpoints",
+    "required_cases": [
+      "berlin_power",
+      "new_york_pipeline",
+      "quebec_power",
+      "south_korea_aeroway"
+    ],
+    "validated_at_utc": "2026-08-04T18:09:30.293002Z"
+  },
+  "environment": {
+    "checked_at_utc": "2026-08-04T15:26:36.267029Z",
+    "gdal": {
+      "data_path": "<LOCAL_PATH_REDACTED>",
+      "drivers": {
+        "GPKG": true,
+        "OSM": true
+      },
+      "ogr2ogr": "<LOCAL_PATH_REDACTED>",
+      "ogrinfo": "<LOCAL_PATH_REDACTED>",
+      "python_bindings": true,
+      "version": "GDAL 3.13.2 \"Iowa City\", released 2026/07/20"
+    },
+    "os": {
+      "machine": "AMD64",
+      "release": "10",
+      "system": "Windows",
+      "version": "10.0.19045"
+    },
+    "problems": [],
+    "python": {
+      "executable": "<LOCAL_PATH_REDACTED>",
+      "version": "3.12.13"
+    },
+    "reproducibility_warnings": [],
+    "sqlite": {
+      "version": "3.53.4"
+    },
+    "temporary_directory": "<LOCAL_PATH_REDACTED>"
+  },
+  "finished_at_utc": "2026-08-04T18:05:26.511001Z",
+  "schema_version": "1.0",
+  "software_version": "0.4.1",
+  "status": "success"
+}

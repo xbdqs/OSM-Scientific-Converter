@@ -1,15 +1,12 @@
+## 0.4.2 — release preparation (2026-10-11)
+
+- Added reviewed `highway`/`lines` fast selection path, CLI and GUI, with bounded preview and honest audit limits.
+- Corrected source-layer filtering, progress semantics and GeoPackage enrichment; added Windows resource and frozen CLI regression tests.
+- Preserved default spatial index; deferred index remains optional and experimental.
+- Integrated GUI quick-result panel and clickable road tags.
+- Prepared separate Windows onedir packaging and frozen quick-extraction self-test.
+
 # Changelog
-
-## Peer-review documentation update - 2026-09-05 (software core remains v0.4.1)
-
-- Expanded scientific positioning and related-tool documentation for the SoftwareX revision; the contribution is framed as reproducible, provenance-preserving thematic data preparation rather than low-level OSM filtering.
-- Added profile-authoring guidance based on snapshot-specific tag inventory, OSM/domain knowledge, explicit candidate rules, validation, and profile hashing.
-- Added empirical scalability boundaries and clarified that the tested evidence does not establish planet-scale capability.
-- Added format-support guidance that treats GeoPackage as a standards-informed archival choice, Shapefile as a legacy interoperability format with audited limitations, and GeoParquet as a future extension rather than an implemented v0.4.1 feature.
-- Added typical user value chains and scientific-scope documentation.
-- Updated manuscript figures to the final six-figure set, including the validation-region overview map and optimized architecture/export-audit graphics; figure code and source data mirror the revised manuscript.
-- No changes were made to the validated scanner, classifier, rule evaluator, profiles, exporter, database schema, or v0.4.1 release binaries.
-
 
 ## 0.4.1 — 2026-08-04
 

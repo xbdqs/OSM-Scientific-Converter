@@ -1,0 +1,1471 @@
+{
+  "frozen_versions": {
+    "phase1": {
+      "modified": false,
+      "version": "0.2.3"
+    },
+    "phase2": {
+      "evidence_file": "Phase2_v0.3.1_validation_evidence_final.zip",
+      "evidence_sha256": "594b173b413668416cf73c25a0f08080b98de1069008ffc9562fb237f935a942",
+      "modified": false,
+      "version": "0.3.1"
+    },
+    "phase3": {
+      "classification_expressions_unchanged": true,
+      "classification_schema_unchanged": true,
+      "classifier_source_unchanged": true,
+      "derived_from": "0.4.0",
+      "profile_hashes_changed_for_expected_field_metadata": true,
+      "rule_engine_source_unchanged": true,
+      "scanner_source_unchanged": true,
+      "version": "0.4.1"
+    },
+    "phase3_predecessor": {
+      "modified": false,
+      "release_json_sha256": "aa4b89e23a46f7e09060be00ead7be33965dff788d2792daf2258f1222d19ad2",
+      "version": "0.4.0"
+    }
+  },
+  "generated_at_utc": "2026-08-04T18:57:19.452877Z",
+  "gui_user_acceptance": {
+    "cases": {
+      "berlin_power": {
+        "automation_disclosure": "Programmatic acceptance through the real packaged GUI widgets; not a manual mouse-session claim.",
+        "checks": [
+          {
+            "detail": "0.4.1",
+            "name": "packaged v0.4.1 EXE",
+            "passed": true
+          },
+          {
+            "detail": {
+              "data_path": "<LOCAL_PATH_REDACTED>",
+              "drivers": {
+                "GPKG": true,
+                "OSM": true
+              },
+              "ogr2ogr": "<LOCAL_PATH_REDACTED>",
+              "ogrinfo": "<LOCAL_PATH_REDACTED>",
+              "python_bindings": true,
+              "version": "GDAL 3.13.2 \"Iowa City\", released 2026/07/20"
+            },
+            "name": "clean environment",
+            "passed": true
+          },
+          {
+            "detail": {
+              "loaded": 2000,
+              "total": 2086
+            },
+            "name": "bounded preview",
+            "passed": true
+          },
+          {
+            "detail": [
+              {
+                "category": "line",
+                "geometry_group": "line",
+                "population": 183,
+                "sampled": 5
+              },
+              {
+                "category": "substation",
+                "geometry_group": "point",
+                "population": 963,
+                "sampled": 23
+              },
+              {
+                "category": "substation",
+                "geometry_group": "polygon",
+                "population": 940,
+                "sampled": 22
+              }
+            ],
+            "name": "stratified quality",
+            "passed": true
+          },
+          {
+            "detail": [
+              {
+                "features_written": 2086,
+                "format": "GPKG",
+                "loss_audit": {
+                  "attribute_truncation_detected": false,
+                  "field_name_mapping_file": "field_mapping.csv",
+                  "field_name_truncation_detected": false,
+                  "full_tags_json_preserved": true,
+                  "geometry_conversion": "copied through GDAL/OGR into target format",
+                  "long_value_truncation_risks": 0,
+                  "mixed_geometry": "split by geometry group",
+                  "tags_json_handling": "full",
+                  "truncated_values": 0,
+                  "unicode": "UTF-8"
+                },
+                "output": "<LOCAL_PATH_REDACTED>",
+                "selection": {
+                  "categories": [
+                    "line",
+                    "substation"
+                  ],
+                  "field_selection_applied": true,
+                  "fields": [
+                    "osm_id",
+                    "osm_type",
+                    "source_layer",
+                    "geometry_group",
+                    "category",
+                    "rule_ids",
+                    "lifecycle",
+                    "profile_id",
+                    "profile_sha256",
+                    "tags_json",
+                    "voltage",
+                    "operator",
+                    "owner",
+                    "network"
+                  ],
+                  "format": "GPKG",
+                  "profile": "berlin_power_selected",
+                  "required_traceability_fields": [
+                    "osm_id",
+                    "osm_type",
+                    "source_layer",
+                    "geometry_group",
+                    "category",
+                    "rule_ids",
+                    "lifecycle",
+                    "profile_id",
+                    "profile_sha256",
+                    "tags_json"
+                  ],
+                  "resolved_categories": [
+                    "line",
+                    "substation"
+                  ],
+                  "schema_version": "1.0",
+                  "selected_profile_attributes": [
+                    "voltage",
+                    "operator",
+                    "owner",
+                    "network"
+                  ]
+                }
+              },
+              {
+                "features_written": 2086,
+                "format": "Shapefile",
+                "loss_audit": {
+                  "attribute_truncation_detected": true,
+                  "field_name_mapping_file": "shapefile_field_mapping.csv",
+                  "field_name_truncation_detected": true,
+                  "full_tags_json_preserved": false,
+                  "geometry_conversion": "copied through GDAL/OGR into target format",
+                  "long_value_truncation_risks": 313,
+                  "mixed_geometry": "split by category and geometry",
+                  "tags_json_handling": "UTF-8 text truncated to 254 characters when necessary",
+                  "truncated_values": 313,
+                  "unicode": "UTF-8 requested; downstream DBF reader support may vary"
+                },
+                "output": "<LOCAL_PATH_REDACTED>",
+                "selection": {
+                  "categories": [
+                    "line",
+                    "substation"
+                  ],
+                  "field_selection_applied": true,
+                  "fields": [
+                    "osm_id",
+                    "osm_type",
+                    "source_layer",
+                    "geometry_group",
+                    "category",
+                    "rule_ids",
+                    "lifecycle",
+                    "profile_id",
+                    "profile_sha256",
+                    "tags_json",
+                    "voltage",
+                    "operator",
+                    "owner",
+                    "network"
+                  ],
+                  "format": "Shapefile",
+                  "profile": "berlin_power_selected",
+                  "required_traceability_fields": [
+                    "osm_id",
+                    "osm_type",
+                    "source_layer",
+                    "geometry_group",
+                    "category",
+                    "rule_ids",
+                    "lifecycle",
+                    "profile_id",
+                    "profile_sha256",
+                    "tags_json"
+                  ],
+                  "resolved_categories": [
+                    "line",
+                    "substation"
+                  ],
+                  "schema_version": "1.0",
+                  "selected_profile_attributes": [
+                    "voltage",
+                    "operator",
+                    "owner",
+                    "network"
+                  ]
+                }
+              }
+            ],
+            "name": "exports created",
+            "passed": true
+          },
+          {
+            "detail": {
+              "gui": [
+                "line",
+                "substation"
+              ],
+              "resolved": [
+                "line",
+                "substation"
+              ]
+            },
+            "name": "GUI categories match applied export selection",
+            "passed": true
+          },
+          {
+            "detail": {
+              "power": [
+                "line",
+                "substation"
+              ]
+            },
+            "name": "line/substation cross-page state",
+            "passed": true
+          },
+          {
+            "detail": [
+              "GPKG",
+              "Shapefile"
+            ],
+            "name": "GPKG and Shapefile",
+            "passed": true
+          }
+        ],
+        "classification": {
+          "matched_objects": 2086,
+          "profile": {
+            "id": "berlin_power_selected",
+            "sha256": "c66f680fcac7be8129540e45bd3eacac4e339030b17d5be6afc35248f7228bef",
+            "source": "custom:gui_acceptance_berlin_power.json"
+          }
+        },
+        "exports": [
+          {
+            "features_written": 2086,
+            "format": "GPKG",
+            "loss_audit": {
+              "attribute_truncation_detected": false,
+              "field_name_mapping_file": "field_mapping.csv",
+              "field_name_truncation_detected": false,
+              "full_tags_json_preserved": true,
+              "geometry_conversion": "copied through GDAL/OGR into target format",
+              "long_value_truncation_risks": 0,
+              "mixed_geometry": "split by geometry group",
+              "tags_json_handling": "full",
+              "truncated_values": 0,
+              "unicode": "UTF-8"
+            },
+            "output": "<LOCAL_PATH_REDACTED>",
+            "selection": {
+              "categories": [
+                "line",
+                "substation"
+              ],
+              "field_selection_applied": true,
+              "fields": [
+                "osm_id",
+                "osm_type",
+                "source_layer",
+                "geometry_group",
+                "category",
+                "rule_ids",
+                "lifecycle",
+                "profile_id",
+                "profile_sha256",
+                "tags_json",
+                "voltage",
+                "operator",
+                "owner",
+                "network"
+              ],
+              "format": "GPKG",
+              "profile": "berlin_power_selected",
+              "required_traceability_fields": [
+                "osm_id",
+                "osm_type",
+                "source_layer",
+                "geometry_group",
+                "category",
+                "rule_ids",
+                "lifecycle",
+                "profile_id",
+                "profile_sha256",
+                "tags_json"
+              ],
+              "resolved_categories": [
+                "line",
+                "substation"
+              ],
+              "schema_version": "1.0",
+              "selected_profile_attributes": [
+                "voltage",
+                "operator",
+                "owner",
+                "network"
+              ]
+            }
+          },
+          {
+            "features_written": 2086,
+            "format": "Shapefile",
+            "loss_audit": {
+              "attribute_truncation_detected": true,
+              "field_name_mapping_file": "shapefile_field_mapping.csv",
+              "field_name_truncation_detected": true,
+              "full_tags_json_preserved": false,
+              "geometry_conversion": "copied through GDAL/OGR into target format",
+              "long_value_truncation_risks": 313,
+              "mixed_geometry": "split by category and geometry",
+              "tags_json_handling": "UTF-8 text truncated to 254 characters when necessary",
+              "truncated_values": 313,
+              "unicode": "UTF-8 requested; downstream DBF reader support may vary"
+            },
+            "output": "<LOCAL_PATH_REDACTED>",
+            "selection": {
+              "categories": [
+                "line",
+                "substation"
+              ],
+              "field_selection_applied": true,
+              "fields": [
+                "osm_id",
+                "osm_type",
+                "source_layer",
+                "geometry_group",
+                "category",
+                "rule_ids",
+                "lifecycle",
+                "profile_id",
+                "profile_sha256",
+                "tags_json",
+                "voltage",
+                "operator",
+                "owner",
+                "network"
+              ],
+              "format": "Shapefile",
+              "profile": "berlin_power_selected",
+              "required_traceability_fields": [
+                "osm_id",
+                "osm_type",
+                "source_layer",
+                "geometry_group",
+                "category",
+                "rule_ids",
+                "lifecycle",
+                "profile_id",
+                "profile_sha256",
+                "tags_json"
+              ],
+              "resolved_categories": [
+                "line",
+                "substation"
+              ],
+              "schema_version": "1.0",
+              "selected_profile_attributes": [
+                "voltage",
+                "operator",
+                "owner",
+                "network"
+              ]
+            }
+          }
+        ],
+        "preview": {
+          "loaded": 2000,
+          "total": 2086
+        },
+        "process_execution": "validation\\GUI_ACCEPTANCE\\berlin_power\\process_execution.json",
+        "process_execution_sha256": "69f2e773e13d390f0de0db84e10fd62be2c82fcadda815eee0557a092c6d69c3",
+        "report": "validation\\GUI_ACCEPTANCE\\berlin_power\\report.json",
+        "report_sha256": "38c37bda4c18a424a3e297262bc4b72697649eb77913afb81a6ecd9cb974c27a",
+        "screenshots": [
+          {
+            "bytes": 58587,
+            "file": "validation\\GUI_ACCEPTANCE\\berlin_power\\screenshots\\01_project_open.png",
+            "sha256": "07e6291da44380b16e74ed115635513ada8e4ef3b5dc0d7357929dc542524c0f"
+          },
+          {
+            "bytes": 138467,
+            "file": "validation\\GUI_ACCEPTANCE\\berlin_power\\screenshots\\02_selection.png",
+            "sha256": "e2584b2253f99f22147eeb4ca8620acf75df668103886357558a4ff909165f3e"
+          },
+          {
+            "bytes": 104140,
+            "file": "validation\\GUI_ACCEPTANCE\\berlin_power\\screenshots\\03_preview_quality.png",
+            "sha256": "dbede0d92221f02147d73975f7006a92ef9965e85e666963ad2f84c7240ffe35"
+          },
+          {
+            "bytes": 79919,
+            "file": "validation\\GUI_ACCEPTANCE\\berlin_power\\screenshots\\04_export.png",
+            "sha256": "3eb20af34ccefb371a0c5843ff422dc9e0f1c2e1682991c92bf31658ff5c7129"
+          }
+        ],
+        "status": "success",
+        "wall_time_seconds": 57.400949
+      },
+      "new_york_pipeline": {
+        "automation_disclosure": "Programmatic acceptance through the real packaged GUI widgets; not a manual mouse-session claim.",
+        "checks": [
+          {
+            "detail": "0.4.1",
+            "name": "packaged v0.4.1 EXE",
+            "passed": true
+          },
+          {
+            "detail": {
+              "data_path": "<LOCAL_PATH_REDACTED>",
+              "drivers": {
+                "GPKG": true,
+                "OSM": true
+              },
+              "ogr2ogr": "<LOCAL_PATH_REDACTED>",
+              "ogrinfo": "<LOCAL_PATH_REDACTED>",
+              "python_bindings": true,
+              "version": "GDAL 3.13.2 \"Iowa City\", released 2026/07/20"
+            },
+            "name": "clean environment",
+            "passed": true
+          },
+          {
+            "detail": {
+              "loaded": 2000,
+              "total": 3078
+            },
+            "name": "bounded preview",
+            "passed": true
+          },
+          {
+            "detail": [
+              {
+                "category": "gas",
+                "geometry_group": "line",
+                "population": 182,
+                "sampled": 3
+              },
+              {
+                "category": "gas",
+                "geometry_group": "point",
+                "population": 1,
+                "sampled": 1
+              },
+              {
+                "category": "gas",
+                "geometry_group": "polygon",
+                "population": 18,
+                "sampled": 1
+              },
+              {
+                "category": "lifecycle",
+                "geometry_group": "line",
+                "population": 1,
+                "sampled": 1
+              },
+              {
+                "category": "oil",
+                "geometry_group": "line",
+                "population": 11,
+                "sampled": 1
+              },
+              {
+                "category": "pipeline",
+                "geometry_group": "line",
+                "population": 832,
+                "sampled": 8
+              },
+              {
+                "category": "pipeline",
+                "geometry_group": "polygon",
+                "population": 3,
+                "sampled": 1
+              },
+              {
+                "category": "pumping",
+                "geometry_group": "line",
+                "population": 5,
+                "sampled": 1
+              },
+              {
+                "category": "pumping",
+                "geometry_group": "point",
+                "population": 10,
+                "sampled": 1
+              },
+              {
+                "category": "pumping",
+                "geometry_group": "polygon",
+                "population": 17,
+                "sampled": 1
+              },
+              {
+                "category": "pumping_candidate",
+                "geometry_group": "line",
+                "population": 40,
+                "sampled": 1
+              },
+              {
+                "category": "pumping_candidate",
+                "geometry_group": "point",
+                "population": 9,
+                "sampled": 1
+              },
+              {
+                "category": "pumping_candidate",
+                "geometry_group": "polygon",
+                "population": 18,
+                "sampled": 1
+              },
+              {
+                "category": "sewage",
+                "geometry_group": "line",
+                "population": 10,
+                "sampled": 1
+              },
+              {
+                "category": "storage_candidate",
+                "geometry_group": "point",
+                "population": 239,
+                "sampled": 3
+              },
+              {
+                "category": "storage_candidate",
+                "geometry_group": "polygon",
+                "population": 1674,
+                "sampled": 15
+              },
+              {
+                "category": "transmission",
+                "geometry_group": "line",
+                "population": 145,
+                "sampled": 2
+              },
+              {
+                "category": "valve",
+                "geometry_group": "point",
+                "population": 122,
+                "sampled": 2
+              },
+              {
+                "category": "water",
+                "geometry_group": "line",
+                "population": 229,
+                "sampled": 3
+              },
+              {
+                "category": "water",
+                "geometry_group": "point",
+                "population": 11,
+                "sampled": 1
+              },
+              {
+                "category": "water",
+                "geometry_group": "polygon",
+                "population": 53,
+                "sampled": 1
+              }
+            ],
+            "name": "stratified quality",
+            "passed": true
+          },
+          {
+            "detail": [
+              {
+                "features_written": 1098,
+                "format": "GPKG",
+                "loss_audit": {
+                  "attribute_truncation_detected": false,
+                  "field_name_mapping_file": "field_mapping.csv",
+                  "field_name_truncation_detected": false,
+                  "full_tags_json_preserved": true,
+                  "geometry_conversion": "copied through GDAL/OGR into target format",
+                  "long_value_truncation_risks": 0,
+                  "mixed_geometry": "split by geometry group",
+                  "tags_json_handling": "full",
+                  "truncated_values": 0,
+                  "unicode": "UTF-8"
+                },
+                "output": "<LOCAL_PATH_REDACTED>",
+                "selection": {
+                  "categories": [],
+                  "field_selection_applied": true,
+                  "fields": [
+                    "osm_id",
+                    "osm_type",
+                    "source_layer",
+                    "geometry_group",
+                    "category",
+                    "rule_ids",
+                    "lifecycle",
+                    "profile_id",
+                    "profile_sha256",
+                    "tags_json",
+                    "substance",
+                    "usage",
+                    "diameter",
+                    "pressure",
+                    "capacity",
+                    "operator",
+                    "owner",
+                    "location",
+                    "flow_direction"
+                  ],
+                  "format": "GPKG",
+                  "profile": "pipeline",
+                  "required_traceability_fields": [
+                    "osm_id",
+                    "osm_type",
+                    "source_layer",
+                    "geometry_group",
+                    "category",
+                    "rule_ids",
+                    "lifecycle",
+                    "profile_id",
+                    "profile_sha256",
+                    "tags_json"
+                  ],
+                  "resolved_categories": [
+                    "gas",
+                    "lifecycle",
+                    "oil",
+                    "pipeline",
+                    "pumping",
+                    "sewage",
+                    "transmission",
+                    "valve",
+                    "water"
+                  ],
+                  "schema_version": "1.0",
+                  "selected_profile_attributes": [
+                    "substance",
+                    "usage",
+                    "diameter",
+                    "pressure",
+                    "capacity",
+                    "operator",
+                    "owner",
+                    "location",
+                    "flow_direction"
+                  ]
+                }
+              }
+            ],
+            "name": "exports created",
+            "passed": true
+          },
+          {
+            "detail": {
+              "gui": [
+                "gas",
+                "lifecycle",
+                "oil",
+                "pipeline",
+                "pumping",
+                "sewage",
+                "transmission",
+                "valve",
+                "water"
+              ],
+              "resolved": [
+                "gas",
+                "lifecycle",
+                "oil",
+                "pipeline",
+                "pumping",
+                "sewage",
+                "transmission",
+                "valve",
+                "water"
+              ]
+            },
+            "name": "GUI categories match applied export selection",
+            "passed": true
+          },
+          {
+            "detail": {
+              "pumping_candidate": 67,
+              "storage_candidate": 1913
+            },
+            "name": "confirmed/candidate comparison",
+            "passed": true
+          },
+          {
+            "detail": [
+              "gas",
+              "lifecycle",
+              "oil",
+              "pipeline",
+              "pumping",
+              "sewage",
+              "transmission",
+              "valve",
+              "water"
+            ],
+            "name": "storage_candidate excluded by default",
+            "passed": true
+          }
+        ],
+        "classification": {
+          "matched_objects": 3078,
+          "profile": {
+            "id": "pipeline",
+            "sha256": "7ad325f8ea9bce00c727703aa872219d14aad233371412d2352db0e76edcfa2e",
+            "source": "builtin:pipeline"
+          }
+        },
+        "exports": [
+          {
+            "features_written": 1098,
+            "format": "GPKG",
+            "loss_audit": {
+              "attribute_truncation_detected": false,
+              "field_name_mapping_file": "field_mapping.csv",
+              "field_name_truncation_detected": false,
+              "full_tags_json_preserved": true,
+              "geometry_conversion": "copied through GDAL/OGR into target format",
+              "long_value_truncation_risks": 0,
+              "mixed_geometry": "split by geometry group",
+              "tags_json_handling": "full",
+              "truncated_values": 0,
+              "unicode": "UTF-8"
+            },
+            "output": "<LOCAL_PATH_REDACTED>",
+            "selection": {
+              "categories": [],
+              "field_selection_applied": true,
+              "fields": [
+                "osm_id",
+                "osm_type",
+                "source_layer",
+                "geometry_group",
+                "category",
+                "rule_ids",
+                "lifecycle",
+                "profile_id",
+                "profile_sha256",
+                "tags_json",
+                "substance",
+                "usage",
+                "diameter",
+                "pressure",
+                "capacity",
+                "operator",
+                "owner",
+                "location",
+                "flow_direction"
+              ],
+              "format": "GPKG",
+              "profile": "pipeline",
+              "required_traceability_fields": [
+                "osm_id",
+                "osm_type",
+                "source_layer",
+                "geometry_group",
+                "category",
+                "rule_ids",
+                "lifecycle",
+                "profile_id",
+                "profile_sha256",
+                "tags_json"
+              ],
+              "resolved_categories": [
+                "gas",
+                "lifecycle",
+                "oil",
+                "pipeline",
+                "pumping",
+                "sewage",
+                "transmission",
+                "valve",
+                "water"
+              ],
+              "schema_version": "1.0",
+              "selected_profile_attributes": [
+                "substance",
+                "usage",
+                "diameter",
+                "pressure",
+                "capacity",
+                "operator",
+                "owner",
+                "location",
+                "flow_direction"
+              ]
+            }
+          }
+        ],
+        "preview": {
+          "loaded": 2000,
+          "total": 3078
+        },
+        "process_execution": "validation\\GUI_ACCEPTANCE\\new_york_pipeline\\process_execution.json",
+        "process_execution_sha256": "5aa13a190207111d0167c46912a816184f524598864ca19e7af0d099feb48e37",
+        "report": "validation\\GUI_ACCEPTANCE\\new_york_pipeline\\report.json",
+        "report_sha256": "c6f87ab3f0831a78ce3c702f734c397fb3ed65012d39cc6699d1f2bb09e05d04",
+        "screenshots": [
+          {
+            "bytes": 58961,
+            "file": "validation\\GUI_ACCEPTANCE\\new_york_pipeline\\screenshots\\01_project_open.png",
+            "sha256": "0f1d0fc6de0a0374b10aa5a1183edae8a69681fed0eec9c45adab962bc4389bb"
+          },
+          {
+            "bytes": 115978,
+            "file": "validation\\GUI_ACCEPTANCE\\new_york_pipeline\\screenshots\\02_selection.png",
+            "sha256": "bd50acfd618c5179443315e1eda22f54c1cde63aac80e2b4d17b0a4d20a05d03"
+          },
+          {
+            "bytes": 115340,
+            "file": "validation\\GUI_ACCEPTANCE\\new_york_pipeline\\screenshots\\03_preview_quality.png",
+            "sha256": "c38fa85876e676dbb3de31ef8e18d80ff6007e5aa700a25f4e5202ed03c12d1d"
+          },
+          {
+            "bytes": 80450,
+            "file": "validation\\GUI_ACCEPTANCE\\new_york_pipeline\\screenshots\\04_export.png",
+            "sha256": "e77545ae6c8b135d43278820b245c2c04c18d0309a94c7b731e217e4c80d80bf"
+          }
+        ],
+        "status": "success",
+        "wall_time_seconds": 2187.616463
+      },
+      "south_korea_aeroway": {
+        "automation_disclosure": "Programmatic acceptance through the real packaged GUI widgets; not a manual mouse-session claim.",
+        "checks": [
+          {
+            "detail": "0.4.1",
+            "name": "packaged v0.4.1 EXE",
+            "passed": true
+          },
+          {
+            "detail": {
+              "data_path": "<LOCAL_PATH_REDACTED>",
+              "drivers": {
+                "GPKG": true,
+                "OSM": true
+              },
+              "ogr2ogr": "<LOCAL_PATH_REDACTED>",
+              "ogrinfo": "<LOCAL_PATH_REDACTED>",
+              "python_bindings": true,
+              "version": "GDAL 3.13.2 \"Iowa City\", released 2026/07/20"
+            },
+            "name": "clean environment",
+            "passed": true
+          },
+          {
+            "detail": {
+              "loaded": 2000,
+              "total": 9304
+            },
+            "name": "bounded preview",
+            "passed": true
+          },
+          {
+            "detail": [
+              {
+                "category": "aerodrome",
+                "geometry_group": "point",
+                "population": 24,
+                "sampled": 1
+              },
+              {
+                "category": "aerodrome",
+                "geometry_group": "polygon",
+                "population": 75,
+                "sampled": 1
+              },
+              {
+                "category": "apron",
+                "geometry_group": "polygon",
+                "population": 119,
+                "sampled": 1
+              },
+              {
+                "category": "gate",
+                "geometry_group": "point",
+                "population": 241,
+                "sampled": 2
+              },
+              {
+                "category": "hangar",
+                "geometry_group": "polygon",
+                "population": 357,
+                "sampled": 2
+              },
+              {
+                "category": "helipad",
+                "geometry_group": "point",
+                "population": 648,
+                "sampled": 3
+              },
+              {
+                "category": "helipad",
+                "geometry_group": "polygon",
+                "population": 1377,
+                "sampled": 6
+              },
+              {
+                "category": "lifecycle",
+                "geometry_group": "line",
+                "population": 34,
+                "sampled": 1
+              },
+              {
+                "category": "lifecycle",
+                "geometry_group": "polygon",
+                "population": 2,
+                "sampled": 1
+              },
+              {
+                "category": "navigation_aid",
+                "geometry_group": "point",
+                "population": 444,
+                "sampled": 3
+              },
+              {
+                "category": "navigation_aid",
+                "geometry_group": "polygon",
+                "population": 5,
+                "sampled": 1
+              },
+              {
+                "category": "parking_position",
+                "geometry_group": "point",
+                "population": 489,
+                "sampled": 3
+              },
+              {
+                "category": "runway",
+                "geometry_group": "line",
+                "population": 139,
+                "sampled": 1
+              },
+              {
+                "category": "runway",
+                "geometry_group": "polygon",
+                "population": 1,
+                "sampled": 1
+              },
+              {
+                "category": "taxilane",
+                "geometry_group": "line",
+                "population": 236,
+                "sampled": 2
+              },
+              {
+                "category": "taxiway",
+                "geometry_group": "line",
+                "population": 5060,
+                "sampled": 18
+              },
+              {
+                "category": "taxiway",
+                "geometry_group": "polygon",
+                "population": 21,
+                "sampled": 1
+              },
+              {
+                "category": "terminal",
+                "geometry_group": "point",
+                "population": 1,
+                "sampled": 1
+              },
+              {
+                "category": "terminal",
+                "geometry_group": "polygon",
+                "population": 31,
+                "sampled": 1
+              }
+            ],
+            "name": "stratified quality",
+            "passed": true
+          },
+          {
+            "detail": [
+              {
+                "features_written": 5320,
+                "format": "GeoJSON",
+                "loss_audit": {
+                  "attribute_truncation_detected": false,
+                  "field_name_mapping_file": "field_mapping.csv",
+                  "field_name_truncation_detected": false,
+                  "full_tags_json_preserved": true,
+                  "geometry_conversion": "copied through GDAL/OGR into target format",
+                  "long_value_truncation_risks": 0,
+                  "mixed_geometry": "split by category and geometry",
+                  "tags_json_handling": "full",
+                  "truncated_values": 0,
+                  "unicode": "UTF-8"
+                },
+                "output": "<LOCAL_PATH_REDACTED>",
+                "selection": {
+                  "categories": [
+                    "runway",
+                    "aerodrome",
+                    "taxiway"
+                  ],
+                  "field_selection_applied": true,
+                  "fields": [
+                    "osm_id",
+                    "osm_type",
+                    "source_layer",
+                    "geometry_group",
+                    "category",
+                    "rule_ids",
+                    "lifecycle",
+                    "profile_id",
+                    "profile_sha256",
+                    "tags_json",
+                    "icao",
+                    "iata",
+                    "faa",
+                    "ref",
+                    "surface",
+                    "width",
+                    "length",
+                    "lit",
+                    "operator",
+                    "military",
+                    "access"
+                  ],
+                  "format": "GeoJSON",
+                  "profile": "aeroway",
+                  "required_traceability_fields": [
+                    "osm_id",
+                    "osm_type",
+                    "source_layer",
+                    "geometry_group",
+                    "category",
+                    "rule_ids",
+                    "lifecycle",
+                    "profile_id",
+                    "profile_sha256",
+                    "tags_json"
+                  ],
+                  "resolved_categories": [
+                    "runway",
+                    "aerodrome",
+                    "taxiway"
+                  ],
+                  "schema_version": "1.0",
+                  "selected_profile_attributes": [
+                    "icao",
+                    "iata",
+                    "faa",
+                    "ref",
+                    "surface",
+                    "width",
+                    "length",
+                    "lit",
+                    "operator",
+                    "military",
+                    "access"
+                  ]
+                }
+              }
+            ],
+            "name": "exports created",
+            "passed": true
+          },
+          {
+            "detail": {
+              "gui": [
+                "aerodrome",
+                "runway",
+                "taxiway"
+              ],
+              "resolved": [
+                "runway",
+                "aerodrome",
+                "taxiway"
+              ]
+            },
+            "name": "GUI categories match applied export selection",
+            "passed": true
+          },
+          {
+            "detail": {
+              "categories": [
+                "runway",
+                "aerodrome",
+                "taxiway"
+              ],
+              "field_selection_applied": true,
+              "fields": [
+                "osm_id",
+                "osm_type",
+                "source_layer",
+                "geometry_group",
+                "category",
+                "rule_ids",
+                "lifecycle",
+                "profile_id",
+                "profile_sha256",
+                "tags_json",
+                "icao",
+                "iata",
+                "faa",
+                "ref",
+                "surface",
+                "width",
+                "length",
+                "lit",
+                "operator",
+                "military",
+                "access"
+              ],
+              "format": "GeoJSON",
+              "profile": "aeroway",
+              "required_traceability_fields": [
+                "osm_id",
+                "osm_type",
+                "source_layer",
+                "geometry_group",
+                "category",
+                "rule_ids",
+                "lifecycle",
+                "profile_id",
+                "profile_sha256",
+                "tags_json"
+              ],
+              "resolved_categories": [
+                "runway",
+                "aerodrome",
+                "taxiway"
+              ],
+              "schema_version": "1.0",
+              "selected_profile_attributes": [
+                "icao",
+                "iata",
+                "faa",
+                "ref",
+                "surface",
+                "width",
+                "length",
+                "lit",
+                "operator",
+                "military",
+                "access"
+              ]
+            },
+            "name": "selected aeroway categories",
+            "passed": true
+          },
+          {
+            "detail": {
+              "features": 5320,
+              "output": "<LOCAL_PATH_REDACTED>"
+            },
+            "name": "Unicode preserved in GeoJSON",
+            "passed": true
+          }
+        ],
+        "classification": {
+          "matched_objects": 9304,
+          "profile": {
+            "id": "aeroway",
+            "sha256": "ff2f74757d78bed9e776512d4d0ba6112a1b2f959f774ebea31dda12c2bc23b4",
+            "source": "builtin:aeroway"
+          }
+        },
+        "exports": [
+          {
+            "features_written": 5320,
+            "format": "GeoJSON",
+            "loss_audit": {
+              "attribute_truncation_detected": false,
+              "field_name_mapping_file": "field_mapping.csv",
+              "field_name_truncation_detected": false,
+              "full_tags_json_preserved": true,
+              "geometry_conversion": "copied through GDAL/OGR into target format",
+              "long_value_truncation_risks": 0,
+              "mixed_geometry": "split by category and geometry",
+              "tags_json_handling": "full",
+              "truncated_values": 0,
+              "unicode": "UTF-8"
+            },
+            "output": "<LOCAL_PATH_REDACTED>",
+            "selection": {
+              "categories": [
+                "runway",
+                "aerodrome",
+                "taxiway"
+              ],
+              "field_selection_applied": true,
+              "fields": [
+                "osm_id",
+                "osm_type",
+                "source_layer",
+                "geometry_group",
+                "category",
+                "rule_ids",
+                "lifecycle",
+                "profile_id",
+                "profile_sha256",
+                "tags_json",
+                "icao",
+                "iata",
+                "faa",
+                "ref",
+                "surface",
+                "width",
+                "length",
+                "lit",
+                "operator",
+                "military",
+                "access"
+              ],
+              "format": "GeoJSON",
+              "profile": "aeroway",
+              "required_traceability_fields": [
+                "osm_id",
+                "osm_type",
+                "source_layer",
+                "geometry_group",
+                "category",
+                "rule_ids",
+                "lifecycle",
+                "profile_id",
+                "profile_sha256",
+                "tags_json"
+              ],
+              "resolved_categories": [
+                "runway",
+                "aerodrome",
+                "taxiway"
+              ],
+              "schema_version": "1.0",
+              "selected_profile_attributes": [
+                "icao",
+                "iata",
+                "faa",
+                "ref",
+                "surface",
+                "width",
+                "length",
+                "lit",
+                "operator",
+                "military",
+                "access"
+              ]
+            }
+          }
+        ],
+        "preview": {
+          "loaded": 2000,
+          "total": 9304
+        },
+        "process_execution": "validation\\GUI_ACCEPTANCE\\south_korea_aeroway\\process_execution.json",
+        "process_execution_sha256": "67c705c50f04fab56826ee794b3f4cfbdb01401f6b980cdcb2adaefd25f68ab4",
+        "report": "validation\\GUI_ACCEPTANCE\\south_korea_aeroway\\report.json",
+        "report_sha256": "2b83afbb956703ee2ac2f3d336cdc4e993d51bb6995c285670e7436f84d085f5",
+        "screenshots": [
+          {
+            "bytes": 59032,
+            "file": "validation\\GUI_ACCEPTANCE\\south_korea_aeroway\\screenshots\\01_project_open.png",
+            "sha256": "cc1fd2f603464f608c875f3b7626693c1c9f23c1aad3afc584aaf36cc4cd05cf"
+          },
+          {
+            "bytes": 118464,
+            "file": "validation\\GUI_ACCEPTANCE\\south_korea_aeroway\\screenshots\\02_selection.png",
+            "sha256": "7c8497c1cdd1921bce809bb75d3f445147ff49ec52c066c4d505ac6954a3ca6c"
+          },
+          {
+            "bytes": 104367,
+            "file": "validation\\GUI_ACCEPTANCE\\south_korea_aeroway\\screenshots\\03_preview_quality.png",
+            "sha256": "b428ad5e2913a823b4b39b3f89b6f1988f188d3d22715264b278a355493fa140"
+          },
+          {
+            "bytes": 81573,
+            "file": "validation\\GUI_ACCEPTANCE\\south_korea_aeroway\\screenshots\\04_export.png",
+            "sha256": "d6f2da51b8eecc08afac7c14219e4456ea479587758311f2c9eea182df14d0e6"
+          }
+        ],
+        "status": "success",
+        "wall_time_seconds": 239.737191
+      }
+    },
+    "executable": {
+      "bytes": 2258971,
+      "file": "..\\phase3_v041_pyinstaller_dist\\OSMScientificConverter_v0.4.1\\OSMScientificConverter_v0.4.1.exe",
+      "sha256": "0c5911f3ffa8fa4e12da0dccde51950250a1b3b9b4e60f1ae94ab24d3c678e25"
+    },
+    "generated_at_utc": "2026-08-04T18:55:37.238144Z",
+    "method": "Programmatic acceptance through real packaged GUI widgets with captured window screenshots; not a manual mouse-session claim.",
+    "schema_version": "1.0",
+    "software_version": "0.4.1",
+    "status": "success"
+  },
+  "real_validation": {
+    "berlin_power": "success",
+    "new_york_pipeline": "success",
+    "quebec_power": "success",
+    "south_korea_aeroway": "success"
+  },
+  "schema_version": "1.0",
+  "software_version": "0.4.1",
+  "standalone_windows": {
+    "file": "OSMScientificConverter_v0.4.1_Windows_x64.zip",
+    "member_count": 409,
+    "sha256": "cc85793eab7ec9b7029da2653aaf40e966d4b9187c676a8bba7d89583e2208b4",
+    "smoke": {
+      "clean_environment": true,
+      "gdal": "GDAL 3.13.2 \"Iowa City\", released 2026/07/20",
+      "status": "success",
+      "workflow": {
+        "export_exists": true,
+        "features_written": 2,
+        "field_selection_applied": true,
+        "input_sha256": "e896535d009134dbaf4b6bff68c695af05d8db92cf359101cc9e66af73bcce18",
+        "matched_objects": 2,
+        "quality_sampling": "deterministic category × geometry_group stratification; SHA-256 order within each stratum",
+        "quality_strata": [
+          {
+            "category": "line",
+            "geometry_group": "line",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "substation",
+            "geometry_group": "point",
+            "population": 1,
+            "sampled": 1
+          }
+        ],
+        "scan_status": "success",
+        "selected_profile_attributes": [
+          "voltage"
+        ]
+      }
+    },
+    "uncompressed_bytes": 264485150
+  },
+  "status": "success",
+  "tests": {
+    "installed_wheel_python_3_12_13": {
+      "duration_seconds": 14.73,
+      "import_mode": "installed final wheel; PYTHONPATH removed",
+      "passed": 90,
+      "python_version": "3.12.13",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "installed_wheel_python_3_13_14": {
+      "duration_seconds": 14.09,
+      "import_mode": "installed final wheel; PYTHONPATH removed",
+      "passed": 90,
+      "python_version": "3.13.14",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "source_python_3_12_13": {
+      "duration_seconds": 13.37,
+      "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+      "passed": 90,
+      "python_version": "3.12.13",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "source_python_3_13_14": {
+      "duration_seconds": 12.88,
+      "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+      "passed": 90,
+      "python_version": "3.13.14",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    }
+  },
+  "wheel": {
+    "gui_entry_point": true,
+    "gui_modules": [
+      "osm_scientific_converter/gui/__init__.py",
+      "osm_scientific_converter/gui/__main__.py",
+      "osm_scientific_converter/gui/app.py",
+      "osm_scientific_converter/gui/inventory.py",
+      "osm_scientific_converter/gui/main_window.py",
+      "osm_scientific_converter/gui/project_state.py",
+      "osm_scientific_converter/gui/quality.py",
+      "osm_scientific_converter/gui/workers.py"
+    ],
+    "installed_tests": {
+      "installed_wheel_python_3_12_13": {
+        "duration_seconds": 14.73,
+        "import_mode": "installed final wheel; PYTHONPATH removed",
+        "passed": 90,
+        "python_version": "3.12.13",
+        "software_version": "0.4.1",
+        "status": "success",
+        "warnings_as_errors": true
+      },
+      "installed_wheel_python_3_13_14": {
+        "duration_seconds": 14.09,
+        "import_mode": "installed final wheel; PYTHONPATH removed",
+        "passed": 90,
+        "python_version": "3.13.14",
+        "software_version": "0.4.1",
+        "status": "success",
+        "warnings_as_errors": true
+      },
+      "source_python_3_12_13": {
+        "duration_seconds": 13.37,
+        "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+        "passed": 90,
+        "python_version": "3.12.13",
+        "software_version": "0.4.1",
+        "status": "success",
+        "warnings_as_errors": true
+      },
+      "source_python_3_13_14": {
+        "duration_seconds": 12.88,
+        "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+        "passed": 90,
+        "python_version": "3.13.14",
+        "software_version": "0.4.1",
+        "status": "success",
+        "warnings_as_errors": true
+      }
+    },
+    "metadata_version": true,
+    "profiles": [
+      "osm_scientific_converter/resources/profiles/aeroway.json",
+      "osm_scientific_converter/resources/profiles/pipeline.json",
+      "osm_scientific_converter/resources/profiles/power.json"
+    ],
+    "pyside_pin": true,
+    "sdist": {
+      "file": "osm_scientific_converter-0.4.1.tar.gz",
+      "members": 55,
+      "sha256": "f5e5612dea3300245d3f3534bbd23ba0d4c04218e7198de7fd673c233c92af74"
+    },
+    "status": "success",
+    "wheel": {
+      "file": "osm_scientific_converter-0.4.1-py3-none-any.whl",
+      "sha256": "b882fb9988a7e9adec3c561f7e28563d16f54a11b28dfe806eacfc4597f63ec3"
+    },
+    "wheel_crc": true
+  }
+}

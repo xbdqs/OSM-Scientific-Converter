@@ -1,10 +1,18 @@
 cff-version: 1.2.0
-message: "If you use this software, please cite the release described by this file."
+message: "If you use this software, please cite the software release described by this file."
 title: "OSM Scientific Converter: Auditable Scanner, Rule Classifier, and Thematic Exporter"
 type: software
-version: 0.4.1
-date-released: 2026-08-04
+version: 0.4.2
 license: MIT
+repository-code: "https://github.com/xbdqs/OSM-Scientific-Converter"
 authors:
-  - name: "OSM Scientific Converter contributors"
-    # Qingsong Du.
+  - given-names: "Qingsong"
+    family-names: "Du"
+  - given-names: "Guoyu"
+    family-names: "Li"
+  - given-names: "Fei"
+    family-names: "Wang"
+  - given-names: "Wei"
+    family-names: "Ma"
+  - given-names: "Yanhu"
+    family-names: "Mu"

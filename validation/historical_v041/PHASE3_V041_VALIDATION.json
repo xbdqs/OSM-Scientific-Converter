@@ -1,0 +1,387 @@
+{
+  "checks": [
+    {
+      "detail": "0.4.1",
+      "name": "software version is exactly v0.4.1",
+      "passed": true
+    },
+    {
+      "detail": "594b173b413668416cf73c25a0f08080b98de1069008ffc9562fb237f935a942",
+      "name": "frozen Phase 2 evidence unchanged",
+      "passed": true
+    },
+    {
+      "detail": "aa4b89e23a46f7e09060be00ead7be33965dff788d2792daf2258f1222d19ad2",
+      "name": "frozen v0.4.0 release record unchanged",
+      "passed": true
+    },
+    {
+      "detail": {
+        "aeroway": "ff2f74757d78bed9e776512d4d0ba6112a1b2f959f774ebea31dda12c2bc23b4",
+        "pipeline": "7ad325f8ea9bce00c727703aa872219d14aad233371412d2352db0e76edcfa2e",
+        "power": "393249f2c3fb8e3263b10d5e5902852b7a881089d33189843441dad35da2fd1f"
+      },
+      "name": "v0.4.1 expected-field profile hashes",
+      "passed": true
+    },
+    {
+      "detail": {
+        "installed_wheel_python_3_12_13": {
+          "duration_seconds": 14.73,
+          "import_mode": "installed final wheel; PYTHONPATH removed",
+          "passed": 90,
+          "python_version": "3.12.13",
+          "software_version": "0.4.1",
+          "status": "success",
+          "warnings_as_errors": true
+        },
+        "installed_wheel_python_3_13_14": {
+          "duration_seconds": 14.09,
+          "import_mode": "installed final wheel; PYTHONPATH removed",
+          "passed": 90,
+          "python_version": "3.13.14",
+          "software_version": "0.4.1",
+          "status": "success",
+          "warnings_as_errors": true
+        },
+        "source_python_3_12_13": {
+          "duration_seconds": 13.37,
+          "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+          "passed": 90,
+          "python_version": "3.12.13",
+          "software_version": "0.4.1",
+          "status": "success",
+          "warnings_as_errors": true
+        },
+        "source_python_3_13_14": {
+          "duration_seconds": 12.88,
+          "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+          "passed": 90,
+          "python_version": "3.13.14",
+          "software_version": "0.4.1",
+          "status": "success",
+          "warnings_as_errors": true
+        }
+      },
+      "name": "strict source and installed-wheel test matrix",
+      "passed": true
+    },
+    {
+      "detail": {
+        "all_profile_classification_semantics_unchanged": true,
+        "all_v041_profile_hashes_changed": true,
+        "classifier_source_unchanged": true,
+        "phase2_evidence_unchanged": true,
+        "rule_engine_source_unchanged": true,
+        "scanner_source_unchanged": true,
+        "v040_release_record_unchanged": true
+      },
+      "name": "frozen-version boundary audit",
+      "passed": true
+    },
+    {
+      "detail": {
+        "allowed_change_explanation": {
+          "METADATA": "README/version-boundary wording corrected; package requirements and version remain v0.4.1.",
+          "RECORD": "Wheel hash manifest necessarily changed with the two files above.",
+          "osm_scientific_converter/__init__.py": "Module docstring corrected from Phase 2 to Phase 3 v0.4.1; AST is otherwise identical.",
+          "osm_scientific_converter/core/exporter.py": "Exact audited delta: always records the effective category list, including explicit selections; selection, feature writing, geometry, field handling, and monitoring code are unchanged. Covered by the 90-test final source/wheel matrix and explicit-category audit regression.",
+          "osm_scientific_converter/gui/app.py": "Packaged-GUI acceptance now synchronizes the visible category checks with the resolved export selection and verifies equality.",
+          "osm_scientific_converter/gui/main_window.py": "Export-page category state can be explicitly applied/read and restored from project state; performance core does not import this module."
+        },
+        "changed_members": [
+          "osm_scientific_converter-0.4.1.dist-info/METADATA",
+          "osm_scientific_converter-0.4.1.dist-info/RECORD",
+          "osm_scientific_converter/__init__.py",
+          "osm_scientific_converter/core/exporter.py",
+          "osm_scientific_converter/gui/app.py",
+          "osm_scientific_converter/gui/main_window.py"
+        ],
+        "checks": {
+          "all_performance_scientific_members_except_audited_exporter_delta_byte_equal": true,
+          "all_profile_members_byte_equal": true,
+          "exporter_delta_is_exact_resolved_category_audit_hardening": true,
+          "init_code_equal_after_removing_module_docstring": true,
+          "only_documented_members_changed": true,
+          "wheel_member_names_equal": true
+        },
+        "decision": "The long real-data performance build and final wheel have byte-identical classification, import, scan, quality, profile, CLI, and resource logic. The exporter delta is mechanically proven to be only resolved-category audit metadata hardening and is covered by the final 90-test source/wheel matrix; feature selection/writing and performance paths are unchanged. The builds are therefore performance-functionally equivalent but not byte-identical.",
+        "final_build": {
+          "file": "release_artifacts_v041_final/osm_scientific_converter-0.4.1-py3-none-any.whl",
+          "sha256": "b882fb9988a7e9adec3c561f7e28563d16f54a11b28dfe806eacfc4597f63ec3"
+        },
+        "performance_tested_build": {
+          "file": "release_artifacts_v041_candidate/osm_scientific_converter-0.4.1-py3-none-any.whl",
+          "sha256": "775816722ee773ec6aef5e520756d5ae6c42d6c60e0332991af0427e64039c81"
+        },
+        "schema_version": "1.0",
+        "status": "success"
+      },
+      "name": "performance-tested build is functionally equivalent to final wheel",
+      "passed": true
+    },
+    {
+      "detail": {
+        "equivalence_final_build": {
+          "file": "release_artifacts_v041_final/osm_scientific_converter-0.4.1-py3-none-any.whl",
+          "sha256": "b882fb9988a7e9adec3c561f7e28563d16f54a11b28dfe806eacfc4597f63ec3"
+        },
+        "test_matrix": {
+          "file": "osm_scientific_converter-0.4.1-py3-none-any.whl",
+          "sha256": "b882fb9988a7e9adec3c561f7e28563d16f54a11b28dfe806eacfc4597f63ec3"
+        }
+      },
+      "name": "test matrix and equivalence audit identify the same final wheel",
+      "passed": true
+    },
+    {
+      "detail": {
+        "clean_environment": false,
+        "environment": {
+          "checked_at_utc": "2026-08-04T18:16:18.680526Z",
+          "gdal": {
+            "data_path": "<LOCAL_PATH_REDACTED>",
+            "drivers": {
+              "GPKG": true,
+              "OSM": true
+            },
+            "ogr2ogr": "<LOCAL_PATH_REDACTED>",
+            "ogrinfo": "<LOCAL_PATH_REDACTED>",
+            "python_bindings": true,
+            "version": "GDAL 3.12.0dev-7b06d23399-dirty, released 2025/07/11"
+          },
+          "os": {
+            "machine": "AMD64",
+            "release": "10",
+            "system": "Windows",
+            "version": "10.0.19045"
+          },
+          "problems": [],
+          "python": {
+            "executable": "<LOCAL_PATH_REDACTED>",
+            "version": "3.12.13"
+          },
+          "reproducibility_warnings": [
+            "GDAL reports a development or dirty build; rerun formal benchmarks with a stable release build."
+          ],
+          "sqlite": {
+            "version": "3.53.4"
+          },
+          "temporary_directory": "<LOCAL_PATH_REDACTED>"
+        },
+        "five_step_pages": 5,
+        "frozen": false,
+        "qt_version": "6.8.3",
+        "software_version": "0.4.1",
+        "status": "success"
+      },
+      "name": "wheel GUI five-step smoke",
+      "passed": true
+    },
+    {
+      "detail": {
+        "clean_environment": true,
+        "environment": {
+          "checked_at_utc": "2026-08-04T18:15:38.772566Z",
+          "gdal": {
+            "data_path": "<LOCAL_PATH_REDACTED>",
+            "drivers": {
+              "GPKG": true,
+              "OSM": true
+            },
+            "ogr2ogr": "<LOCAL_PATH_REDACTED>",
+            "ogrinfo": "<LOCAL_PATH_REDACTED>",
+            "python_bindings": true,
+            "version": "GDAL 3.13.2 \"Iowa City\", released 2026/07/20"
+          },
+          "os": {
+            "machine": "AMD64",
+            "release": "10",
+            "system": "Windows",
+            "version": "10.0.19045"
+          },
+          "problems": [],
+          "python": {
+            "executable": "<LOCAL_PATH_REDACTED>",
+            "version": "3.12.13"
+          },
+          "reproducibility_warnings": [],
+          "sqlite": {
+            "version": "3.50.0"
+          },
+          "temporary_directory": "<LOCAL_PATH_REDACTED>"
+        },
+        "five_step_pages": 5,
+        "frozen": true,
+        "qt_version": "6.8.3",
+        "software_version": "0.4.1",
+        "status": "success",
+        "workflow": {
+          "export_exists": true,
+          "features_written": 2,
+          "field_selection_applied": true,
+          "input_sha256": "e896535d009134dbaf4b6bff68c695af05d8db92cf359101cc9e66af73bcce18",
+          "matched_objects": 2,
+          "quality_sampling": "deterministic category × geometry_group stratification; SHA-256 order within each stratum",
+          "quality_strata": [
+            {
+              "category": "line",
+              "geometry_group": "line",
+              "population": 1,
+              "sampled": 1
+            },
+            {
+              "category": "substation",
+              "geometry_group": "point",
+              "population": 1,
+              "sampled": 1
+            }
+          ],
+          "scan_status": "success",
+          "selected_profile_attributes": [
+            "voltage"
+          ]
+        }
+      },
+      "name": "standalone clean environment",
+      "passed": true
+    },
+    {
+      "detail": {
+        "export_exists": true,
+        "features_written": 2,
+        "field_selection_applied": true,
+        "input_sha256": "e896535d009134dbaf4b6bff68c695af05d8db92cf359101cc9e66af73bcce18",
+        "matched_objects": 2,
+        "quality_sampling": "deterministic category × geometry_group stratification; SHA-256 order within each stratum",
+        "quality_strata": [
+          {
+            "category": "line",
+            "geometry_group": "line",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "substation",
+            "geometry_group": "point",
+            "population": 1,
+            "sampled": 1
+          }
+        ],
+        "scan_status": "success",
+        "selected_profile_attributes": [
+          "voltage"
+        ]
+      },
+      "name": "standalone field subset applied",
+      "passed": true
+    },
+    {
+      "detail": {
+        "export_exists": true,
+        "features_written": 2,
+        "field_selection_applied": true,
+        "input_sha256": "e896535d009134dbaf4b6bff68c695af05d8db92cf359101cc9e66af73bcce18",
+        "matched_objects": 2,
+        "quality_sampling": "deterministic category × geometry_group stratification; SHA-256 order within each stratum",
+        "quality_strata": [
+          {
+            "category": "line",
+            "geometry_group": "line",
+            "population": 1,
+            "sampled": 1
+          },
+          {
+            "category": "substation",
+            "geometry_group": "point",
+            "population": 1,
+            "sampled": 1
+          }
+        ],
+        "scan_status": "success",
+        "selected_profile_attributes": [
+          "voltage"
+        ]
+      },
+      "name": "standalone stratified quality",
+      "passed": true
+    },
+    {
+      "detail": {
+        "berlin_power": "success",
+        "new_york_pipeline": "success",
+        "quebec_power": "success",
+        "south_korea_aeroway": "success"
+      },
+      "name": "four-region final performance/reproducibility",
+      "passed": true
+    },
+    {
+      "detail": {
+        "berlin_power": "success",
+        "new_york_pipeline": "success",
+        "south_korea_aeroway": "success"
+      },
+      "name": "three packaged-EXE GUI acceptance cases",
+      "passed": true
+    }
+  ],
+  "generated_at_utc": "2026-08-04T18:55:46.805244Z",
+  "gui_acceptance": {
+    "berlin_power": "success",
+    "new_york_pipeline": "success",
+    "south_korea_aeroway": "success"
+  },
+  "profile_hashes": {
+    "aeroway": "ff2f74757d78bed9e776512d4d0ba6112a1b2f959f774ebea31dda12c2bc23b4",
+    "pipeline": "7ad325f8ea9bce00c727703aa872219d14aad233371412d2352db0e76edcfa2e",
+    "power": "393249f2c3fb8e3263b10d5e5902852b7a881089d33189843441dad35da2fd1f"
+  },
+  "real_validation": {
+    "berlin_power": "success",
+    "new_york_pipeline": "success",
+    "quebec_power": "success",
+    "south_korea_aeroway": "success"
+  },
+  "schema_version": "1.0",
+  "software_version": "0.4.1",
+  "status": "success",
+  "tests": {
+    "installed_wheel_python_3_12_13": {
+      "duration_seconds": 14.73,
+      "import_mode": "installed final wheel; PYTHONPATH removed",
+      "passed": 90,
+      "python_version": "3.12.13",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "installed_wheel_python_3_13_14": {
+      "duration_seconds": 14.09,
+      "import_mode": "installed final wheel; PYTHONPATH removed",
+      "passed": 90,
+      "python_version": "3.13.14",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "source_python_3_12_13": {
+      "duration_seconds": 13.37,
+      "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+      "passed": 90,
+      "python_version": "3.12.13",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "source_python_3_13_14": {
+      "duration_seconds": 12.88,
+      "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+      "passed": 90,
+      "python_version": "3.13.14",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    }
+  }
+}
