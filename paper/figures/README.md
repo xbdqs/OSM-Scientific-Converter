@@ -1,22 +1,7 @@
-# Revised manuscript figures and reproducible code
+# Publication figures
 
-This directory matches the revised SoftwareX manuscript SOFTX-D-26-01000.
+Figures 1, 3, 4, and 5 are fully reproducible from the included scripts and CSV files.
 
-## Figure numbering
+Figure 2 is deliberately **not fabricated**. It must be assembled from screenshots captured by the actual English GUI build. On Windows, rebuild the executable from the English GitHub source, run `tools/capture_publication_gui_english.bat`, and pass the generated `screenshots` directory to `code/figure_2_actual_english_gui.py`.
 
-1. `Figure_1_architecture` - software architecture and evidence flow.
-2. `Figure_2_actual_English_GUI_workflow` - five-step English GUI captured from the packaged v0.4.1 Windows application during the Berlin power workflow.
-3. `Figure_3_validation_regions` - overview of the four validation regions. Natural Earth public-domain country boundaries are used only as geographic background; markers indicate representative locations, not exact Geofabrik extract boundaries.
-4. `Figure_4_thematic_examples` - major thematic categories in Berlin power, South Korea aeroway and New York pipeline cases.
-5. `Figure_5_export_reproducibility` - observed Berlin export audit and repeated-run reproducibility checks.
-6. `Figure_6_performance` - complete-workflow time and peak resident memory.
-
-## Reproduction
-
-Run:
-
-```bash
-python code/run_all_figures.py
-```
-
-Python dependencies used by the figure scripts include matplotlib, pandas, Pillow and geopandas. The Natural Earth low-resolution shapefile required for Figure 3 is bundled under `data/naturalearth_lowres/` for reproducibility.
+The old v0.4.1 Windows executable and acceptance screenshots use Chinese interface labels and must not be used in the English manuscript.

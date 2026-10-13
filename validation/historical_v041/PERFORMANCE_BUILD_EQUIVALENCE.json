@@ -1,0 +1,37 @@
+{
+  "allowed_change_explanation": {
+    "METADATA": "README/version-boundary wording corrected; package requirements and version remain v0.4.1.",
+    "RECORD": "Wheel hash manifest necessarily changed with the two files above.",
+    "osm_scientific_converter/__init__.py": "Module docstring corrected from Phase 2 to Phase 3 v0.4.1; AST is otherwise identical.",
+    "osm_scientific_converter/core/exporter.py": "Exact audited delta: always records the effective category list, including explicit selections; selection, feature writing, geometry, field handling, and monitoring code are unchanged. Covered by the 90-test final source/wheel matrix and explicit-category audit regression.",
+    "osm_scientific_converter/gui/app.py": "Packaged-GUI acceptance now synchronizes the visible category checks with the resolved export selection and verifies equality.",
+    "osm_scientific_converter/gui/main_window.py": "Export-page category state can be explicitly applied/read and restored from project state; performance core does not import this module."
+  },
+  "changed_members": [
+    "osm_scientific_converter-0.4.1.dist-info/METADATA",
+    "osm_scientific_converter-0.4.1.dist-info/RECORD",
+    "osm_scientific_converter/__init__.py",
+    "osm_scientific_converter/core/exporter.py",
+    "osm_scientific_converter/gui/app.py",
+    "osm_scientific_converter/gui/main_window.py"
+  ],
+  "checks": {
+    "all_performance_scientific_members_except_audited_exporter_delta_byte_equal": true,
+    "all_profile_members_byte_equal": true,
+    "exporter_delta_is_exact_resolved_category_audit_hardening": true,
+    "init_code_equal_after_removing_module_docstring": true,
+    "only_documented_members_changed": true,
+    "wheel_member_names_equal": true
+  },
+  "decision": "The long real-data performance build and final wheel have byte-identical classification, import, scan, quality, profile, CLI, and resource logic. The exporter delta is mechanically proven to be only resolved-category audit metadata hardening and is covered by the final 90-test source/wheel matrix; feature selection/writing and performance paths are unchanged. The builds are therefore performance-functionally equivalent but not byte-identical.",
+  "final_build": {
+    "file": "release_artifacts_v041_final/osm_scientific_converter-0.4.1-py3-none-any.whl",
+    "sha256": "b882fb9988a7e9adec3c561f7e28563d16f54a11b28dfe806eacfc4597f63ec3"
+  },
+  "performance_tested_build": {
+    "file": "release_artifacts_v041_candidate/osm_scientific_converter-0.4.1-py3-none-any.whl",
+    "sha256": "775816722ee773ec6aef5e520756d5ae6c42d6c60e0332991af0427e64039c81"
+  },
+  "schema_version": "1.0",
+  "status": "success"
+}

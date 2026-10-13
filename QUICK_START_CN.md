@@ -1,14 +1,9 @@
-# Windows 独立版快速开始
+# v0.4.2 Windows 操作说明
 
-1. 完整解压 ZIP；不要只复制 EXE，也不要移动 `_internal`。
-2. 双击 `OSMScientificConverter_v0.4.1.exe`。
-3. 在 Step 1 选择 `examples/sample_infrastructure.osm`，并选择一个不存在的新工程目录。
-4. 单击环境/输入检查，然后运行扫描；示例很小，应快速完成。
-5. 在 Step 3 选择 `power`，运行分类。
-6. 在 Step 4 加载预览并运行质量检查。
-7. 在 Step 5 选择 GPKG 和输出路径后导出。
-8. 将结果与 `examples/expected_output_summary.json` 核对，并查看工程目录中的 `classification_summary.json` 与 `exports/export_audit.json`。
+**先确认** `tools/build_windows_v042.bat` 生成的打包验收报告 PASS，独立版 ZIP 才适合分发。保持 EXE 与 `_internal` 文件夹的相对位置。
 
-真实 PBF 可能需要较多磁盘和时间。运行前应保留足够临时/工程空间；不要把输出目录放在只读目录。若失败，保留界面日志和生成的最小化反馈 ZIP。反馈包不应包含原始 OSM、几何数据库或完整 tags。
+- 完整流程：打开 `OSMScientificConverter_v0.4.2.exe`，Step 1 选择 `examples/sample_infrastructure.osm` 和新项目目录，检查环境并开始扫描；Step 3 选择 `power` 并分类；Step 4 预览与抽样质量核查；Step 5 导出。
+- 快速道路流程：在 Step 1 点击 `Quick roads (no scan)...`，选择 `examples/round2_roads_small.osm`，将输出设在可写目录新建 `quick_roads.gpkg`，核对规则 `reviewer_roads_lines_v1.json` 并开始。Step 4 可浏览有限的道路样本并点击单条线查看标签；Step 5 显示已创建文件和受限审计范围，无需再次点击导出。
+- 快速模式仍可能读取整个 PBF 以重建几何，不代表完整道路网络，也没有完整库存或质量审计。完整 OSM 快照、几何 GPKG 不随代码包分发。
 
-字段勾选仅控制 profile 属性；十个追溯字段始终保留。Shapefile 导出后必须同时检查 `shapefile_field_mapping.csv` 和 `shapefile_loss_report.json`。
+源代码用户请先执行 `python -m pytest -q`。详见 `RELEASE_VALIDATION_CHECKLIST_CN.md`。

@@ -27,6 +27,7 @@ class GuiProject:
     profile_sha256: str = ""
     custom_rule_file: str = ""
     classification_rules: list[dict[str, Any]] = field(default_factory=list)
+    classification_source_layers: list[str] = field(default_factory=list)
     selected_categories: list[str] = field(default_factory=list)
     selected_tag_values: dict[str, list[str]] = field(default_factory=dict)
     export_format: str = "GPKG"

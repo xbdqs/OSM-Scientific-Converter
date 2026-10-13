@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "profile": "reviewer_roads_lines_v1",
+  "categories": ["motorways_and_trunks", "primary_secondary_tertiary", "residential_and_service", "pedestrian"],
+  "format": "GPKG",
+  "fields": ["highway", "name", "ref", "maxspeed", "oneway"]
+}

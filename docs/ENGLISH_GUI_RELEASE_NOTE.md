@@ -1,3 +1,5 @@
+> **Historical development document (pre-v0.4.2).** Refer to README.md and RELEASE_NOTES_v0.4.2.md for current instructions.
+
 # English GUI publication build
 
 The publication repository uses English for every user-visible desktop label and message. The scientific core (`core/`, profiles, scanner, classifier, exporter, database schemas, and rule expressions) is unchanged from the validated v0.4.1 core.

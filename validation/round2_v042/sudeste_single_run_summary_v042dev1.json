@@ -1,0 +1,96 @@
+{
+  "experiment": "round2_sudeste_targeted_vs_direct_gdal_minimal",
+  "experiment_started_utc": "2026-10-10T23:44:17.079987+00:00",
+  "input_name": "sudeste-260901.osm.pbf",
+  "input_size_bytes": 856168766,
+  "input_sha256": "e850eeafc2ec1d94d5b6014b89b923f239a95415e663301cbe21907fa805dfc8",
+  "rules_sha256": "da49cec6259173afc6fb71c8a0e9e2d9351594eae7c788d235e97ba8218f7829",
+  "software_version_expected": "0.4.2.dev1",
+  "machine": {
+    "os": "Windows-10-10.0.19045-SP0",
+    "cpu": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "logical_cpu_count": 6,
+    "ram_gib": 23.84,
+    "python": "3.13.14",
+    "free_disk_gib_before": 1253.1
+  },
+  "design_notes": [
+    "Same fixed PBF, same 13 highway values, exact lines source layer, same GeoPackage output format.",
+    "Direct GDAL baseline does not do category/provenance enrichment, input-hash binding or full inventory.",
+    "Targeted mode has no full vocabulary inventory or complete pre-export quality audit.",
+    "Timed runs include file hashing performed by each workflow; initial experiment hash is excluded.",
+    "Order alternates to expose warm-cache/order effects; sample RSS is approximate.",
+    "No evidence this is the same exact PBF as used by the reviewer without review input SHA-256."
+  ],
+  "runs": [
+    {
+      "run_index": 1,
+      "run_order": [
+        "gdal",
+        "targeted"
+      ],
+      "gdal": {
+        "returncode": 0,
+        "wall_seconds": 89.179,
+        "sampled_peak_process_tree_rss_mib": 446.6,
+        "note": "RSS sampled every 0.2 s; a short-lived peak may be missed. Includes child GDAL process when observed.",
+        "gdal_report_exit_code": 0,
+        "input_hash_matches": true
+      },
+      "targeted": {
+        "returncode": 0,
+        "wall_seconds": 126.289,
+        "sampled_peak_process_tree_rss_mib": 457.3,
+        "note": "RSS sampled every 0.2 s; a short-lived peak may be missed. Includes child GDAL process when observed.",
+        "audit_status": "success",
+        "audit_counts": 2067117,
+        "internal_timings_seconds": {
+          "category_and_provenance": 37.781,
+          "gdal_selective_import": 84.933,
+          "input_hash": 2.068,
+          "total_before_final_copy": 124.783,
+          "total_end_to_end": 124.783
+        },
+        "audit_sha256_matches_input": true,
+        "audit_profile_sha256": "da49cec6259173afc6fb71c8a0e9e2d9351594eae7c788d235e97ba8218f7829"
+      },
+      "targeted_gpkg": {
+        "count": 2067117,
+        "null_geometry_count": 0,
+        "declared_geometry_and_srs": [
+          [
+            "LINESTRING",
+            4326
+          ]
+        ],
+        "invalid_targeted_provenance_rows": 0,
+        "category_counts": {
+          "motorways_and_trunks": 73732,
+          "pedestrian": 3922,
+          "primary_secondary_tertiary": 352653,
+          "residential_and_service": 1636810
+        }
+      },
+      "gdal_gpkg": {
+        "count": 2067117,
+        "null_geometry_count": 0,
+        "declared_geometry_and_srs": [
+          [
+            "LINESTRING",
+            4326
+          ]
+        ],
+        "invalid_targeted_provenance_rows": null,
+        "category_counts": {}
+      },
+      "identity_comparison": {
+        "canonical_id_multisets_equal": true,
+        "rows_compared": 2067117,
+        "different_sorted_positions": 0,
+        "difference_sample": [],
+        "scope": "canonical ID multiset only; not geometry/attributes/quality-audit equivalence"
+      },
+      "status": "PASS"
+    }
+  ]
+}

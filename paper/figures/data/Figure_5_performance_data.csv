@@ -1,0 +1,5 @@
+Region,Profile,Input_MiB,Reconstructed_objects,Unique_key_value,Matched_objects,Total_time_min,Peak_RSS_MiB,Output_MiB
+Berlin,power,94.2,2525682,445244,6726,4.1,481.1,3.7
+South Korea,aeroway,271.3,4587351,1479872,9304,8.5,604.5,4.0
+New York,pipeline,471.4,11434477,6576398,3078,51.4,633.1,1.1
+Quebec,power,1104.5,12382811,595209,475166,29.7,616.4,133.9

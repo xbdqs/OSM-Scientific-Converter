@@ -24,8 +24,9 @@ def portable_project_path(path: str | Path, project: str | Path, *, external_lab
 def portable_profile_source(source: str) -> str:
     if source.startswith("builtin:"):
         return source
-    path = Path(source)
-    return f"custom:{path.name}"
+    # Windows-style paths must be anonymised correctly on POSIX as well.
+    normalized = source.replace("\\", "/").rstrip("/")
+    return f"custom:{normalized.rsplit('/', 1)[-1]}"
 
 
 def _looks_absolute(value: str) -> bool:

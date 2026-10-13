@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 import psutil
-from PySide6.QtCore import QCoreApplication, QPointF, QRectF, Qt, QThreadPool, QTimer, QUrl, Signal
+from PySide6.QtCore import QCoreApplication, QPointF, QRect, QRectF, Qt, QThreadPool, QTimer, QUrl, Signal
 from PySide6.QtGui import QAction, QColor, QDesktopServices, QPainter, QPainterPath, QPen
 from PySide6.QtWidgets import (
     QAbstractItemView, QApplication, QCheckBox, QComboBox, QDialog, QFileDialog, QFormLayout,
@@ -30,7 +30,9 @@ from osm_scientific_converter.core.exporter import REQUIRED_TRACEABILITY_FIELDS
 from osm_scientific_converter.gui.inventory import InventoryRepository
 from osm_scientific_converter.gui.project_state import GuiProject
 from osm_scientific_converter.gui.quality import load_preview, run_quality_checks
-from osm_scientific_converter.gui.workers import CoreWorker, classify_worker, export_worker, scan_worker
+from osm_scientific_converter.gui.workers import CoreWorker, classify_worker, export_worker, scan_worker, quick_highway_worker
+from osm_scientific_converter.gui.quick_highway import QuickHighwayDialog
+from osm_scientific_converter.gui.quick_preview import load_quick_preview
 
 
 COLORS = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#E69F00", "#56B4E9", "#F0E442", "#666666"]
@@ -145,8 +147,11 @@ class InputPage(QWidget):
         self.inspect_button = QPushButton("Inspect input and environment")
         self.scan_button = QPushButton("Start scan")
         self.scan_button.setObjectName("primaryButton")
+        self.quick_button = QPushButton("Quick roads (no scan)...")
+        self.quick_button.setToolTip("Experimental highway extraction; exact GDAL lines only; bypass full tag inventory")
         actions.addStretch()
         actions.addWidget(self.inspect_button)
+        actions.addWidget(self.quick_button)
         actions.addWidget(self.scan_button)
         layout.addLayout(actions)
         layout.addStretch()
@@ -267,7 +272,8 @@ class SelectionPage(QWidget):
         dynamic_layout = QVBoxLayout(dynamic_box)
         filters = QHBoxLayout()
         self.key_search = QLineEdit(); self.key_search.setPlaceholderText("Search keys")
-        self.geometry_filter = QComboBox(); self.geometry_filter.addItems(["All geometry", "point", "line", "polygon", "relation"])
+        self.geometry_filter = QComboBox(); self.geometry_filter.addItems(["All geometries (inventory only)", "point", "line", "polygon", "relation"])
+        self.geometry_filter.setToolTip("Filters the tag inventory display only. Use 'Classification source layer' below to restrict outputs.")
         self.lifecycle_filter = QComboBox(); self.lifecycle_filter.addItem("All lifecycle", "")
         self.load_keys = QPushButton("Load keys")
         filters.addWidget(self.key_search); filters.addWidget(self.geometry_filter); filters.addWidget(self.lifecycle_filter); filters.addWidget(self.load_keys)
@@ -292,6 +298,19 @@ class SelectionPage(QWidget):
         dynamic_layout.addWidget(self.use_dynamic)
         splitter.addWidget(dynamic_box)
 
+        scope_row = QHBoxLayout()
+        scope_row.addWidget(QLabel("Classification source layer (enforced):"))
+        self.classification_source_layer = QComboBox()
+        self.classification_source_layer.addItem("All GDAL source layers", None)
+        for layer_name in ("points", "lines", "multilinestrings", "multipolygons", "other_relations"):
+            self.classification_source_layer.addItem(layer_name, layer_name)
+        self.classification_source_layer.setToolTip(
+            "Applies to built-in and custom profiles. The GDAL 'lines' layer excludes 'multilinestrings'."
+        )
+        scope_row.addWidget(self.classification_source_layer)
+        scope_row.addStretch()
+        layout.addLayout(scope_row)
+
         custom_box = QGroupBox("Option 3 · Simple rule builder / advanced JSON")
         custom_form = QFormLayout(custom_box)
         self.rule_id = QLineEdit("gui_custom_rule")
@@ -302,7 +321,8 @@ class SelectionPage(QWidget):
         self.rule_preview = QPlainTextEdit(); self.rule_preview.setReadOnly(True); self.rule_preview.setMaximumHeight(220)
         self.build_rule = QPushButton("Build and validate rule")
         self.load_advanced = QPushButton("Load advanced JSON profile")
-        custom_form.addRow("Rule ID", self.rule_id); custom_form.addRow("Category", self.rule_category); custom_form.addRow("Key", self.rule_key)
+        custom_form.addRow(QLabel("OSM key/value rule (e.g. highway = primary; 'highway' is a key, not a road subclass)"))
+        custom_form.addRow("Rule ID", self.rule_id); custom_form.addRow("Category", self.rule_category); custom_form.addRow("OSM tag key", self.rule_key)
         custom_form.addRow("Operator", self.rule_operator); custom_form.addRow("Value", self.rule_value); custom_form.addRow(self.build_rule); custom_form.addRow(self.load_advanced); custom_form.addRow(self.rule_preview)
         splitter.addWidget(custom_box)
         splitter.setSizes([280, 520, 320])
@@ -432,6 +452,21 @@ class SelectionPage(QWidget):
     def selected_categories(self) -> list[str]:
         return [self.profile_tree.topLevelItem(i).text(0) for i in range(self.profile_tree.topLevelItemCount()) if self.profile_tree.topLevelItem(i).checkState(0) == Qt.Checked]
 
+    def selected_classification_source_layers(self) -> tuple[str, ...] | None:
+        name = self.classification_source_layer.currentData()
+        return (name,) if name else None
+
+    def set_classification_source_layers(self, layers: list[str] | None) -> None:
+        if not layers:
+            self.classification_source_layer.setCurrentIndex(0)
+        elif len(layers) == 1:
+            index = self.classification_source_layer.findData(layers[0])
+            if index < 0:
+                raise ValueError(f"Unsupported GUI source layer scope: {layers[0]}")
+            self.classification_source_layer.setCurrentIndex(index)
+        else:
+            raise ValueError("The GUI currently supports a single GDAL source-layer constraint")
+
     def _profile_document(self, expressions: list[dict[str, Any]], category: str | None = None) -> dict[str, Any]:
         rules = []
         for index, expression in enumerate(expressions):
@@ -495,10 +530,47 @@ class MapView(QGraphicsView):
     def wheelEvent(self, event) -> None:
         self.scale(1.2 if event.angleDelta().y() > 0 else 1 / 1.2, 1.2 if event.angleDelta().y() > 0 else 1 / 1.2)
 
+    def mousePressEvent(self, event) -> None:
+        # ScrollHandDrag captures ordinary presses on some Qt versions. Explicitly
+        # pick map features with an 8-pixel viewport tolerance, independent of
+        # scene scale and the thin display pen, while preserving background panning.
+        if event.button() == Qt.LeftButton:
+            pos = event.position().toPoint()
+            hit_box = QRect(pos.x() - 8, pos.y() - 8, 17, 17)
+            for candidate in self.items(hit_box):
+                if (candidate.isVisible()
+                        and candidate.flags() & candidate.GraphicsItemFlag.ItemIsSelectable
+                        and isinstance(candidate.data(0), dict)):
+                    self.scene().clearSelection()
+                    candidate.setSelected(True)
+                    self.featureSelected.emit(candidate.data(0) or {})
+                    event.accept()
+                    return
+            # Empty-space click clears the attribute inspector; left-drag on the
+            # background still pans because the base view retains ScrollHandDrag.
+            self.scene().clearSelection()
+        super().mousePressEvent(event)
+
     def _selection_changed(self) -> None:
         selected = self.scene().selectedItems()
-        if selected:
-            self.featureSelected.emit(selected[0].data(0) or {})
+        self.featureSelected.emit(selected[0].data(0) or {} if selected else {})
+
+    def fit_all(self) -> None:
+        if self.scene().items():
+            self.resetTransform()
+            self.fitInView(self.scene().sceneRect(), Qt.KeepAspectRatio)
+
+    def zoom_to_selected(self) -> bool:
+        selected = self.scene().selectedItems()
+        if not selected:
+            return False
+        bounds = selected[0].sceneBoundingRect()
+        center = bounds.center()
+        width = max(65.0, bounds.width() * 1.4)
+        height = max(65.0, bounds.height() * 1.4)
+        area = QRectF(center.x() - width / 2, center.y() - height / 2, width, height)
+        self.fitInView(area, Qt.KeepAspectRatio)
+        return True
 
     def populate(self, data: dict[str, Any]) -> None:
         self.scene().clear()
@@ -530,6 +602,7 @@ class MapView(QGraphicsView):
 class PreviewPage(QWidget):
     previewRequested = Signal()
     qualityRequested = Signal(dict)
+    quickPreviewRequested = Signal()
 
     def __init__(self) -> None:
         super().__init__()
@@ -540,19 +613,61 @@ class PreviewPage(QWidget):
         self.auto_repair = QCheckBox("Automatic repair (disabled)"); self.auto_repair.setChecked(False); self.auto_repair.setEnabled(False)
         self.sample_size = QSpinBox(); self.sample_size.setRange(10, 1000); self.sample_size.setValue(50)
         buttons.addWidget(self.refresh); buttons.addWidget(self.run_quality); buttons.addWidget(QLabel("Sample size")); buttons.addWidget(self.sample_size); buttons.addWidget(self.auto_repair); buttons.addStretch(); layout.addLayout(buttons)
+        map_controls = QHBoxLayout()
+        self.fit_map = QPushButton("Fit extent")
+        self.zoom_selected = QPushButton("Zoom to selected feature")
+        self.zoom_in = QPushButton("Zoom in")
+        self.zoom_out = QPushButton("Zoom out")
+        self.quick_preview_button = QPushButton("Preview quick GeoPackage sample")
+        self.quick_preview_button.setEnabled(False)
+        self.quick_preview_button.setToolTip("Visualise up to 400 first exported lines; not a spatially representative sample or quality audit")
+        self.preview_scope_note = QLabel("Preview is limited; not a full GIS or completeness check")
+        map_controls.addWidget(self.quick_preview_button)
+        map_controls.addWidget(self.fit_map); map_controls.addWidget(self.zoom_selected)
+        map_controls.addWidget(self.zoom_in); map_controls.addWidget(self.zoom_out)
+        map_controls.addWidget(self.preview_scope_note)
+        map_controls.addStretch()
+        layout.addLayout(map_controls)
         splitter = QSplitter()
         left = QWidget(); left_layout = QVBoxLayout(left); self.layers = QListWidget(); left_layout.addWidget(QLabel("Category visibility")); left_layout.addWidget(self.layers)
         self.count_label = QLabel("Not loaded"); left_layout.addWidget(self.count_label)
         self.map = MapView()
-        right = QWidget(); right_layout = QVBoxLayout(right); self.tags = QPlainTextEdit(); self.tags.setReadOnly(True); self.quality = QPlainTextEdit(); self.quality.setReadOnly(True)
+        self.map.setToolTip("Click near a colored road line to inspect its OSM tags; drag empty space to pan")
+        right = QWidget(); right_layout = QVBoxLayout(right); self.tags = QPlainTextEdit(); self.tags.setReadOnly(True); self.tags.setPlaceholderText("Click a colored road line in the map (not a category row) to inspect its OSM tags."); self.quality = QPlainTextEdit(); self.quality.setReadOnly(True)
         right_layout.addWidget(QLabel("Complete tags")); right_layout.addWidget(self.tags); right_layout.addWidget(QLabel("Quality report")); right_layout.addWidget(self.quality)
         splitter.addWidget(left); splitter.addWidget(self.map); splitter.addWidget(right); splitter.setSizes([180, 700, 330]); layout.addWidget(splitter)
+        self.quick_preview_button.clicked.connect(self.quickPreviewRequested)
         self.refresh.clicked.connect(self.previewRequested); self.run_quality.clicked.connect(lambda: self.qualityRequested.emit({"auto_repair": False, "sample_size": self.sample_size.value()}))
+        self.fit_map.clicked.connect(self.map.fit_all)
+        self.zoom_selected.clicked.connect(self._zoom_selected)
+        self.zoom_in.clicked.connect(lambda: self.map.scale(1.4, 1.4))
+        self.zoom_out.clicked.connect(lambda: self.map.scale(1 / 1.4, 1 / 1.4))
         self.map.featureSelected.connect(lambda feature: self.tags.setPlainText(json.dumps(feature.get("tags", {}), ensure_ascii=False, indent=2, sort_keys=True)))
         self.layers.itemChanged.connect(lambda item: self.map.set_category_visible(item.data(Qt.UserRole), item.checkState() == Qt.Checked))
 
+    def _zoom_selected(self) -> None:
+        if not self.map.zoom_to_selected():
+            QMessageBox.information(self, "No selected feature", "Click a feature in the preview before zooming to it.")
+
+    def set_quick_output(self, output: Path) -> None:
+        self.quick_preview_button.setEnabled(True)
+        self.quick_preview_button.setToolTip(f"Preview a bounded visual sample from {output}")
+        self.preview_scope_note.setText("Quick preview: first 400 exported objects only; NOT a completeness or full quality check")
+
+    def populate_quick_preview(self, data: dict[str, Any]) -> None:
+        self.populate_preview(data)
+        self.count_label.setText(f"Quick GPKG visual sample: {data['loaded']:,} / {data['total']:,} exported lines (NOT spatially representative)")
+        self.quality.setPlainText(
+            "Quick extract performed limited execution, provenance and SQLite index checks. "
+            "The full project-wide pre-export quality audit was NOT performed."
+        )
+
     def populate_preview(self, data: dict[str, Any]) -> None:
+        self.tags.clear()
         self.map.populate(data); self.layers.clear()
+        # The splitter can resize the map after it is initially populated;
+        # recompute fit when the current event loop has applied that layout.
+        QTimer.singleShot(0, self.map.fit_all)
         for category in sorted({item["category"] for item in data["features"]}):
             item = QListWidgetItem(category); item.setData(Qt.UserRole, category); item.setFlags(item.flags() | Qt.ItemIsUserCheckable); item.setCheckState(Qt.Checked); self.layers.addItem(item)
         self.count_label.setText(f"Showing {data['loaded']:,} / {data['total']:,} classified objects (bounded preview)")
@@ -564,9 +679,9 @@ class ExportPage(QWidget):
     def __init__(self) -> None:
         super().__init__()
         layout = QVBoxLayout(self)
-        title = QLabel("Step 5 · Export")
-        title.setObjectName("pageTitle"); layout.addWidget(title)
-        form_box = QGroupBox("Export settings"); form = QFormLayout(form_box)
+        self.title = QLabel("Step 5 · Export")
+        self.title.setObjectName("pageTitle"); layout.addWidget(self.title)
+        form_box = QGroupBox("Export settings"); self.form_box = form_box; form = QFormLayout(form_box)
         self.format = QComboBox(); self.format.addItems(["GPKG", "GeoJSON", "Shapefile"])
         self.crs = QComboBox(); self.crs.addItem("EPSG:4326 · WGS 84 (native frozen-core CRS)", "EPSG:4326")
         self.categories = QListWidget(); self.categories.setMaximumHeight(180)
@@ -575,13 +690,90 @@ class ExportPage(QWidget):
         output_row = QHBoxLayout(); self.output = QLineEdit(); browse = QPushButton("Browse"); output_row.addWidget(self.output); output_row.addWidget(browse)
         form.addRow("Format", self.format); form.addRow("Coordinate reference system", self.crs); form.addRow("Categories", self.categories); form.addRow("Fields (traceability fields are mandatory)", self.fields); form.addRow("Output location", output_row)
         layout.addWidget(form_box)
+        # Quick-extract outputs have *already* been written. A dedicated, read-only
+        # results panel replaces the conventional pre-export form for this mode.
+        self.quick_result_panel = QGroupBox("Quick highway extraction — completed")
+        quick_layout = QVBoxLayout(self.quick_result_panel)
+        self.quick_result_facts = QLabel()
+        self.quick_result_facts.setWordWrap(True)
+        self.quick_result_facts.setTextFormat(Qt.PlainText)
+        self.quick_result_facts.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        self.quick_result_limitations = QLabel()
+        self.quick_result_limitations.setWordWrap(True)
+        self.quick_result_limitations.setTextFormat(Qt.PlainText)
+        self.quick_result_limitations.setTextInteractionFlags(Qt.TextSelectableByMouse)
+        quick_layout.addWidget(self.quick_result_facts)
+        quick_layout.addWidget(self.quick_result_limitations)
+        self.quick_result_panel.hide()
+        layout.addWidget(self.quick_result_panel)
         self.estimate = QLabel("Estimated layers and feature counts will appear after classification"); self.estimate.setWordWrap(True); layout.addWidget(self.estimate)
         self.loss_warning = QLabel(); self.loss_warning.setWordWrap(True); layout.addWidget(self.loss_warning)
+        self.audit_title = QLabel("Execution and audit details")
+        layout.addWidget(self.audit_title)
         self.summary = QPlainTextEdit(); self.summary.setReadOnly(True); layout.addWidget(self.summary)
         actions = QHBoxLayout(); self.export_button = QPushButton("Export in background"); self.export_button.setObjectName("primaryButton"); self.open_folder = QPushButton("Open output folder"); self.open_folder.setEnabled(False)
         actions.addStretch(); actions.addWidget(self.export_button); actions.addWidget(self.open_folder); layout.addLayout(actions)
         browse.clicked.connect(self._browse); self.export_button.clicked.connect(self._request); self.format.currentTextChanged.connect(self._format_changed); self._format_changed(self.format.currentText())
         self.open_folder.clicked.connect(self._open_output_folder)
+
+    def show_quick_result(self, output: Path, audit: dict[str, Any]) -> None:
+        """Replace the conventional export controls with factual completed-output details.
+
+        The audit's internal timer intentionally is NOT presented as external wall
+        time, since it can exclude the final copy/staging operation.
+        """
+        self.title.setText("Step 5 · Quick extraction result")
+        self.form_box.hide()
+        self.estimate.hide()
+        self.loss_warning.hide()
+        self.export_button.setEnabled(False)
+        self.export_button.hide()
+        self.quick_result_panel.show()
+        self.audit_title.setText("Execution metadata / audit JSON (read-only)")
+        self.output.setText(str(output))
+        self.open_folder.setEnabled(True)
+
+        categories = audit.get("category_counts") or {}
+        category_lines = "\n".join(
+            f"  {category}: {count:,}" for category, count in sorted(categories.items())
+        ) if categories else "  Not available in audit"
+        internal_seconds = (audit.get("timings_seconds") or {}).get("total_before_final_copy")
+        internal_line = (
+            f"Internal processing before final copy: {float(internal_seconds):.3f} s\n"
+            if isinstance(internal_seconds, (int, float)) else ""
+        )
+        self.quick_result_facts.setText(
+            f"Status: {audit.get('status', 'unknown')} (output already created)\n"
+            f"GeoPackage: {output}\n"
+            f"Exported road features: {int(audit.get('feature_count') or 0):,}\n"
+            f"Source layer: {audit.get('source_layer', 'unknown')}  |  "
+            f"OSM tag key: {audit.get('tag_key', 'unknown')}\n"
+            f"Rule profile: {audit.get('profile_id', 'unknown')}\n"
+            f"Categories:\n{category_lines}\n"
+            + internal_line
+            + f"Audit JSON: {output}.audit.json"
+        )
+        self.quick_result_limitations.setText(
+            "Scope: selective highway extraction with limited execution, provenance "
+            "and GeoPackage checks. The full OSM vocabulary inventory, project-wide "
+            "pre-export geometry/quality audit and spatial completeness assessment "
+            "were NOT performed. The Step 4 preview is a bounded visual sample."
+        )
+        self.summary.setPlainText(json.dumps(audit, ensure_ascii=False, indent=2))
+
+    def reset_quick_result(self) -> None:
+        """Restore normal export controls when opening a full scanned project."""
+        self.title.setText("Step 5 · Export")
+        self.quick_result_panel.hide()
+        self.form_box.show()
+        self.estimate.show()
+        self.loss_warning.show()
+        self.export_button.show()
+        self.export_button.setEnabled(True)
+        self.audit_title.setText("Execution and audit details")
+        self.summary.clear()
+        self.output.clear()
+        self.open_folder.setEnabled(False)
 
     def _format_changed(self, value: str) -> None:
         self.loss_warning.setText("⚠ Shapefile may incur measurable losses because of 10-character field names, DBF text widths, and Unicode compatibility. Inspect the loss report after export." if value == "Shapefile" else "GPKG/GeoJSON retain complete tags_json. The audit reports observed truncation only and does not make a universal lossless claim.")
@@ -645,6 +837,8 @@ class MainWindow(QMainWindow):
         self.repository: InventoryRepository | None = None
         self.thread_pool = QThreadPool.globalInstance()
         self.current_worker: CoreWorker | None = None
+        self.quick_output_path: Path | None = None
+        self._pending_quick_preview = False
         self._success_callback: Callable[[Any], None] | None = None
         self.pages = [InputPage(), OverviewPage(), SelectionPage(), PreviewPage(), ExportPage()]
         central = QWidget(); layout = QHBoxLayout(central); self.steps = QListWidget(); self.steps.setFixedWidth(205)
@@ -656,10 +850,12 @@ class MainWindow(QMainWindow):
         self.steps.currentRowChanged.connect(self.stack.setCurrentIndex); self.steps.setCurrentRow(0)
         self._build_menu(); self._build_task_panel(); self.setStatusBar(QStatusBar())
         self.pages[0].inspectRequested.connect(self.inspect_input); self.pages[0].scanRequested.connect(self.run_scan)
+        self.pages[0].quick_button.clicked.connect(self.open_quick_dialog)
         self.pages[2].classifyRequested.connect(self.run_classify)
         self.pages[2].selectedValuesChanged.connect(self._selected_values_changed)
         self.pages[2].profileLoaded.connect(self.pages[4].set_fields)
         self.pages[3].previewRequested.connect(self.load_map_preview); self.pages[3].qualityRequested.connect(self.run_quality)
+        self.pages[3].quickPreviewRequested.connect(self.load_quick_map_preview)
         self.pages[4].exportRequested.connect(self.run_export)
         initial_profile = inspect_builtin_profile(self.pages[2].profile_combo.currentText())
         self.pages[4].set_fields([str(value) for value in initial_profile.get("attributes", [])])
@@ -676,6 +872,7 @@ class MainWindow(QMainWindow):
     def _build_task_panel(self) -> None:
         dock = QWidget(); layout = QHBoxLayout(dock); self.task_label = QLabel("Ready"); self.progress = QProgressBar(); self.progress.setRange(0, 100); self.progress.setValue(0)
         self.cancel = QPushButton("Cancel"); self.cancel.setEnabled(False); self.cancel.clicked.connect(self.cancel_task); self.log = QPlainTextEdit(); self.log.setReadOnly(True); self.log.setMaximumHeight(90)
+        self.progress.setFormat("Idle — no active task")
         left = QVBoxLayout(); left.addWidget(self.task_label); left.addWidget(self.progress); left.addWidget(self.log); layout.addLayout(left); layout.addWidget(self.cancel)
         from PySide6.QtWidgets import QDockWidget
         container = QDockWidget("Background tasks", self); container.setWidget(dock); self.addDockWidget(Qt.BottomDockWidgetArea, container)
@@ -684,17 +881,38 @@ class MainWindow(QMainWindow):
         if self.current_worker:
             QMessageBox.warning(self, "Task in progress", "Wait for the current background task or cancel it first.")
             return
-        self.current_worker = worker; self._success_callback = success; self.cancel.setEnabled(True); self.progress.setValue(0); self.log.clear()
+        self.current_worker = worker; self._success_callback = success; self.cancel.setEnabled(True)
+        self.progress.setRange(0, 0)  # indeterminate until a measured denominator exists
+        self.progress.setFormat("Busy — no reliable percentage")
+        self.log.clear()
         worker.signals.started.connect(lambda name: self.task_label.setText(f"Running: {name}"))
         worker.signals.progress.connect(self._task_progress); worker.signals.succeeded.connect(self._task_succeeded)
         worker.signals.failed.connect(self._task_failed); worker.signals.cancelled.connect(lambda: self.statusBar().showMessage("Task cancelled; uncommitted partial results were discarded.", 8000))
         worker.signals.finished.connect(self._task_finished); self.thread_pool.start(worker)
 
     def _task_progress(self, message: str, percent: int) -> None:
-        self.log.appendPlainText(message); self.progress.setValue(percent if percent else min(95, self.progress.value() + 2))
+        if message.startswith("@@PROGRESS "):
+            try:
+                payload = json.loads(message[len("@@PROGRESS "):])
+                self.task_label.setText(
+                    f"{payload.get('operation', 'Task')}: {int(payload['processed']):,} / {int(payload['total']):,} input objects processed"
+                )
+            except (ValueError, TypeError, KeyError, json.JSONDecodeError):
+                pass
+        elif message:
+            self.log.appendPlainText(message)
+        if percent >= 0:
+            if self.progress.maximum() == 0:
+                self.progress.setRange(0, 100)
+            self.progress.setValue(percent)
+        elif self.progress.maximum() != 0:
+            # When the worker provides no reliable denominator, show busy mode.
+            self.progress.setRange(0, 0)
 
     def _task_succeeded(self, result: Any) -> None:
+        self.progress.setRange(0, 100)
         self.progress.setValue(100)
+        self.progress.setFormat("Complete")
         if self._success_callback: self._success_callback(result)
 
     def _task_failed(self, message: str, feedback: str, details: str) -> None:
@@ -704,10 +922,56 @@ class MainWindow(QMainWindow):
 
     def _task_finished(self) -> None:
         self.task_label.setText("Ready"); self.cancel.setEnabled(False); self.current_worker = None; self._success_callback = None
+        if self.progress.maximum() == 0:
+            self.progress.setRange(0, 100); self.progress.setValue(0)
+            self.progress.setFormat("Idle — no active task")
+        if self._pending_quick_preview:
+            self._pending_quick_preview = False
+            QTimer.singleShot(0, self.load_quick_map_preview)
 
     def cancel_task(self) -> None:
         if self.current_worker:
             self.task_label.setText("Cancelling safely…"); self.current_worker.cancel()
+
+    def open_quick_dialog(self) -> None:
+        if self.current_worker:
+            QMessageBox.warning(self, "Task in progress", "Wait for the current task before starting quick extraction.")
+            return
+        dialog = QuickHighwayDialog(self.pages[0].input_edit.text(), self)
+        if dialog.exec() != QDialog.Accepted:
+            return
+        source, rules, output = dialog.arguments()
+        self.quick_output_path = None
+        self.pages[3].quick_preview_button.setEnabled(False)
+        self.start_worker(quick_highway_worker(source, rules, output), self._quick_extraction_done)
+
+    def _quick_extraction_done(self, result: dict[str, Any]) -> None:
+        self.quick_output_path = Path(result['output'])
+        audit = result['audit']
+        self.pages[3].set_quick_output(self.quick_output_path)
+        # These buttons belong to the full scanned-project path; never apply
+        # their audit/export labels to an unrelated quick-mode GeoPackage.
+        self.pages[3].refresh.setEnabled(False)
+        self.pages[3].run_quality.setEnabled(False)
+        self.pages[4].show_quick_result(self.quick_output_path, audit)
+        self.steps.item(4).setText("5  Quick result")
+        self.statusBar().showMessage(
+            f"Quick roads: {audit.get('feature_count', 0):,} exported; full quality audit NOT performed.",
+            15000,
+        )
+        self.steps.setCurrentRow(3)
+        self._pending_quick_preview = True
+
+    def load_quick_map_preview(self) -> None:
+        if self.quick_output_path is None:
+            QMessageBox.information(self, "No quick output", "Run quick road extraction first.")
+            return
+        path = self.quick_output_path
+        self.start_worker(CoreWorker(
+            "bounded quick GeoPackage preview",
+            lambda progress: (progress("Loading first 400 exported lines for visual inspection"),
+                              load_quick_preview(path, 400))[1],
+        ), self.pages[3].populate_quick_preview)
 
     def inspect_input(self, path: str) -> None:
         source = Path(path)
@@ -733,9 +997,17 @@ class MainWindow(QMainWindow):
         self.load_project(Path(self.state.project_dir)); self.steps.setCurrentRow(1); self.statusBar().showMessage("Scan completed; the overview is available through lazy queries.", 7000)
 
     def load_project(self, project: Path) -> None:
+        self.quick_output_path = None
+        self.pages[4].reset_quick_result()
+        self.steps.item(4).setText("5  Export")
+        self.pages[3].quick_preview_button.setEnabled(False)
+        self.pages[3].refresh.setEnabled(True)
+        self.pages[3].run_quality.setEnabled(True)
+        self.pages[4].export_button.setEnabled(True)
         self.state.project_dir = str(project.resolve()); self.repository = InventoryRepository(project)
         self.pages[1].populate(project, self.repository); self.pages[2].set_repository(self.repository)
         self.pages[2].set_selected_tag_values(self.state.selected_tag_values)
+        self.pages[2].set_classification_source_layers(self.state.classification_source_layers)
         try:
             profile_data = inspect_builtin_profile(self.state.profile_id)
             self.pages[2].profile_combo.setCurrentText(self.state.profile_id)
@@ -756,10 +1028,12 @@ class MainWindow(QMainWindow):
         else:
             profile = resolve_profile(profile=payload); self.state.custom_rule_file = ""
             self.state.selected_tag_values = self.pages[2].selected_tag_values()
+        scope = self.pages[2].selected_classification_source_layers()
+        self.state.classification_source_layers = list(scope) if scope else []
         self.state.profile_id = profile.id; self.state.profile_sha256 = profile.sha256; self.state.selected_categories = self.pages[2].selected_categories()
         self.state.classification_rules = list(profile.data.get("rules", []))
         self.pages[4].set_fields([str(value) for value in profile.data.get("attributes", [])])
-        self.start_worker(classify_worker(project, profile), self._classify_done)
+        self.start_worker(classify_worker(project, profile, scope), self._classify_done)
 
     def _classify_done(self, result: Any) -> None:
         self.state.run_results["classification"] = {"status": "success", "matched_objects": result.matched_objects, "rule_matches": result.total_matches, "profile_sha256": self.state.profile_sha256}; self.state.save()

@@ -1,0 +1,69 @@
+{
+  "gui_entry_point": true,
+  "gui_modules": [
+    "osm_scientific_converter/gui/__init__.py",
+    "osm_scientific_converter/gui/__main__.py",
+    "osm_scientific_converter/gui/app.py",
+    "osm_scientific_converter/gui/inventory.py",
+    "osm_scientific_converter/gui/main_window.py",
+    "osm_scientific_converter/gui/project_state.py",
+    "osm_scientific_converter/gui/quality.py",
+    "osm_scientific_converter/gui/workers.py"
+  ],
+  "installed_tests": {
+    "installed_wheel_python_3_12_13": {
+      "duration_seconds": 14.73,
+      "import_mode": "installed final wheel; PYTHONPATH removed",
+      "passed": 90,
+      "python_version": "3.12.13",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "installed_wheel_python_3_13_14": {
+      "duration_seconds": 14.09,
+      "import_mode": "installed final wheel; PYTHONPATH removed",
+      "passed": 90,
+      "python_version": "3.13.14",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "source_python_3_12_13": {
+      "duration_seconds": 13.37,
+      "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+      "passed": 90,
+      "python_version": "3.12.13",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    },
+    "source_python_3_13_14": {
+      "duration_seconds": 12.88,
+      "import_mode": "source via explicit v0.4.1_working/src PYTHONPATH",
+      "passed": 90,
+      "python_version": "3.13.14",
+      "software_version": "0.4.1",
+      "status": "success",
+      "warnings_as_errors": true
+    }
+  },
+  "metadata_version": true,
+  "profiles": [
+    "osm_scientific_converter/resources/profiles/aeroway.json",
+    "osm_scientific_converter/resources/profiles/pipeline.json",
+    "osm_scientific_converter/resources/profiles/power.json"
+  ],
+  "pyside_pin": true,
+  "sdist": {
+    "file": "osm_scientific_converter-0.4.1.tar.gz",
+    "members": 55,
+    "sha256": "f5e5612dea3300245d3f3534bbd23ba0d4c04218e7198de7fd673c233c92af74"
+  },
+  "status": "success",
+  "wheel": {
+    "file": "osm_scientific_converter-0.4.1-py3-none-any.whl",
+    "sha256": "b882fb9988a7e9adec3c561f7e28563d16f54a11b28dfe806eacfc4597f63ec3"
+  },
+  "wheel_crc": true
+}

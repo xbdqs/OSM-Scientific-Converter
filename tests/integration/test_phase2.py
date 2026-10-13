@@ -9,6 +9,7 @@ from contextlib import closing
 from pathlib import Path
 
 import pytest
+from osm_scientific_converter import __version__
 
 from osm_scientific_converter.core.classifier import classify_project
 from osm_scientific_converter.core.environment import inspect_environment
@@ -41,7 +42,7 @@ def test_power_classification_is_traceable_and_repeatable(retained_project):
     summary1 = json.loads(first.summary.read_text(encoding="utf-8"))
     second = classify_project(retained_project, profile)
     summary2 = json.loads(second.summary.read_text(encoding="utf-8"))
-    assert summary1["software"]["version"] == "0.4.1"
+    assert summary1["software"]["version"] == __version__
     assert summary1["phase1_project"] == "."
     assert summary1["determinism"] == summary2["determinism"]
     assert summary1["counts"]["matched_objects"] == 2

@@ -1,0 +1,78 @@
+{
+  "comparators": {
+    "gdal_default_osmconf": {
+      "performance": {
+        "command": [
+          "<LOCAL_PATH_REDACTED>",
+          "-f",
+          "GPKG",
+          "..\\phase3_gdal_default_comparison_v041\\.berlin_default.gpkg.partial",
+          "<LOCAL_PATH_REDACTED>",
+          "--config",
+          "GDAL_DATA",
+          "<LOCAL_PATH_REDACTED>",
+          "--config",
+          "OGR2OGR_USE_ARROW_API",
+          "NO"
+        ],
+        "default_osmconf": "<LOCAL_PATH_REDACTED>",
+        "default_osmconf_sha256": "a0e81bb3a04086b2440558774bf41ccd693191e5978d8f7f1be79a0441e5f198",
+        "output_bytes": 819499008,
+        "peak_rss_bytes": 456298496,
+        "stderr": "Warning 1: The filename extension should be 'gpkg' instead of 'partial' to conform to the GPKG specification.",
+        "stdout": "0...10...20...30...40...50...60...70...80...90...100 - done in 00:00:19.",
+        "wall_time_seconds": 47.348094
+      },
+      "status": "executed"
+    },
+    "osm_scientific_converter_v0.4.1": {
+      "explainable_versioned_rules": true,
+      "export_loss_audit": true,
+      "profile": "power",
+      "status": "executed"
+    },
+    "prepared_shapefile": {
+      "reason": "No product, version, same-snapshot date, or matching extent was supplied",
+      "status": "not_executed",
+      "treated_as_reality_truth": false
+    },
+    "quickosm": {
+      "reason": "QGIS/QuickOSM is not installed locally",
+      "status": "not_executed"
+    }
+  },
+  "generated_at_utc": "2026-08-04T18:31:58.461675Z",
+  "input": {
+    "bytes": 98810528,
+    "file": "berlin-260802.osm.pbf",
+    "sha256": "c2f8ca67650fa1777cf07c3fdc5ea1cf6efb3d8cdade0d2dd118f71588ca89d4"
+  },
+  "lifecycle_discovery": {
+    "lifecycle_tags_still_detectable": 272,
+    "recalled_objects": 272,
+    "target_lifecycle_objects": 272
+  },
+  "relation_reconstruction": {
+    "recalled_by_gdal_default": 3,
+    "target_relations": 3
+  },
+  "schema_version": "1.0",
+  "scientific_limitations": [
+    "This is a partial two-tool comparison, not the required complete four-way comparison.",
+    "Target membership is the v0.4.1 power rule result and is not physical real-world ground truth.",
+    "GDAL and v0.4.1 both use the GDAL OSM driver; the comparison isolates default versus custom configuration and downstream audit behavior."
+  ],
+  "scope": "Berlin power target objects; identical local PBF snapshot; GDAL default osmconf partial comparator",
+  "software_version": "0.4.1",
+  "status": "partial_comparison_complete_external_comparators_pending",
+  "tag_retention": {
+    "comparable_original_assignments": 42376,
+    "exact_key_value_assignments_retained": 41179,
+    "rate": 0.971753
+  },
+  "target_osm_id_recall": {
+    "rate": 1.0,
+    "recalled_by_gdal_default": 6726,
+    "target": 6726
+  }
+}
