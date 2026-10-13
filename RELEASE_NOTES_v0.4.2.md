@@ -20,3 +20,8 @@
 This archive provides versioned source and build inputs. A **standalone Windows x64 executable must be built and verified on Windows** (including frozen GUI + headless quick smoke) before labeling its binary a validated release. The archive itself does not imply any GitHub upload, Windows signing, DOI, publisher review or compatibility verification on other systems.
 
 Before publishing, verify the `CITATION.cff` author identity, affiliations and date; do not invent author IDs. Confirm redistribution rights for OSM-derived examples, maps and dependencies.
+
+
+### Documentation note
+
+The tagged source contains an earlier release-preparation document. The validation and distribution information on this Release page reflects the completed v0.4.2 Windows package. A subsequent documentation revision is available on the main branch. The released source-code snapshot remains unchanged.
